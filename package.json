@@ -1,0 +1,33 @@
+{
+  "name": "http-signatures-test-suite",
+  "version": "0.0.1",
+  "description": "This package contains standard tests for the W3C's http signatures working group.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/w3c-dvcg/http-signatures-test-suite.git"
+  },
+  "keywords": [
+    "w3c",
+    "http-signatures",
+    "test",
+    "suite"
+  ],
+  "author": "digital_bazaar",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/w3c-dvcg/http-signatures-test-suite/issues"
+  },
+  "homepage": "https://github.com/w3c-dvcg/http-signatures-test-suite#readme",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "mocha": "^6.1.4"
+  }
+}
