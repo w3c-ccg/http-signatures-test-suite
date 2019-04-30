@@ -12,11 +12,11 @@
  */
 
 {
-  // The following binary will, given an input file, produce a valid
-  // Verifiable Credentials Data Model document.
+  // The following binary will, given a valid request object with headers, produce a valid
+  // http signature.
   // use "type" on Windows as a "cat" replacement
   "generator": "/bin/cat",
 
-  // The arguments that should be passed to the VC generator.
+  // The arguments that should be passed to the http signature generator.
   "generatorOptions": ""
 }
