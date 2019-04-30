@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha --recursive test/http-signatures-v11"
   },
   "repository": {
     "type": "git",
