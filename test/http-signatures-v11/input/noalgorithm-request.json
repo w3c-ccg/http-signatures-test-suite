@@ -1,0 +1,6 @@
+{
+  "headers": {
+    "date": "1556647814703",
+    "authorization": "Signature keyId=\"foo\",signature=\"test\""
+  }
+}
