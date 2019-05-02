@@ -11,7 +11,8 @@ describe('Basic Requests', function() {
   before(function() {
     generatorOptions = {
       generator: config.generator,
-      args: config.generatorOptions
+      args: config.generatorOptions,
+      date: new Date().toGMTString()
     };
   });
 
@@ -32,7 +33,7 @@ describe('Basic Requests', function() {
   it('should fail if there is no keyId', async function() {
     let error = null;
     try {
-      await util.generate('nokeyid-request.json', generatorOptions);
+      await util.generate('nokeyid-request.txt', generatorOptions);
     } catch(e) {
       error = e;
     }
@@ -42,7 +43,7 @@ describe('Basic Requests', function() {
   it('should fail if there is no signature parameter', async function() {
     let error = null;
     try {
-      await util.generate('nosignature-request.json', generatorOptions);
+      await util.generate('nosignature-request.txt', generatorOptions);
     } catch(e) {
       error = e;
     }
@@ -51,7 +52,7 @@ describe('Basic Requests', function() {
 
   it('should succeed with out algorithm parameter', async function() {
     const result = await util.generate(
-      'noalgorithm-request.json', generatorOptions);
+      'noalgorithm-request.txt', generatorOptions);
     result.should.not.be.null;
     result.should.be.an('object');
     result.should.have.property('scheme');
@@ -67,7 +68,7 @@ describe('Basic Requests', function() {
   it('should not process if created is in the future', async function() {
     let error = null;
     try {
-      const result = await util.generate('created-request.json', generatorOptions);
+      const result = await util.generate('created-request.txt', generatorOptions);
     } catch(e) {
       error = e;
     }
@@ -76,7 +77,7 @@ describe('Basic Requests', function() {
 
   it('should return an empty Signing String', async function() {
     const result = await util.generate(
-      'badheaders-request.json', generatorOptions);
+      'badheaders-request.txt', generatorOptions);
     result.should.not.be.null;
     result.should.be.an('object');
   });
