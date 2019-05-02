@@ -16,7 +16,7 @@ describe('Basic Requests', function() {
   });
 
   it('should return a valid signature', async function() {
-    const result = await util.generate('basic-request.json', generatorOptions);
+    const result = await util.generate('basic-request.txt', generatorOptions);
     result.should.not.be.null;
     result.should.be.an('object');
     result.should.have.property('scheme');
