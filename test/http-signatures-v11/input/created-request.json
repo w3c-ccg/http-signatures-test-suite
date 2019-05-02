@@ -1,6 +1,0 @@
-{
-  "headers": {
-    "date": "1556647814703",
-    "authorization": "Signature created=\"9999999999999\",keyId=\"foo\",algorithm=\"hmac\",signature=\"test\""
-  }
-}
