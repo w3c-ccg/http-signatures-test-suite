@@ -2,4 +2,3 @@ GET /basic/request HTTP/1.1
 Connection: keep-alive
 User-Agent: Mozilla/5.0 (Macintosh)
 authorization: Signature keyId="foo",algorithm="hmac",headers="",signature="test"
-date: Thu, 02 May 2019 16:41:25 GMT

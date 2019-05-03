@@ -8,22 +8,13 @@ const exec = util.promisify(require('child_process').exec);
 async function generate(file, options) {
   options = options || {};
   const filePath = path.join(__dirname, 'input', file);
-  if(options.date) {
-    let file = fs.readFileSync(filePath, 'utf8');
-    const dateRegex = /date:.*$/i;
-    const isString = typeof options.date == typeof 'string';
-    const date = isString ? options.date : new Date().toGMTString();
-    const latestDate = `date: ${date}`;
-    const hasDate = file.search(dateRegex) >= 0;
-    if(hasDate) {
-      file = file.replace(dateRegex, latestDate);
-    } else {
-      file += latestDate;
-    }
-    fs.writeFileSync(filePath, file);
-  }
-  const {stdout, stderr} = await exec(options.generator + ' ' + options.args +
-    path.join(__dirname, 'input', file));
+  let httpMessage = fs.readFileSync(filePath, 'utf8');
+  const date = options.date || new Date().toGMTString();
+  const latestDate = `date: ${date}`;
+  httpMessage += latestDate;
+  const headers = `--headers ${options.headers.join(',') || ''} `;
+  const {stdout, stderr} = await exec(
+    options.generator + ' ' + options.args + headers + '"' + httpMessage + '"');
 
   if(file.match(/bad/)) {
     throw new Error('NO_OUTPUT');
@@ -32,7 +23,6 @@ async function generate(file, options) {
   if(stderr) {
     throw new Error(stderr);
   }
-
   return JSON.parse(stdout);
 }
 
