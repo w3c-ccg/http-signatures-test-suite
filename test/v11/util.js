@@ -11,9 +11,9 @@ async function generate(file, options) {
   const latestDate = `date: ${date}`;
   const headers = `--headers ${options.headers.join(',') || ''} `;
   // this cat filePath - the dash is the last pipe op
-  const httpMessage = `echo ${latestDate} | cat ${filePath} -`;
-  const {stdout, stderr} = await exec(httpMessage + ' | ' +
-    options.generator + ' ' + options.args + headers);
+  const httpMessage = `echo ${latestDate} | cat ${filePath} - | `;
+  const generate = `${options.generator} ${options.command} ${options.args} `;
+  const {stdout, stderr} = await exec(httpMessage + generate + headers);
   if(stderr) {
     throw new Error(stderr);
   }
