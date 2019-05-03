@@ -15,6 +15,7 @@ async function generate(file, options) {
   const headers = `--headers ${options.headers.join(',') || ''} `;
   const {stdout, stderr} = await exec(
     options.generator + ' ' + options.args + headers + '"' + httpMessage + '"');
+  console.log(stdout, stderr);
   if(stderr) {
     throw new Error(stderr);
   }
