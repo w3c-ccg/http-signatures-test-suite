@@ -11,7 +11,7 @@ describe.skip('Sign Requests', function() {
   before(function() {
     generatorOptions = {
       generator: config.generator,
-      args: config.generatorOptions,
+      command: 'sign',
       date: new Date().toGMTString(),
       headers: []
     };

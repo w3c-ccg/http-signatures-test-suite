@@ -11,11 +11,48 @@ There are multiple test suites, each of which is detailed below.
 This test suite will check any application that generates [Http Signaturesl](hhttps://tools.ietf.org/html/draft-cavage-http-signatures-11) Headers to
 ensure conformance with the specification.
 
+
+### Creating a Binary
+You web application will need to be accessible from the command line.
+It will also need to accept the following command line parameters:
+
+```
+Usage: http-signature-header [options] [command]
+
+Options:
+  -H, --headers <headers>                   A list of header names.
+  -k, --keyId <keyId>                       A Key Id <string>.
+  -pk, --private-key <privateKey>.          A private key file name <filename>.
+  -pkt, --private-key-type <privateKeyType  The type of the private key.
+  -a, --algorithm [algorithm]               One of: rsa-sha1, hmac-sha1, rsa-sha256, hmac-sha256, hs2019.
+  -c, --created [created]                   The created param for the signature.
+  -e, --expires [expires]                   The expires param for the signature.
+  -h, --help                                output usage information
+
+Commands:
+  c14n|C
+  sign|S [options]
+  verify|V
+```
+All tests will run against your binary and assume that an exit code greater
+than 0 represents an error.
+Your binary will receive an [http message](https://developer.mozilla.org/en-US/docs/Web/HTTP/Messages) via [standard in](https://en.wikipedia.org/wiki/Standard_streams):
+
+```
+POST /foo?param=value&pet=dog HTTP/1.1
+Host: example.com
+Date: Sun, 05 Jan 2014 21:31:40 GMT
+Content-Type: application/json
+Digest: SHA-256=X48E9qOokqqrvdts8nOJRJN3OWDUoyWxBf7kbu9DBPE=
+Content-Length: 18
+```
+
 ### Running the Test Suite
 
 1. npm install
 2. Copy the `config.json.example` file to `config.json` and modify.
-3. npm test
+3. All that is needed is a path to the binary that runs the tests
+4. npm test
 
 ### Submit an Implementation Report
 

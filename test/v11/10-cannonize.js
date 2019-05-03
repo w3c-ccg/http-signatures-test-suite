@@ -11,6 +11,7 @@ describe('Canonize Tests', function() {
   before(function() {
     generatorOptions = {
       generator: config.generator,
+      command: 'c14n',
       args: config.generatorOptions,
       date: new Date().toGMTString(),
       headers: []
