@@ -4,11 +4,12 @@ const util = require('util');
 const fs = require('fs');
 
 const exec = util.promisify(require('child_process').exec);
+const readFile = util.promisify(fs.readFile);
 
 async function generate(file, options) {
   options = options || {};
   const filePath = path.join(__dirname, 'input', file);
-  let httpMessage = fs.readFileSync(filePath, 'utf8');
+  let httpMessage = await readFile(filePath, 'utf8');
   const date = options.date || new Date().toGMTString();
   const latestDate = `date: ${date}`;
   httpMessage += latestDate;
