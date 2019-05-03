@@ -21,15 +21,7 @@ describe('Basic Requests', function() {
     generatorOptions.headers = ['date'];
     const result = await util.generate('basic-request.txt', generatorOptions);
     result.should.not.be.null;
-    result.should.be.an('object');
-    result.should.have.property('scheme');
-    result.scheme.should.be.a('string');
-    result.scheme.should.match(/Signature/i);
-    result.should.have.property('params');
-    result.params.should.be.an('object');
-    result.should.have.property('signingString');
-    result.should.have.property('algorithm');
-    result.should.have.property('keyId');
+    result.should.be.a('string');
   });
 
   it('should fail if there is no keyId', async function() {
@@ -56,15 +48,7 @@ describe('Basic Requests', function() {
     const result = await util.generate(
       'noalgorithm-request.txt', generatorOptions);
     result.should.not.be.null;
-    result.should.be.an('object');
-    result.should.have.property('scheme');
-    result.scheme.should.be.a('string');
-    result.scheme.should.match(/Signature/i);
-    result.should.have.property('params');
-    result.params.should.be.an('object');
-    result.should.have.property('signingString');
-    result.should.not.have.property('algorithm');
-    result.should.have.property('keyId');
+    result.should.be.a('string');
   });
 
   it('should not process if created is in the future', async function() {
