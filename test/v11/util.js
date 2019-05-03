@@ -14,7 +14,6 @@ async function generate(file, options) {
   const httpMessage = `echo ${latestDate} | cat ${filePath} -`;
   const {stdout, stderr} = await exec(httpMessage + ' | ' +
     options.generator + ' ' + options.args + headers);
-  console.log(stdout, stderr);
   if(stderr) {
     throw new Error(stderr);
   }

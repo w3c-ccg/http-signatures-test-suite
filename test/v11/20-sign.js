@@ -6,7 +6,7 @@ const util = require('./util');
 chai.should();
 chai.use(require('chai-as-promised'));
 
-describe('Basic Requests', function() {
+describe.skip('Sign Requests', function() {
   let generatorOptions = null;
   before(function() {
     generatorOptions = {
@@ -15,13 +15,6 @@ describe('Basic Requests', function() {
       date: new Date().toGMTString(),
       headers: []
     };
-  });
-
-  it('should return a valid signature', async function() {
-    generatorOptions.headers = ['date'];
-    const result = await util.generate('basic-request.txt', generatorOptions);
-    result.should.not.be.null;
-    result.should.be.a('string');
   });
 
   it.skip('should fail if there is no keyId', async function() {
