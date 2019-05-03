@@ -4,7 +4,6 @@ const util = require('./util');
 
 // configure chai
 chai.should();
-chai.use(require('chai-as-promised'));
 
 describe('Canonize Tests', function() {
   let generatorOptions = null;
@@ -24,4 +23,16 @@ describe('Canonize Tests', function() {
     result.should.not.be.null;
     result.should.be.a('string');
   });
+
+  it('should return fail is a header is not in the request', async function() {
+    let error = null;
+    try {
+      generatorOptions.headers = ['date', 'not-in-request'];
+      await util.generate('basic-request.txt', generatorOptions);
+    } catch(e) {
+      error = e;
+      error.should.not.be.null;
+    }
+  });
+
 });

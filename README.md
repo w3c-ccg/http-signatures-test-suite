@@ -8,7 +8,7 @@ There are multiple test suites, each of which is detailed below.
 
 ## Http Signatures Version 11 Tests
 
-This test suite will check any application that generates [Http Signaturesl](hhttps://tools.ietf.org/html/draft-cavage-http-signatures-11) Headers to
+This test suite will check any application that generates [Http Signatures](hhttps://tools.ietf.org/html/draft-cavage-http-signatures-11) Headers to
 ensure conformance with the specification.
 
 
