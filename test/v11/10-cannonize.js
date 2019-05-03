@@ -1,9 +1,5 @@
 const config = require('../../config.json');
-const chai = require('chai');
 const util = require('./util');
-
-// configure chai
-chai.should();
 
 describe('Canonize Tests', function() {
   let generatorOptions = null;

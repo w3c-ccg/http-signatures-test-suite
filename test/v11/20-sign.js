@@ -1,10 +1,5 @@
 const config = require('../../config.json');
-const chai = require('chai');
 const util = require('./util');
-
-// configure chai
-chai.should();
-chai.use(require('chai-as-promised'));
 
 describe.skip('Sign Requests', function() {
   let generatorOptions = null;
