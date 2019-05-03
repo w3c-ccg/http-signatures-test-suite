@@ -12,11 +12,13 @@ describe('Basic Requests', function() {
     generatorOptions = {
       generator: config.generator,
       args: config.generatorOptions,
-      date: new Date().toGMTString()
+      date: new Date().toGMTString(),
+      headers: []
     };
   });
 
   it('should return a valid signature', async function() {
+    generatorOptions.headers = ['date'];
     const result = await util.generate('basic-request.txt', generatorOptions);
     result.should.not.be.null;
     result.should.be.an('object');
@@ -77,7 +79,7 @@ describe('Basic Requests', function() {
 
   it('should return an empty Signing String', async function() {
     const result = await util.generate(
-      'badheaders-request.txt', generatorOptions);
+      'invalidheaders-request.txt', generatorOptions);
     result.should.not.be.null;
     result.should.be.an('object');
   });
