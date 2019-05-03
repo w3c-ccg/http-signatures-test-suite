@@ -24,7 +24,7 @@ describe('Basic Requests', function() {
     result.should.be.a('string');
   });
 
-  it('should fail if there is no keyId', async function() {
+  it.skip('should fail if there is no keyId', async function() {
     let error = null;
     try {
       await util.generate('nokeyid-request.txt', generatorOptions);
@@ -34,7 +34,7 @@ describe('Basic Requests', function() {
     error.should.not.be.null;
   });
 
-  it('should fail if there is no signature parameter', async function() {
+  it.skip('should fail if there is no signature parameter', async function() {
     let error = null;
     try {
       await util.generate('nosignature-request.txt', generatorOptions);
@@ -44,14 +44,14 @@ describe('Basic Requests', function() {
     error.should.not.be.null;
   });
 
-  it('should succeed with out algorithm parameter', async function() {
+  it.skip('should succeed with out algorithm parameter', async function() {
     const result = await util.generate(
       'noalgorithm-request.txt', generatorOptions);
     result.should.not.be.null;
     result.should.be.a('string');
   });
 
-  it('should not process if created is in the future', async function() {
+  it.skip('should not process if created is in the future', async function() {
     let error = null;
     try {
       const result = await util.generate('created-request.txt', generatorOptions);
@@ -61,7 +61,7 @@ describe('Basic Requests', function() {
     error.should.not.be.null;
   });
 
-  it('should return an empty Signing String', async function() {
+  it.skip('should return an empty Signing String', async function() {
     const result = await util.generate(
       'invalidheaders-request.txt', generatorOptions);
     result.should.not.be.null;
