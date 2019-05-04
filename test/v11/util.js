@@ -13,11 +13,11 @@ async function generate(file, options) {
   for(const key in options.args) {
     let value = options.args[key];
     if(Array.isArray(value)) {
-      value = `--${key} ${value.join(',')}`;
+      value = `--${key} ${value.join(',')} `;
     } else {
-      value = `--${key} ${value}`;
+      value = `--${key} ${value} `;
     }
-    args += value + '';
+    args += value;
   }
   // this cat filePath - the dash is the last pipe op
   const httpMessage = `echo ${latestDate} | cat ${filePath} - | `;
