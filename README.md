@@ -47,12 +47,36 @@ Digest: SHA-256=X48E9qOokqqrvdts8nOJRJN3OWDUoyWxBf7kbu9DBPE=
 Content-Length: 18
 ```
 
+### Creating a config file
+An example local configuration for the test suite. To use:
+
+1. Copy this file to one called config.json.
+2. Modify the file and replace with appropriate values for your system.
+3. the generatorOptions become command line arguments.
+
+```
+{
+  "generator": "/bin/cat",
+  "generatorOptions": {
+    "keyId": "ED25519TestKey",
+    "headers": ["date"],
+    "private-key": "~/.ssh/id_ed25519",
+    "private-key-type": "ED25519",
+    "algorithm": "hs2019",
+    "created": "1556933492763",
+    "expires": "1956933492763"
+  }
+}
+```
+
 ### Running the Test Suite
 
 1. npm install
 2. Copy the `config.json.example` file to `config.json` and modify.
 3. All that is needed is a path to the binary that runs the tests
 4. npm test
+5. git add implementations/YOUR_IMPLEMENTATION-results.json and submit a
+    pull request for your implementation.
 
 ### Submit an Implementation Report
 
