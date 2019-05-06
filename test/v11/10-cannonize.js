@@ -14,7 +14,6 @@ describe('Canonize Tests', function() {
 
   it('should return a valid signature', async function() {
     generatorOptions.args.headers = ['date'];
-    generatorOptions.args.keyId = 'EDTestKey';
     const result = await util.generate('basic-request.txt', generatorOptions);
     result.should.not.be.null;
     result.should.be.a('string');
