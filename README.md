@@ -57,6 +57,7 @@ An example local configuration for the test suite. To use:
 ```
 {
   "generator": "../my-http-signatures-library/bin",
+  "command": "verify",
   "args": {
     "keyId": "ED25519TestKey",
     "headers": ["date", "etag"],
