@@ -52,14 +52,14 @@ An example local configuration for the test suite. To use:
 
 1. Copy this file to one called config.json.
 2. Modify the file and replace with appropriate values for your system.
-3. the generatorOptions become command line arguments.
+3. the args become command line arguments.
 
 ```
 {
-  "generator": "/bin/cat",
-  "generatorOptions": {
+  "generator": "../my-http-signatures-library/bin",
+  "args": {
     "keyId": "ED25519TestKey",
-    "headers": ["date"],
+    "headers": ["date", "etag"],
     "private-key": "~/.ssh/id_ed25519",
     "private-key-type": "ED25519",
     "algorithm": "hs2019",
