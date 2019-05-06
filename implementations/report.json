@@ -1,0 +1,107 @@
+{
+  "stats": {
+    "suites": 2,
+    "tests": 7,
+    "passes": 2,
+    "pending": 5,
+    "failures": 0,
+    "start": "2019-05-06T21:54:58.621Z",
+    "end": "2019-05-06T21:54:58.837Z",
+    "duration": 216
+  },
+  "tests": [
+    {
+      "title": "should return a valid signature",
+      "fullTitle": "Canonize Tests should return a valid signature",
+      "duration": 107,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should return fail is a header is not in the request",
+      "fullTitle": "Canonize Tests should return fail is a header is not in the request",
+      "duration": 106,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should fail if there is no keyId",
+      "fullTitle": "Sign Requests should fail if there is no keyId",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should fail if there is no signature parameter",
+      "fullTitle": "Sign Requests should fail if there is no signature parameter",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should succeed with out algorithm parameter",
+      "fullTitle": "Sign Requests should succeed with out algorithm parameter",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should not process if created is in the future",
+      "fullTitle": "Sign Requests should not process if created is in the future",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should return an empty Signing String",
+      "fullTitle": "Sign Requests should return an empty Signing String",
+      "currentRetry": 0,
+      "err": {}
+    }
+  ],
+  "pending": [
+    {
+      "title": "should fail if there is no keyId",
+      "fullTitle": "Sign Requests should fail if there is no keyId",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should fail if there is no signature parameter",
+      "fullTitle": "Sign Requests should fail if there is no signature parameter",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should succeed with out algorithm parameter",
+      "fullTitle": "Sign Requests should succeed with out algorithm parameter",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should not process if created is in the future",
+      "fullTitle": "Sign Requests should not process if created is in the future",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should return an empty Signing String",
+      "fullTitle": "Sign Requests should return an empty Signing String",
+      "currentRetry": 0,
+      "err": {}
+    }
+  ],
+  "failures": [],
+  "passes": [
+    {
+      "title": "should return a valid signature",
+      "fullTitle": "Canonize Tests should return a valid signature",
+      "duration": 107,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should return fail is a header is not in the request",
+      "fullTitle": "Canonize Tests should return fail is a header is not in the request",
+      "duration": 106,
+      "currentRetry": 0,
+      "err": {}
+    }
+  ]
+}
