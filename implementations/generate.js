@@ -10,21 +10,28 @@ const allTests = [];
 const allResults = {};
 const dirContents = fs.readdirSync(__dirname);
 const files = dirContents.filter(
-  (contents) => {return contents.match(/.*-report.json/ig);});
+  contents => {return contents.match(/.*-report.json/ig);});
+
+if(!files.length) {
+  throw new Error(
+    'Failed to find any reports in the form of your_program-report.json ' +
+    `in the dir ${__dirname}`);
+}
 
 // process each test file
-files.forEach((file) => {
+files.forEach(file => {
   const implementation = file.match(/(.*)-report.json/)[1];
   const results = JSON.parse(fs.readFileSync(
     path.join(__dirname, file)), 'utf-8');
   allResults[implementation] = {};
 
   // process each test, noting the result
-  results.tests.forEach((test) => {
+  results.tests.forEach(test => {
     allResults[implementation][test.fullTitle] =
       (Object.keys(test.err).length === 0) ? 'success' : 'failure';
 
     // assume vc.js tests all features
+    // TODO abstract this out
     if(implementation === 'vc.js') {
       allTests.push(test.fullTitle);
     }
@@ -38,7 +45,7 @@ let conformanceTable = `
   <thead>
     <th width="80%">Test</th>
 `;
-implementations.forEach((implementation) => {
+implementations.forEach(implementation => {
   conformanceTable += `<th>${implementation}</th>`;
 });
 conformanceTable += `
@@ -47,12 +54,12 @@ conformanceTable += `
 `;
 
 // process each test
-allTests.forEach((test) => {
+allTests.forEach(test => {
   conformanceTable += `
     <tr>
       <td>${test}</td>
   `;
-  implementations.forEach((implementation) => {
+  implementations.forEach(implementation => {
     const status = (allResults[implementation][test]) || 'unimplemented';
     let statusMark = '-';
 
@@ -82,4 +89,4 @@ const template = fs.readFileSync(
 fs.writeFileSync(path.join(__dirname, 'index.html'),
   template.replace('%%%REPORTS%%%', conformanceTable));
 
-console.log("Generated new implementation report.");
+console.log('Generated new implementation report.');
