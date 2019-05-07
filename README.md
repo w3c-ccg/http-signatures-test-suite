@@ -30,9 +30,9 @@ Options:
   -h, --help                                output usage information
 
 Commands:
-  c14n|C
-  sign|S [options]
-  verify|V
+  c14n
+  sign [options]
+  verify
 ```
 All tests will run against your binary and assume that an exit code greater
 than 0 represents an error.
