@@ -19,8 +19,8 @@ if(!files.length) {
     `in the dir ${__dirname}`);
 }
 
-function getTestStatus(test) {
-  if(!test.duration) {
+function getTestStatus(test, pendingTitles) {
+  if(pendingTitles.includes(test.title)) {
     return 'skipped';
   }
   if(Object.keys(test.err).length > 0) {
@@ -35,10 +35,12 @@ files.forEach(file => {
   const results = JSON.parse(fs.readFileSync(
     path.join(__dirname, file)), 'utf-8');
   allResults[implementation] = {};
+  const pendingTitles = results.pending.map(t => t.title);
 
   // process each test, noting the result
   results.tests.forEach(test => {
-    allResults[implementation][test.fullTitle] = getTestStatus(test);
+    allResults[implementation][test.fullTitle] =
+      getTestStatus(test, pendingTitles);
     // assume vc.js tests all features
     // TODO abstract this out
     if(implementation === testConfig.implementation) {
