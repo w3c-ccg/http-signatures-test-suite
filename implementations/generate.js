@@ -4,6 +4,7 @@
  */
 const fs = require('fs');
 const path = require('path');
+const testConfig = require('./test.json');
 
 // extract the results from all of the test files
 const allTests = [];
@@ -32,7 +33,7 @@ files.forEach(file => {
 
     // assume vc.js tests all features
     // TODO abstract this out
-    if(implementation === 'vc.js') {
+    if(implementation === testConfig.implementation) {
       allTests.push(test.fullTitle);
     }
   });
