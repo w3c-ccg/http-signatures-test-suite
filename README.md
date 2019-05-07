@@ -40,7 +40,7 @@ All tests will run against your binary and assume that an exit code greater
 than 0 represents an error.
 Your binary will receive an [HTTP message](https://developer.mozilla.org/en-US/docs/Web/HTTP/Messages) via [standard in](https://en.wikipedia.org/wiki/Standard_streams):
 
-Here is an example HTTP message your binary should be able to take:
+Here is an example HTTP message your binary should receive via stdin:
 ```
 POST /foo?param=value&pet=dog HTTP/1.1
 Host: example.com
