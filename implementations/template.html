@@ -61,14 +61,15 @@
         wgURI:        "https://w3c-dvcg.github.io/",
 
         // name (with the @w3c.org) of the public mailing to which comments are due
-        wgPublicList: "public-vc-comments",
+        wgPublicList: "public-credentials",
 
         // URI of the patent status for this WG, for Rec-track documents
         // !!!! IMPORTANT !!!!
         // This is important for Rec-track documents, do not copy a patent URI from a random
         // document unless you know what you're doing. If in doubt ask your friendly neighbourhood
         // Team Contact.
-        wgPatentURI:  "https://www.w3.org/2004/01/pp-impl/98922/status",
+        // TODO: find patent URI
+        wgPatentURI:  "unknown",
         maxTocLevel: 2,
         inlineCSS: true
       };
@@ -102,11 +103,11 @@ This is the most recent implementation report for the
     <section id='sotd'>
       <p>
 Comments regarding this document are welcome. Please file issues
-directly on <a href="https://github.com/w3c/vc-data-model/issues/">GitHub</a>,
+directly on <a href="https://github.com/w3c-dvcg/http-signatures-test-suite">GitHub</a>,
 or send them to
-<a href="mailto:public-vc-comments@w3.org">public-vc-comments@w3.org</a>
-(<a href="mailto:public-vc-comments-request@w3.org?subject=subscribe">subscribe</a>,
-<a href="https://lists.w3.org/Archives/Public/public-vc-comments/">archives</a>).
+<a href="mailto:public-credentials@w3.org">public-vc-comments@w3.org</a>
+(<a href="mailto:public-credentials@w3.org?subject=subscribe">subscribe</a>,
+<a href="https://lists.w3.org/Archives/Public/public-credentials/">archives</a>).
       </p>
 
     </section>
@@ -124,22 +125,23 @@ output that is conformant to the latest version.
         <h2>Testing Methodology</h2>
 
         <p>
-The testing framework for the Verifiable Credentials Data Model executes the
-following process for every conformance statement in the Verifiable Credentials
-Data Model:
+The testing framework for Http Signatures executes the
+following process for every conformance statement in the 
+<a href="https://tools.ietf.org/html/draft-cavage-http-signatures-11">
+Http Signatures specification</a> :
         </p>
 
         <ol class="algorithm">
           <li>
-Take an input file template that exercises the feature and feed it to a
-developer provided Verifiable Credentials Data Model generator.
+Take an input http message that exercises the feature and feed it to a
+developer provided Http Signatures binary.
           </li>
           <li>
-If the input is valid, generate a Verifiable Credential that is conformant
-to the data model.
+If the input is valid, generate a Http Signature that is conformant
+to options and http message.
           </li>
           <li>
-The test suite then ensures that the generated Verifiable Credential is
+The test suite then ensures that the generated http message is
 conformant to the feature being tested.
           </li>
         </ol>
