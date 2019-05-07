@@ -1,4 +1,3 @@
 {
-  "generator": "/bin/cat",
-  "args": {}
+  "generator": "/bin/cat"
 }
