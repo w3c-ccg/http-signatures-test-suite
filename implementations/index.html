@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Http Signatures Implementation Report 1.0</title>
+    <title>HTTP Signatures Implementation Report 1.0</title>
     <meta http-equiv='Content-Type' content='text/html;charset=utf-8'/>
     <!--
       === NOTA BENE ===
@@ -15,10 +15,10 @@
         specStatus: "ED",
 
         // the specification's short name, as in http://www.w3.org/TR/short-name/
-        shortName: "vc-data-model-implementation-report",
+        shortName: "http-signatures-implementation-report",
 
         // subtitle for the spec
-        subtitle: "Implementation Report for Http Signatures Spec",
+        subtitle: "Implementation Report for HTTP Signatures Spec",
 
         // if you wish the publication date to be other than today, set this
         //publishDate:  "2017-08-03",
@@ -96,7 +96,7 @@
     <section id='abstract'>
       <p>
 This is the most recent implementation report for the
-<a href="https://tools.ietf.org/html/draft-cavage-http-signatures-11">Http Signatures</a> specification.
+<a href="https://tools.ietf.org/html/draft-cavage-http-signatures-11">HTTP Signatures</a> specification.
       </p>
     </section>
 
@@ -117,7 +117,7 @@ or send them to
 
       <p>
 The purpose of this document is to demonstrate that there are multiple
-interoperable implementations of Http Signatures that are capable of generating
+interoperable implementations of HTTP Signatures that are capable of generating
 output that is conformant to the latest version.
       </p>
 
@@ -125,7 +125,7 @@ output that is conformant to the latest version.
         <h2>Testing Methodology</h2>
 
         <p>
-The testing framework for Http Signatures executes the
+The testing framework for HTTP Signatures executes the
 following process for every conformance statement in the 
 <a href="https://tools.ietf.org/html/draft-cavage-http-signatures-11">
 Http Signatures specification</a> :
@@ -133,15 +133,15 @@ Http Signatures specification</a> :
 
         <ol class="algorithm">
           <li>
-Take an input http message that exercises the feature and feed it to a
-developer provided Http Signatures binary.
+Take an input HTTP Message that exercises the feature and feed it to a
+developer provided HTTP Signatures binary.
           </li>
           <li>
-If the input is valid, generate a Http Signature that is conformant
-to options and http message.
+If the input is valid, generate a HTTP Signature that is conformant
+to options and HTTP message.
           </li>
           <li>
-The test suite then ensures that the generated http message is
+The test suite then ensures that the generated HTTP message is
 conformant to the feature being tested.
           </li>
         </ol>
