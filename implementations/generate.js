@@ -1,5 +1,5 @@
 /**
- * Generates the Verifiable Credentials Data Model Implementation Report given
+ * Generates the Http Signatures Implementation Report given
  * a set of *-report.json files.
  */
 const fs = require('fs');
