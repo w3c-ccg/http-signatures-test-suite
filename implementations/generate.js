@@ -19,6 +19,16 @@ if(!files.length) {
     `in the dir ${__dirname}`);
 }
 
+function getTestStatus(test) {
+  if(!test.duration) {
+    return 'skipped';
+  }
+  if(Object.keys(test.err).length > 0) {
+    return 'failure';
+  }
+  return 'success';
+}
+
 // process each test file
 files.forEach(file => {
   const implementation = file.match(/(.*)-report.json/)[1];
@@ -28,9 +38,7 @@ files.forEach(file => {
 
   // process each test, noting the result
   results.tests.forEach(test => {
-    allResults[implementation][test.fullTitle] =
-      (Object.keys(test.err).length === 0) ? 'success' : 'failure';
-
+    allResults[implementation][test.fullTitle] = getTestStatus(test);
     // assume vc.js tests all features
     // TODO abstract this out
     if(implementation === testConfig.implementation) {
@@ -69,6 +77,10 @@ allTests.forEach(test => {
     }
     if(status === 'failure') {
       statusMark = '❌';
+    }
+    if(status === 'skipped') {
+      //skipped tests get a pause button
+      statusMark = '&#9208;';
     }
 
     conformanceTable += `
