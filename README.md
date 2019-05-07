@@ -17,27 +17,30 @@ You web application will need to be accessible from the command line.
 It will also need to accept the following command line parameters:
 
 ```
-Usage: http-signature-header [options] [command]
+Usage: <your_program> [options] [command]
 
 Options:
-  -H, --headers <headers>                   A list of header names.
-  -k, --keyId <keyId>                       A Key Id <string>.
-  -pk, --private-key <privateKey>.          A private key file name <filename>.
-  -pkt, --private-key-type <privateKeyType  The type of the private key.
-  -a, --algorithm [algorithm]               One of: rsa-sha1, hmac-sha1, rsa-sha256, hmac-sha256, hs2019.
-  -c, --created [created]                   The created param for the signature.
-  -e, --expires [expires]                   The expires param for the signature.
-  -h, --help                                output usage information
+  -V, --version                          output the version number
+  -H, --headers <headers>                A list of header names.
+  -k, --keyId <keyId>                    A Key Id string.
+  -private, --private-key <privateKey>.  A private key file name filename.
+  -kt, --key-type <keyType>              The type of the keys.
+  -public, --public-key <publicKey>.     A public key file name filename.
+  -a, --algorithm [algorithm]            One of: rsa-sha1, hmac-sha1, rsa-sha256, hmac-sha256, hs2019.
+  -c, --created [created]                The created param for the signature.
+  -e, --expires [expires]                The expires param for the signature.
+  -h, --help                             output usage information
 
 Commands:
-  c14n
-  sign [options]
-  verify
+  c14n|cannonize
+  sign
+  verify [options]
 ```
 All tests will run against your binary and assume that an exit code greater
 than 0 represents an error.
-Your binary will receive an [http message](https://developer.mozilla.org/en-US/docs/Web/HTTP/Messages) via [standard in](https://en.wikipedia.org/wiki/Standard_streams):
+Your binary will receive an [HTTP message](https://developer.mozilla.org/en-US/docs/Web/HTTP/Messages) via [standard in](https://en.wikipedia.org/wiki/Standard_streams):
 
+Here is an example HTTP message your binary should be able to take:
 ```
 POST /foo?param=value&pet=dog HTTP/1.1
 Host: example.com
@@ -52,21 +55,11 @@ An example local configuration for the test suite. To use:
 
 1. Copy this file to one called config.json.
 2. Modify the file and replace with appropriate values for your system.
-3. the args become command line arguments.
+3. the generator should be a path to your binary.
 
 ```
 {
   "generator": "../my-http-signatures-library/bin",
-  "command": "verify",
-  "args": {
-    "keyId": "ED25519TestKey",
-    "headers": ["date", "etag"],
-    "private-key": "~/.ssh/id_ed25519",
-    "private-key-type": "ED25519",
-    "algorithm": "hs2019",
-    "created": "1556933492763",
-    "expires": "1956933492763"
-  }
 }
 ```
 
