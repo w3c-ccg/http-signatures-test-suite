@@ -69,8 +69,6 @@ An example local configuration for the test suite. To use:
 2. Copy the `config.json.example` file to `config.json` and modify.
 3. All that is needed is a path to the binary that runs the tests
 4. npm test
-5. git add implementations/YOUR_IMPLEMENTATION-results.json and submit a
-    pull request for your implementation.
 
 ### Submit an Implementation Report
 

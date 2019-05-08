@@ -20,10 +20,11 @@ if(!files.length) {
 }
 
 function getTestStatus(test, pendingTitles) {
-  if(pendingTitles.includes(test.title)) {
+  if(pendingTitles.includes(test.fullTitle)) {
     return 'skipped';
   }
-  if(Object.keys(test.err).length > 0) {
+  const errorCount = Object.keys(test.err).length;
+  if(errorCount > 0) {
     return 'failure';
   }
   return 'success';
@@ -35,7 +36,7 @@ files.forEach(file => {
   const results = JSON.parse(fs.readFileSync(
     path.join(__dirname, file)), 'utf-8');
   allResults[implementation] = {};
-  const pendingTitles = results.pending.map(t => t.title);
+  const pendingTitles = results.pending.map(t => t.fullTitle);
 
   // process each test, noting the result
   results.tests.forEach(test => {
