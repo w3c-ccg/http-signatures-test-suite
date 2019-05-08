@@ -13,7 +13,7 @@ async function generate(file, options) {
   for(const key in options.args) {
     let value = options.args[key];
     if(Array.isArray(value)) {
-      value = `--${key} ${value.join(',')} `;
+      value = `--${key} "${value.join(' ')}" `;
     } else {
       value = `--${key} ${value} `;
     }
