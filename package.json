@@ -21,7 +21,11 @@
     "test",
     "suite"
   ],
-  "author": "digital_bazaar",
+  "author": {
+    "name": "Digital Bazaar, Inc.",
+    "email": "support@digitalbazaar.com",
+    "url": "https://digitalbazaar.com/"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/w3c-dvcg/http-signatures-test-suite/issues"
