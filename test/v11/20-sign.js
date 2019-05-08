@@ -12,7 +12,7 @@ describe.skip('Sign Requests', function() {
     };
   });
 
-  it.skip('should fail if there is no keyId', async function() {
+  it.skip('should conform to 2.1.1 - fail if there is no keyId', async function() {
     let error = null;
     try {
       await util.generate('nokeyid-request.txt', generatorOptions);

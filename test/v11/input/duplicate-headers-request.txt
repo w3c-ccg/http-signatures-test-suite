@@ -1,0 +1,5 @@
+GET /duplicate/headers HTTP/1.1
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Macintosh)
+Duplicate: first
+Duplicate: last
