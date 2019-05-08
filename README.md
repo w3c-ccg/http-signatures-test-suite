@@ -53,9 +53,8 @@ Content-Length: 18
 ### Creating a config file
 An example local configuration for the test suite. To use:
 
-1. Copy this file to one called config.json.
-2. Modify the file and replace with appropriate values for your system.
-3. the generator should be a path to your binary.
+1. Copy the `config.json.example` file to `config.json` and modify.
+2. the generator should be a path to your binary.
 
 ```
 {
