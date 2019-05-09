@@ -1,5 +1,11 @@
 const config = require('../../config.json');
 const util = require('./util');
+const {expect} = require('chai');
+const {registry} = require('./input/algorithms');
+
+// base64 string should only consist of letters,
+// numbers, and end with an = sign.
+const base64String = /[A-Za-z0-9+/=]=$/;
 
 describe.skip('Sign Requests', function() {
   let generatorOptions = null;
@@ -10,6 +16,15 @@ describe.skip('Sign Requests', function() {
       date: new Date().toGMTString(),
       headers: []
     };
+  });
+
+  describe('2.4 Creating a Signature', function() {
+    it('should return a base64 string', async function() {
+      const result = await util.generate('basic-request.txt', generatorOptions);
+      expect(result, 'Expected sign to return a Signature').to.exist;
+      result.should.match(base64String);
+
+    });
   });
 
   it.skip('should conform to 2.1.1 - fail if there is no keyId', async function() {
@@ -49,12 +64,6 @@ describe.skip('Sign Requests', function() {
     error.should.not.be.null;
   });
 
-  it.skip('should return an empty Signing String', async function() {
-    const result = await util.generate(
-      'invalidheaders-request.txt', generatorOptions);
-    result.should.not.be.null;
-    result.should.be.an('object');
-  });
 
 
 });
