@@ -31,11 +31,18 @@ describe('Canonize should', function() {
         * single value, `(created)`, in the list of HTTP headers.
       */
       const result = await util.generate('basic-request.txt', generatorOptions);
-      result.should.not.be.null;
+      expect(result, 'Expected a result').to.exist;
       result.should.be.a('string');
       const expected = `created: ${generatorOptions.date}\n`;
       result.should.equal(expected, 'expected signature string to match');
     });
+
+  it.skip('should return an empty String if headers is empty', async function() {
+    const result = await util.generate(
+      'invalidheaders-request.txt', generatorOptions);
+    expect(result, 'Expected a result').to.exist;
+    result.should.be.an('object');
+  });
 
   describe('conform to 2.3 - Signature String Construction ', async function() {
     //TODO: should (created) & algorithm be in canonize or sign?
@@ -62,7 +69,7 @@ describe('Canonize should', function() {
             } catch(e) {
               error = e;
             }
-            expect(error, 'error was null').not.be.null;
+            expect(error, 'expected an error').to.exist;
           });
         });
         const unDefined = `${title} throw if (${param}) & ${param} is not defined`;
@@ -84,7 +91,7 @@ describe('Canonize should', function() {
           } catch(e) {
             error = e;
           }
-          expect(error, 'error was null').not.be.null;
+          expect(error, 'expected and error to be thrown').to.exist;
         });
         const notInt = `${title} should throw if (${param}) & ${param} is not an integer`;
         it(notInt, async function() {
@@ -105,7 +112,7 @@ describe('Canonize should', function() {
           } catch(e) {
             error = e;
           }
-          expect(error, 'error was null').not.be.null;
+          expect(error, 'Expected an error to be thrown').to.exist;
         });
         it.skip(`${title} should return (${param})`,
           async function() {
@@ -123,7 +130,7 @@ describe('Canonize should', function() {
             const result = await util.generate(
               `${param}.txt`, generatorOptions);
             const expected = `(${param}): 1\n`;
-            result.should.not.be.null;
+            expect(result, 'Expected a result').to.exist;
             result.should.be.a('string');
             result.should.equal(expected, 'expected signature string to match');
           });
@@ -139,7 +146,7 @@ describe('Canonize should', function() {
       generatorOptions.args.headers = ['Content-Length', 'Host'];
       const result = await util.generate(
         'default-test.httpMessage', generatorOptions);
-      result.should.not.be.null;
+      expect(result, 'Expected a result').to.exist;
       result.should.be.a('string');
       let expected = 'content-length: 18\n';
       expected += 'host: example.com\n';
@@ -157,7 +164,7 @@ describe('Canonize should', function() {
       */
       generatorOptions.args.headers = ['(request-target)'];
       const result = await util.generate('basic-request.txt', generatorOptions);
-      result.should.not.be.null;
+      expect(result, 'Expected a result').to.exist;
       result.should.be.a('string');
       const expected = '(request-target): get /basic/request\n';
       result.should.equal(expected, 'expected signature string to match');
@@ -206,7 +213,7 @@ describe('Canonize should', function() {
       } catch(e) {
         error = e;
       }
-      expect(error, 'error was null').not.be.null;
+      expect(error, 'Expected an error to be thrown').to.exist;
     });
     it.skip('- 4d. throws if a header is malformed', async function() {
       /**
@@ -222,7 +229,7 @@ describe('Canonize should', function() {
       } catch(e) {
         error = e;
       }
-      expect(error, 'error was null').not.be.null;
+      expect(error, 'Expected an error to be thrown').to.exist;
     });
 
     it('- 5. if not last value should end with \\n', async function() {
@@ -232,7 +239,7 @@ describe('Canonize should', function() {
       generatorOptions.args.headers = ['Digest', 'Host'];
       const result = await util.generate(
         'default-test.httpMessage', generatorOptions);
-      expect(result, 'result was null').not.be.null;
+      expect(result, 'Expected a result').to.exist;
       let expected =
         'digest: SHA-256=X48E9qOokqqrvdts8nOJRJN3OWDUoyWxBf7kbu9DBPE=\n';
       // the last line should not have a new line block
