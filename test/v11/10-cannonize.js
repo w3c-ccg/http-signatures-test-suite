@@ -1,5 +1,7 @@
 const config = require('../../config.json');
 const util = require('./util');
+const {algorithms} = require('./input/algorithms');
+const {expect} = require('chai');
 
 describe('Canonize should', function() {
   let generatorOptions = null;
@@ -21,16 +23,6 @@ describe('Canonize should', function() {
       `date: ${generatorOptions.date}\n`, `expected signature string to match`);
   });
 
-  it('return fail is a header is not in the request', async function() {
-    let error = null;
-    try {
-      generatorOptions.args.headers = ['date', 'not-in-request'];
-      await util.generate('basic-request.txt', generatorOptions);
-    } catch(e) {
-      error = e;
-      error.should.not.be.null;
-    }
-  });
   it.skip('conform to 2.1.6 - if no header param only return (created)',
     async function() {
       /**
@@ -47,195 +39,94 @@ describe('Canonize should', function() {
 
   describe('conform to 2.3 - Signature String Construction ', async function() {
     //TODO: should (created) & algorithm be in canonize or sign?
-    it('- 2. should throw if (created) & algorithm rsa', async function() {
-      /**
-       * If the header field name is `(created)` and the `algorithm`
-       * parameter starts with `rsa`, `hmac`, or `ecdsa` an implementation
-       * MUST produce an error.
-      */
-      generatorOptions.args.headers = ['(created)'];
-      let error = null;
-      try {
-        await util.generate('created-rsa.txt', generatorOptions);
-      } catch(e) {
-        error = e;
-        error.should.not.be.null;
-      }
-    });
-    it('- 2. should throw if (created) & algorithm hmac', async function() {
-      /**
-       * If the header field name is `(created)` and the `algorithm`
-       * parameter starts with `rsa`, `hmac`, or `ecdsa` an implementation
-       * MUST produce an error.
-      */
-      generatorOptions.args.headers = ['(created)'];
-      let error = null;
-      try {
-        await util.generate('created-hmac.txt', generatorOptions);
-      } catch(e) {
-        error = e;
-        error.should.not.be.null;
-      }
-    });
-    it('- 2. should throw if (created) & algorithm ecdsa', async function() {
-      /**
-       * If the header field name is `(created)` and the `algorithm`
-       * parameter starts with `rsa`, `hmac`, or `ecdsa` an implementation
-       * MUST produce an error.
-      */
-      generatorOptions.args.headers = ['(created)'];
-      let error = null;
-      try {
-        await util.generate('created-ecdsa.txt', generatorOptions);
-      } catch(e) {
-        error = e;
-        error.should.not.be.null;
-      }
-    });
-
-    it('- 2. should throw if (created) & created parameter is not defined',
-      async function() {
-        /**
-          * If the `created` Signature Parameter is
-          * not specified, or is not an integer, an implementation MUST
-          * produce an error.
-        */
-        generatorOptions.args.headers = ['(created)'];
-        let error = null;
-        try {
-          await util.generate('not-created.txt', generatorOptions);
-        } catch(e) {
-          error = e;
-          error.should.not.be.null;
-        }
-      });
-
-    it('- 2. should throw if (created) & created parameter is not an integer',
-      async function() {
-        /**
-          * If the `created` Signature Parameter is
-          * not specified, or is not an integer, an implementation MUST
-          * produce an error.
-        */
-        generatorOptions.args.headers = ['(created)'];
-        let error = null;
-        try {
-          await util.generate('created-not-int.txt', generatorOptions);
-        } catch(e) {
-          error = e;
-          error.should.not.be.null;
-        }
-      });
-
-    it.skip('- 2. should return (created)',
-      async function() {
-        /**
-          * If the `created` Signature Parameter is
-          * not specified, or is not an integer, an implementation MUST
-          * produce an error.
-        */
-        generatorOptions.args.headers = ['(created)'];
-        const result = await util.generate('created.txt', generatorOptions);
-        const expected = '(created): 1\n';
-        result.should.not.be.null;
-        result.should.be.a('string');
-        result.should.equal(expected, 'expected signature string to match');
-        console.log(result);
-      });
-    it('- 2. should throw if (expires) & algorithm rsa', async function() {
-      /**
-       * If the header field name is `(expires)` and the `algorithm`
-       * parameter starts with `rsa`, `hmac`, or `ecdsa` an implementation
-       * MUST produce an error.
-      */
-      generatorOptions.args.headers = ['(expires)'];
-      let error = null;
-      try {
-        await util.generate('expires-rsa.txt', generatorOptions);
-      } catch(e) {
-        error = e;
-        error.should.not.be.null;
-      }
-    });
-    it('- 2. should throw if (expires) & algorithm hmac', async function() {
-      /**
-       * If the header field name is `(expires)` and the `algorithm`
-       * parameter starts with `rsa`, `hmac`, or `ecdsa` an implementation
-       * MUST produce an error.
-      */
-      generatorOptions.args.headers = ['(expires)'];
-      let error = null;
-      try {
-        await util.generate('expires-hmac.txt', generatorOptions);
-      } catch(e) {
-        error = e;
-        error.should.not.be.null;
-      }
-    });
-    it('- 2. should throw if (expires) & algorithm ecdsa', async function() {
-      /**
-       * If the header field name is `(expires)` and the `algorithm`
-       * parameter starts with `rsa`, `hmac`, or `ecdsa` an implementation
-       * MUST produce an error.
-      */
-      generatorOptions.args.headers = ['(expires)'];
-      let error = null;
-      try {
-        await util.generate('expires-ecdsa.txt', generatorOptions);
-      } catch(e) {
-        error = e;
-        error.should.not.be.null;
-      }
-    });
-
-    it('- 2. should throw if (expires) & expires parameter is not defined',
-      async function() {
-        /**
-          * If the `expires` Signature Parameter is
-          * not specified, or is not an integer, an implementation MUST
-          * produce an error.
-        */
-        generatorOptions.args.headers = ['(expires)'];
-        let error = null;
-        try {
-          await util.generate('not-expires.txt', generatorOptions);
-        } catch(e) {
-          error = e;
-          error.should.not.be.null;
-        }
-      });
-
-    it('- 2. should throw if (expires) & expires parameter is not an integer',
-      async function() {
-        /**
-          * If the `expires` Signature Parameter is
-          * not specified, or is not an integer, an implementation MUST
-          * produce an error.
-        */
-        generatorOptions.args.headers = ['(expires)'];
-        let error = null;
-        try {
-          await util.generate('expires-not-int.txt', generatorOptions);
-        } catch(e) {
-          error = e;
-          error.should.not.be.null;
-        }
-      });
-
-    it.skip('- 2. should return (expires)',
-      async function() {
-        /**
-          * If the `expires` Signature Parameter is
-          * not specified, or is not an integer, an implementation MUST
-          * produce an error.
-        */
-        generatorOptions.args.headers = ['(expires)'];
-        const result = await util.generate('expires.txt', generatorOptions);
-        const expected = '(expires): 1\n';
-        result.should.not.be.null;
-        result.should.be.a('string');
-        result.should.equal(expected, 'expected signature string to match');
-        console.log(result);
+    [{number: 2, param: 'created'}, {number: 3, param: 'expires'}]
+      .forEach(({number, param}) => {
+        const title = `- ${number}. should`;
+        algorithms.forEach(algorithm => {
+          const algTest = `${title} throw if (${param}) & algorithm ${algorithm}`;
+          it(algTest, async function() {
+            /**
+             * If the header field name is `(created)` and the `algorithm`
+             * parameter starts with `rsa`, `hmac`, or `ecdsa` an implementation
+             * MUST produce an error.
+            */
+            /**
+             * If the header field name is `(expires)` and the `algorithm`
+             * parameter starts with `rsa`, `hmac`, or `ecdsa` an implementation
+             * MUST produce an error.
+            */
+            generatorOptions.args.headers = [`(${algorithm})`];
+            let error = null;
+            try {
+              await util.generate(`created-${algorithm}.txt`, generatorOptions);
+            } catch(e) {
+              error = e;
+            }
+            expect(error, 'error was null').not.be.null;
+          });
+        });
+        const unDefined = `${title} throw if (${param}) & ${param} is not defined`;
+        it(unDefined, async function() {
+          /**
+            * If the `created` Signature Parameter is
+            * not specified, or is not an integer, an implementation MUST
+            * produce an error.
+          */
+          /**
+            * If the `expires` Signature Parameter is
+            * not specified, or is not an integer, an implementation MUST
+            * produce an error.
+          */
+          generatorOptions.args.headers = [`(${param})`];
+          let error = null;
+          try {
+            await util.generate(`not-${param}.txt`, generatorOptions);
+          } catch(e) {
+            error = e;
+          }
+          expect(error, 'error was null').not.be.null;
+        });
+        const notInt = `${title} should throw if (${param}) & ${param} is not an integer`;
+        it(notInt, async function() {
+          /**
+            * If the `created` Signature Parameter is
+            * not specified, or is not an integer, an implementation MUST
+            * produce an error.
+          */
+          /**
+            * If the `expires` Signature Parameter is
+            * not specified, or is not an integer, an implementation MUST
+            * produce an error.
+          */
+          generatorOptions.args.headers = [`(${param})`];
+          let error = null;
+          try {
+            await util.generate(`${param}-not-int.txt`, generatorOptions);
+          } catch(e) {
+            error = e;
+          }
+          expect(error, 'error was null').not.be.null;
+        });
+        it.skip(`${title} should return (${param})`,
+          async function() {
+            /**
+              * If the `created` Signature Parameter is
+              * not specified, or is not an integer, an implementation MUST
+              * produce an error.
+            */
+            /**
+              * If the `expires` Signature Parameter is
+              * not specified, or is not an integer, an implementation MUST
+              * produce an error.
+            */
+            generatorOptions.args.headers = [`(${param})`];
+            const result = await util.generate(
+              `${param}.txt`, generatorOptions);
+            const expected = `(${param}): 1\n`;
+            result.should.not.be.null;
+            result.should.be.a('string');
+            result.should.equal(expected, 'expected signature string to match');
+          });
       });
 
     it('- should match the order of the headers parameter', async function() {
@@ -271,5 +162,83 @@ describe('Canonize should', function() {
       const expected = '(request-target): get /basic/request\n';
       result.should.equal(expected, 'expected signature string to match');
     });
+
+    it('- 4. should change capitalized Headers to lowercase', async function() {
+      /**
+        * Create the header field string by concatenating the lowercased
+        * header field name followed with an ASCII colon `:`,
+        * an ASCII space ` `, and the header field value.
+        * Leading and trailing optional whitespace (OWS) in the
+        * header field value MUST be omitted
+        * (as specified in RFC7230, Section 3.2.4).
+       */
+    });
+
+    it('- 4a. should convert multiple headers to a list', async function() {
+      /**
+        * If there are multiple instances of the same header
+        * field, all header field values associated with the
+        * header field MUST be concatenated, separated by an
+        * ASCII comma and an ASCII space `, `, and used in the
+        * order in which they will appear in the transmitted HTTP message.
+      */
+    });
+
+    it('- 4b. should include empty headers', async function() {
+      /**
+       * If the header value (after removing leading and trailing whitespace)
+       * is a zero-length string, the signature string line correlating with
+       * that header will simply be the (lowercased) header name,
+       * an ASCII colon `:`, and an ASCII space ` `.
+       */
+    });
+    it('- 4d. throws if a header is not in the request', async function() {
+      /**
+        * If a header specified in the headers parameter is
+        * malformed or cannot be matched with a provided
+        * header in the message, the implementation
+        * MUST produce an error.
+      */
+      let error = null;
+      try {
+        generatorOptions.args.headers = ['not-in-request'];
+        await util.generate('basic-request.txt', generatorOptions);
+      } catch(e) {
+        error = e;
+      }
+      expect(error, 'error was null').not.be.null;
+    });
+    it.skip('- 4d. throws if a header is malformed', async function() {
+      /**
+        * If a header specified in the headers parameter is
+        * malformed or cannot be matched with a provided
+        * header in the message, the implementation
+        * MUST produce an error.
+      */
+      let error = null;
+      generatorOptions.args.headers = ['Server'];
+      try {
+        await util.generate('malformed-request.txt', generatorOptions);
+      } catch(e) {
+        error = e;
+      }
+      expect(error, 'error was null').not.be.null;
+    });
+
+    it('- 5. if not last value should end with \\n', async function() {
+      /**
+        * If value is not the last value then append an ASCII newline `\n`.
+      */
+      generatorOptions.args.headers = ['Digest', 'Host'];
+      const result = await util.generate(
+        'default-test.httpMessage', generatorOptions);
+      expect(result, 'result was null').not.be.null;
+      let expected =
+        'digest: SHA-256=X48E9qOokqqrvdts8nOJRJN3OWDUoyWxBf7kbu9DBPE=\n';
+      // the last line should not have a new line block
+      expected += 'host: example.com';
+      result.should.equal(expected);
+    });
+
   });
 });
