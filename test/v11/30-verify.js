@@ -1,7 +1,7 @@
 const config = require('../../config.json');
 const util = require('./util');
 
-describe('should verify http message', function() {
+describe('Verify should', function() {
   let generatorOptions = null;
   before(function() {
     generatorOptions = {
@@ -11,7 +11,19 @@ describe('should verify http message', function() {
       date: new Date().toGMTString(),
     };
   });
-
+  describe('conform to 2.5', function() {
+    it('by deriving the signature algorithim from the keyid', async function() {
+      /**
+        * The `algorithm`, `keyId`, and base 64 decoded `signature`
+        * listed in the Signature Parameters are then used to verify
+        * the authenticity of the digital signature.
+        * Note: The application verifying the signature MUST derive
+        * the digital signature algorithm from the metadata associated
+        * with the `keyId` and MUST NOT use the value of
+        * `algorithm` from the signed message.
+      */
+    });
+  });
   it('should conform to 2.1.1 - fail if no keyId paramater', function() {
 
   });

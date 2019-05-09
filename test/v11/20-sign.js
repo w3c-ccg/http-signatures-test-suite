@@ -7,7 +7,7 @@ const {registry} = require('./input/algorithms');
 // numbers, and end with an = sign.
 const base64String = /[A-Za-z0-9+/=]=$/;
 
-describe.skip('Sign Requests', function() {
+describe.skip('Sign should', function() {
   let generatorOptions = null;
   before(function() {
     generatorOptions = {
@@ -23,7 +23,19 @@ describe.skip('Sign Requests', function() {
       const result = await util.generate('basic-request.txt', generatorOptions);
       expect(result, 'Expected sign to return a Signature').to.exist;
       result.should.match(base64String);
-
+      console.log(result);
+    });
+    it('should return a valid signature string', async function() {
+      const result = await util.generate('basic-request.txt', generatorOptions);
+      expect(result, 'Expected sign to return a Signature').to.exist;
+      result.should.match(base64String);
+      console.log(result);
+    });
+    it('should use the key from keyId', async function() {
+      const result = await util.generate('basic-request.txt', generatorOptions);
+      expect(result, 'Expected sign to return a Signature').to.exist;
+      result.should.match(base64String);
+      console.log(result);
     });
   });
 

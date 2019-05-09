@@ -232,7 +232,7 @@ describe('Canonize should', function() {
       expect(error, 'Expected an error to be thrown').to.exist;
     });
 
-    it('- 5. if not last value should end with \\n', async function() {
+    it.skip('- 5. if not last value should end with \\n', async function() {
       /**
         * If value is not the last value then append an ASCII newline `\n`.
       */
