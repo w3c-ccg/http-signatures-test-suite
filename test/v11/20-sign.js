@@ -13,26 +13,26 @@ describe.skip('Sign should', function() {
     generatorOptions = {
       generator: config.generator,
       command: 'sign',
+      args: {},
       date: new Date().toGMTString(),
-      headers: []
     };
   });
 
   describe('2.4 Creating a Signature', function() {
     it('should return a base64 string', async function() {
-      const result = await util.generate('basic-request.txt', generatorOptions);
+      const result = await util.generate('basic-request.httpMessage', generatorOptions);
       expect(result, 'Expected sign to return a Signature').to.exist;
       result.should.match(base64String);
       console.log(result);
     });
     it('should return a valid signature string', async function() {
-      const result = await util.generate('basic-request.txt', generatorOptions);
+      const result = await util.generate('basic-request.httpMessage', generatorOptions);
       expect(result, 'Expected sign to return a Signature').to.exist;
       result.should.match(base64String);
       console.log(result);
     });
     it('should use the key from keyId', async function() {
-      const result = await util.generate('basic-request.txt', generatorOptions);
+      const result = await util.generate('basic-request.httpMessage', generatorOptions);
       expect(result, 'Expected sign to return a Signature').to.exist;
       result.should.match(base64String);
       console.log(result);
@@ -42,7 +42,7 @@ describe.skip('Sign should', function() {
   it.skip('should conform to 2.1.1 - fail if there is no keyId', async function() {
     let error = null;
     try {
-      await util.generate('nokeyid-request.txt', generatorOptions);
+      await util.generate('nokeyid-request.httpMessage', generatorOptions);
     } catch(e) {
       error = e;
     }
@@ -52,7 +52,7 @@ describe.skip('Sign should', function() {
   it.skip('should fail if there is no signature parameter', async function() {
     let error = null;
     try {
-      await util.generate('nosignature-request.txt', generatorOptions);
+      await util.generate('nosignature-request.httpMessage', generatorOptions);
     } catch(e) {
       error = e;
     }
@@ -61,21 +61,47 @@ describe.skip('Sign should', function() {
 
   it.skip('should succeed with out algorithm parameter', async function() {
     const result = await util.generate(
-      'noalgorithm-request.txt', generatorOptions);
+      'noalgorithm-request.httpMessage', generatorOptions);
     result.should.not.be.null;
     result.should.be.a('string');
   });
 
-  it.skip('should not process if created is in the future', async function() {
+  it.skip('should conform to 2.1.4 - not process if created is in the future', async function() {
+    /**
+     * A signature with a `created` timestamp value
+     * that is in the future MUST NOT be processed.
+    */
     let error = null;
     try {
-      const result = await util.generate('created-request.txt', generatorOptions);
+      await util.generate('created-in-future.httpMessage', generatorOptions);
     } catch(e) {
       error = e;
     }
     error.should.not.be.null;
   });
 
+  it.skip('should conform to 2.1.5 - not process if expires is in the past', async function() {
+    /**
+      * A signatures with a `expires` timestamp
+      * value that is in the past MUST NOT be processed.
+    */
+    let error = null;
+    try {
+      await util.generate('expired.httpMessage', generatorOptions);
+    } catch(e) {
+      error = e;
+    }
+    error.should.not.be.null;
+  });
+
+  it('should conform to 2.1.3 - use the algorithm param to verify key', async function() {
+    /**
+     * If `algorithm` is provided and differs from
+     * the key metadata identified by the `keyId`,
+     * for example `rsa-sha256` but an EdDSA key
+     * is identified via `keyId`, then an implementation MUST produce an error.
+    */
+  });
 
 
 });

@@ -38,9 +38,10 @@ describe('Verify should', function() {
       * used.
     */
     const result = await util.generate(
-      'duplicate-headers-request.txt', generatorOptions);
+      'duplicate-headers-request.httpMessage', generatorOptions);
     result.should.not.be.null;
     result.should.be.a('string');
     result.should.equal('duplicate: last\n');
   });
+
 });

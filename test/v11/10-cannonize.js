@@ -16,7 +16,7 @@ describe('Canonize should', function() {
 
   it('return a valid signature string', async function() {
     generatorOptions.args.headers = ['date'];
-    const result = await util.generate('basic-request.txt', generatorOptions);
+    const result = await util.generate('basic-request.httpMessage', generatorOptions);
     result.should.not.be.null;
     result.should.be.a('string');
     result.should.equal(
@@ -30,7 +30,7 @@ describe('Canonize should', function() {
         * implementations MUST operate as if the field were specified with a
         * single value, `(created)`, in the list of HTTP headers.
       */
-      const result = await util.generate('basic-request.txt', generatorOptions);
+      const result = await util.generate('basic-request.httpMessage', generatorOptions);
       expect(result, 'Expected a result').to.exist;
       result.should.be.a('string');
       const expected = `created: ${generatorOptions.date}\n`;
@@ -39,7 +39,7 @@ describe('Canonize should', function() {
 
   it.skip('should return an empty String if headers is empty', async function() {
     const result = await util.generate(
-      'invalidheaders-request.txt', generatorOptions);
+      'invalidheaders-request.httpMessage', generatorOptions);
     expect(result, 'Expected a result').to.exist;
     result.should.be.an('object');
   });
@@ -65,7 +65,7 @@ describe('Canonize should', function() {
             generatorOptions.args.headers = [`(${algorithm})`];
             let error = null;
             try {
-              await util.generate(`created-${algorithm}.txt`, generatorOptions);
+              await util.generate(`created-${algorithm}.httpMessage`, generatorOptions);
             } catch(e) {
               error = e;
             }
@@ -87,7 +87,7 @@ describe('Canonize should', function() {
           generatorOptions.args.headers = [`(${param})`];
           let error = null;
           try {
-            await util.generate(`not-${param}.txt`, generatorOptions);
+            await util.generate(`not-${param}.httpMessage`, generatorOptions);
           } catch(e) {
             error = e;
           }
@@ -108,7 +108,7 @@ describe('Canonize should', function() {
           generatorOptions.args.headers = [`(${param})`];
           let error = null;
           try {
-            await util.generate(`${param}-not-int.txt`, generatorOptions);
+            await util.generate(`${param}-not-int.httpMessage`, generatorOptions);
           } catch(e) {
             error = e;
           }
@@ -128,7 +128,7 @@ describe('Canonize should', function() {
             */
             generatorOptions.args.headers = [`(${param})`];
             const result = await util.generate(
-              `${param}.txt`, generatorOptions);
+              `${param}.httpMessage`, generatorOptions);
             const expected = `(${param}): 1\n`;
             expect(result, 'Expected a result').to.exist;
             result.should.be.a('string');
@@ -163,7 +163,7 @@ describe('Canonize should', function() {
        * to the :method pseudo-header and not to the :path pseudo-header.
       */
       generatorOptions.args.headers = ['(request-target)'];
-      const result = await util.generate('basic-request.txt', generatorOptions);
+      const result = await util.generate('basic-request.httpMessage', generatorOptions);
       expect(result, 'Expected a result').to.exist;
       result.should.be.a('string');
       const expected = '(request-target): get /basic/request\n';
@@ -209,7 +209,7 @@ describe('Canonize should', function() {
       let error = null;
       try {
         generatorOptions.args.headers = ['not-in-request'];
-        await util.generate('basic-request.txt', generatorOptions);
+        await util.generate('basic-request.httpMessage', generatorOptions);
       } catch(e) {
         error = e;
       }
@@ -225,7 +225,7 @@ describe('Canonize should', function() {
       let error = null;
       generatorOptions.args.headers = ['Server'];
       try {
-        await util.generate('malformed-request.txt', generatorOptions);
+        await util.generate('malformed-request.httpMessage', generatorOptions);
       } catch(e) {
         error = e;
       }
