@@ -16,26 +16,65 @@ describe('Canonize should', function() {
 
   it('return a valid signature string', async function() {
     generatorOptions.args.headers = ['date'];
-    const result = await util.generate('basic-request.httpMessage', generatorOptions);
+    const result = await util.generate(
+      'basic-request.httpMessage', generatorOptions);
     result.should.not.be.null;
     result.should.be.a('string');
     result.should.equal(
       `date: ${generatorOptions.date}\n`, `expected signature string to match`);
   });
+  it.skip('- 5. if not last value should end with \\n', async function() {
+    /**
+      * If value is not the last value then append an ASCII newline `\n`.
+    */
+    generatorOptions.args.headers = ['Digest', 'Host'];
+    const result = await util.generate(
+      'default-test.httpMessage', generatorOptions);
+    expect(result, 'Expected a result').to.exist;
+    let expected =
+      'digest: SHA-256=X48E9qOokqqrvdts8nOJRJN3OWDUoyWxBf7kbu9DBPE=\n';
+    // the last line should not have a new line block
+    expected += 'host: example.com';
+    result.should.equal(expected);
+  });
 
-  it.skip('conform to 2.1.6 - if no header param only return (created)',
-    async function() {
-      /**
-        * If not specified (the header parameter),
-        * implementations MUST operate as if the field were specified with a
-        * single value, `(created)`, in the list of HTTP headers.
-      */
-      const result = await util.generate('basic-request.httpMessage', generatorOptions);
-      expect(result, 'Expected a result').to.exist;
-      result.should.be.a('string');
-      const expected = `created: ${generatorOptions.date}\n`;
-      result.should.equal(expected, 'expected signature string to match');
-    });
+  it('- 4b. should include empty headers', async function() {
+    /**
+     * If the header value (after removing leading and trailing whitespace)
+     * is a zero-length string, the signature string line correlating with
+     * that header will simply be the (lowercased) header name,
+     * an ASCII colon `:`, and an ASCII space ` `.
+     */
+  });
+
+  it('- should accept (request-target)', async function() {
+    /**
+     * If the header field name is `(request-target)` then generate
+     * the header field value by concatenating the lowercased :method,
+     * an ASCII space, and the :path pseudo-headers
+     * (as specified in HTTP/2, Section 8.1.2.3).
+     * Note: For the avoidance of doubt, lowercasing only applies
+     * to the :method pseudo-header and not to the :path pseudo-header.
+    */
+    generatorOptions.args.headers = ['(request-target)'];
+    const result = await util.generate(
+      'basic-request.httpMessage', generatorOptions);
+    expect(result, 'Expected a result').to.exist;
+    result.should.be.a('string');
+    const expected = '(request-target): get /basic/request\n';
+    result.should.equal(expected, 'expected signature string to match');
+  });
+
+  it('- 4. should change capitalized Headers to lowercase', async function() {
+    /**
+      * Create the header field string by concatenating the lowercased
+      * header field name followed with an ASCII colon `:`,
+      * an ASCII space ` `, and the header field value.
+      * Leading and trailing optional whitespace (OWS) in the
+      * header field value MUST be omitted
+      * (as specified in RFC7230, Section 3.2.4).
+     */
+  });
 
   it.skip('should return an empty String if headers is empty', async function() {
     const result = await util.generate(
@@ -44,13 +83,33 @@ describe('Canonize should', function() {
     result.should.be.an('object');
   });
 
+  it.skip(`If the header parameter is not specified,
+      implementations MUST operate as if the field were specified with a
+      single value, (created), in the list of HTTP headers.`,
+  async function() {
+    /**
+        * If not specified (the header parameter),
+        * implementations MUST operate as if the field were specified with a
+        * single value, `(created)`, in the list of HTTP headers.
+      */
+    const result = await util.generate(
+      'basic-request.httpMessage', generatorOptions);
+    expect(result, 'Expected a result').to.exist;
+    result.should.be.a('string');
+    const expected = `created: ${generatorOptions.date}\n`;
+    result.should.equal(expected, 'expected signature string to match');
+  });
+
+
   describe('conform to 2.3 - Signature String Construction ', async function() {
     //TODO: should (created) & algorithm be in canonize or sign?
     [{number: 2, param: 'created'}, {number: 3, param: 'expires'}]
       .forEach(({number, param}) => {
         const title = `- ${number}. should`;
         algorithms.forEach(algorithm => {
-          const algTest = `${title} throw if (${param}) & algorithm ${algorithm}`;
+          const algTest = `If the header field name is (${param})
+          and the algorithm parameter starts with ${algorithm} 
+          an implementation MUST produce an error.`;
           it(algTest, async function() {
             /**
              * If the header field name is `(created)` and the `algorithm`
@@ -65,14 +124,16 @@ describe('Canonize should', function() {
             generatorOptions.args.headers = [`(${algorithm})`];
             let error = null;
             try {
-              await util.generate(`created-${algorithm}.httpMessage`, generatorOptions);
+              await util.generate(
+                `created-${algorithm}.httpMessage`, generatorOptions);
             } catch(e) {
               error = e;
             }
             expect(error, 'expected an error').to.exist;
           });
         });
-        const unDefined = `${title} throw if (${param}) & ${param} is not defined`;
+        const unDefined = `If the ${param} Signature Parameter is
+        not specified, an implementation MUST produce an error.`;
         it(unDefined, async function() {
           /**
             * If the `created` Signature Parameter is
@@ -93,7 +154,9 @@ describe('Canonize should', function() {
           }
           expect(error, 'expected and error to be thrown').to.exist;
         });
-        const notInt = `${title} should throw if (${param}) & ${param} is not an integer`;
+        const notInt = `If the ${param} Signature Parameter is
+        not an integer or unix timestamp, an 
+        implementation MUST produce an error.`;
         it(notInt, async function() {
           /**
             * If the `created` Signature Parameter is
@@ -108,24 +171,15 @@ describe('Canonize should', function() {
           generatorOptions.args.headers = [`(${param})`];
           let error = null;
           try {
-            await util.generate(`${param}-not-int.httpMessage`, generatorOptions);
+            await util.generate(
+              `${param}-not-int.httpMessage`, generatorOptions);
           } catch(e) {
             error = e;
           }
           expect(error, 'Expected an error to be thrown').to.exist;
         });
-        it.skip(`${title} should return (${param})`,
+        it.skip(`SHOULD return (${param})`,
           async function() {
-            /**
-              * If the `created` Signature Parameter is
-              * not specified, or is not an integer, an implementation MUST
-              * produce an error.
-            */
-            /**
-              * If the `expires` Signature Parameter is
-              * not specified, or is not an integer, an implementation MUST
-              * produce an error.
-            */
             generatorOptions.args.headers = [`(${param})`];
             const result = await util.generate(
               `${param}.httpMessage`, generatorOptions);
@@ -136,7 +190,10 @@ describe('Canonize should', function() {
           });
       });
 
-    it('- should match the order of the headers parameter', async function() {
+    it(`The client MUST use the values of each HTTP header field in the headers
+        Signature Parameter, in the order they appear in the headers
+        Signature Parameter.`,
+    async function() {
       /**
         * In order to generate the string that is signed with a key, the client
         * MUST use the values of each HTTP header field in the `headers`
@@ -153,35 +210,11 @@ describe('Canonize should', function() {
       result.should.equal(expected, 'expected signature string to match');
     });
 
-    it('- should accept (request-target)', async function() {
-      /**
-       * If the header field name is `(request-target)` then generate
-       * the header field value by concatenating the lowercased :method,
-       * an ASCII space, and the :path pseudo-headers
-       * (as specified in HTTP/2, Section 8.1.2.3).
-       * Note: For the avoidance of doubt, lowercasing only applies
-       * to the :method pseudo-header and not to the :path pseudo-header.
-      */
-      generatorOptions.args.headers = ['(request-target)'];
-      const result = await util.generate('basic-request.httpMessage', generatorOptions);
-      expect(result, 'Expected a result').to.exist;
-      result.should.be.a('string');
-      const expected = '(request-target): get /basic/request\n';
-      result.should.equal(expected, 'expected signature string to match');
-    });
-
-    it('- 4. should change capitalized Headers to lowercase', async function() {
-      /**
-        * Create the header field string by concatenating the lowercased
-        * header field name followed with an ASCII colon `:`,
-        * an ASCII space ` `, and the header field value.
-        * Leading and trailing optional whitespace (OWS) in the
-        * header field value MUST be omitted
-        * (as specified in RFC7230, Section 3.2.4).
-       */
-    });
-
-    it('- 4a. should convert multiple headers to a list', async function() {
+    it(`All header field values associated with the
+        header field MUST be concatenated, separated by an
+        ASCII comma and an ASCII space , and used in the
+        order in which they will appear in the transmitted HTTP message.`,
+    async function() {
       /**
         * If there are multiple instances of the same header
         * field, all header field values associated with the
@@ -191,15 +224,10 @@ describe('Canonize should', function() {
       */
     });
 
-    it('- 4b. should include empty headers', async function() {
-      /**
-       * If the header value (after removing leading and trailing whitespace)
-       * is a zero-length string, the signature string line correlating with
-       * that header will simply be the (lowercased) header name,
-       * an ASCII colon `:`, and an ASCII space ` `.
-       */
-    });
-    it('- 4d. throws if a header is not in the request', async function() {
+    it(`If a header specified in the headers parameter
+        cannot be matched with a provided
+        header in the message, the implementation
+        MUST produce an error.`, async function() {
       /**
         * If a header specified in the headers parameter is
         * malformed or cannot be matched with a provided
@@ -215,7 +243,9 @@ describe('Canonize should', function() {
       }
       expect(error, 'Expected an error to be thrown').to.exist;
     });
-    it.skip('- 4d. throws if a header is malformed', async function() {
+    it.skip(`If a header specified in the headers parameter is
+        malformed the implementation MUST produce an error.`,
+    async function() {
       /**
         * If a header specified in the headers parameter is
         * malformed or cannot be matched with a provided
@@ -230,21 +260,6 @@ describe('Canonize should', function() {
         error = e;
       }
       expect(error, 'Expected an error to be thrown').to.exist;
-    });
-
-    it.skip('- 5. if not last value should end with \\n', async function() {
-      /**
-        * If value is not the last value then append an ASCII newline `\n`.
-      */
-      generatorOptions.args.headers = ['Digest', 'Host'];
-      const result = await util.generate(
-        'default-test.httpMessage', generatorOptions);
-      expect(result, 'Expected a result').to.exist;
-      let expected =
-        'digest: SHA-256=X48E9qOokqqrvdts8nOJRJN3OWDUoyWxBf7kbu9DBPE=\n';
-      // the last line should not have a new line block
-      expected += 'host: example.com';
-      result.should.equal(expected);
     });
 
   });
