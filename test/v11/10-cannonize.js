@@ -23,22 +23,25 @@ describe('Canonize should', function() {
     result.should.equal(
       `date: ${generatorOptions.date}\n`, `expected signature string to match`);
   });
-  it.skip('- 5. if not last value should end with \\n', async function() {
+  it.skip('If value is not the last value then append an ASCII newline.',
+    async function() {
     /**
       * If value is not the last value then append an ASCII newline `\n`.
     */
-    generatorOptions.args.headers = ['Digest', 'Host'];
-    const result = await util.generate(
-      'default-test.httpMessage', generatorOptions);
-    expect(result, 'Expected a result').to.exist;
-    let expected =
-      'digest: SHA-256=X48E9qOokqqrvdts8nOJRJN3OWDUoyWxBf7kbu9DBPE=\n';
-    // the last line should not have a new line block
-    expected += 'host: example.com';
-    result.should.equal(expected);
-  });
+      generatorOptions.args.headers = ['Digest', 'Host'];
+      const result = await util.generate(
+        'default-test.httpMessage', generatorOptions);
+      expect(result, 'Expected a result').to.exist;
+      let expected =
+        'digest: SHA-256=X48E9qOokqqrvdts8nOJRJN3OWDUoyWxBf7kbu9DBPE=\n';
+      // the last line should not have a new line block
+      expected += 'host: example.com';
+      result.should.equal(expected);
+    });
 
-  it('- 4b. should include empty headers', async function() {
+  it(`is a zero-length string, the signature string line correlating with
+      that header will simply be the (lowercased) header name,
+      an ASCII colon :, and an ASCII space.`, async function() {
     /**
      * If the header value (after removing leading and trailing whitespace)
      * is a zero-length string, the signature string line correlating with
@@ -47,7 +50,9 @@ describe('Canonize should', function() {
      */
   });
 
-  it('- should accept (request-target)', async function() {
+  it(`If the header field name is (request-target) then generate
+      the header field value by concatenating the lowercased :method,
+      an ASCII space, and the :path pseudo-headers`, async function() {
     /**
      * If the header field name is `(request-target)` then generate
      * the header field value by concatenating the lowercased :method,
