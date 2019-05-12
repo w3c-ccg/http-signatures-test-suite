@@ -39,7 +39,8 @@ describe('Canonize should', function() {
       result.should.equal(expected);
     });
 
-  it(`is a zero-length string, the signature string line correlating with
+  it(`If the header value is a zero-length string,
+      the signature string line correlating with
       that header will simply be the (lowercased) header name,
       an ASCII colon :, and an ASCII space.`, async function() {
     /**
@@ -105,95 +106,91 @@ describe('Canonize should', function() {
     result.should.equal(expected, 'expected signature string to match');
   });
 
-
-  describe('conform to 2.3 - Signature String Construction ', async function() {
-    //TODO: should (created) & algorithm be in canonize or sign?
-    [{number: 2, param: 'created'}, {number: 3, param: 'expires'}]
-      .forEach(({number, param}) => {
-        const title = `- ${number}. should`;
-        algorithms.forEach(algorithm => {
-          const algTest = `If the header field name is (${param})
-          and the algorithm parameter starts with ${algorithm} 
-          an implementation MUST produce an error.`;
-          it(algTest, async function() {
-            /**
-             * If the header field name is `(created)` and the `algorithm`
-             * parameter starts with `rsa`, `hmac`, or `ecdsa` an implementation
-             * MUST produce an error.
-            */
-            /**
-             * If the header field name is `(expires)` and the `algorithm`
-             * parameter starts with `rsa`, `hmac`, or `ecdsa` an implementation
-             * MUST produce an error.
-            */
-            generatorOptions.args.headers = [`(${algorithm})`];
-            let error = null;
-            try {
-              await util.generate(
-                `created-${algorithm}.httpMessage`, generatorOptions);
-            } catch(e) {
-              error = e;
-            }
-            expect(error, 'expected an error').to.exist;
-          });
-        });
-        const unDefined = `If the ${param} Signature Parameter is
-        not specified, an implementation MUST produce an error.`;
-        it(unDefined, async function() {
+  //TODO: should (created) & algorithm be in canonize or sign?
+  ['created', 'expires']
+    .forEach(param => {
+      algorithms.forEach(algorithm => {
+        const algTest = `If the header field name is (${param})
+        and the algorithm parameter starts with ${algorithm} 
+        an implementation MUST produce an error.`;
+        it(algTest, async function() {
           /**
-            * If the `created` Signature Parameter is
-            * not specified, or is not an integer, an implementation MUST
-            * produce an error.
+           * If the header field name is `(created)` and the `algorithm`
+           * parameter starts with `rsa`, `hmac`, or `ecdsa` an implementation
+           * MUST produce an error.
           */
           /**
-            * If the `expires` Signature Parameter is
-            * not specified, or is not an integer, an implementation MUST
-            * produce an error.
+           * If the header field name is `(expires)` and the `algorithm`
+           * parameter starts with `rsa`, `hmac`, or `ecdsa` an implementation
+           * MUST produce an error.
           */
-          generatorOptions.args.headers = [`(${param})`];
-          let error = null;
-          try {
-            await util.generate(`not-${param}.httpMessage`, generatorOptions);
-          } catch(e) {
-            error = e;
-          }
-          expect(error, 'expected and error to be thrown').to.exist;
-        });
-        const notInt = `If the ${param} Signature Parameter is
-        not an integer or unix timestamp, an 
-        implementation MUST produce an error.`;
-        it(notInt, async function() {
-          /**
-            * If the `created` Signature Parameter is
-            * not specified, or is not an integer, an implementation MUST
-            * produce an error.
-          */
-          /**
-            * If the `expires` Signature Parameter is
-            * not specified, or is not an integer, an implementation MUST
-            * produce an error.
-          */
-          generatorOptions.args.headers = [`(${param})`];
+          generatorOptions.args.headers = [`(${algorithm})`];
           let error = null;
           try {
             await util.generate(
-              `${param}-not-int.httpMessage`, generatorOptions);
+              `created-${algorithm}.httpMessage`, generatorOptions);
           } catch(e) {
             error = e;
           }
-          expect(error, 'Expected an error to be thrown').to.exist;
+          expect(error, 'expected an error').to.exist;
         });
-        it.skip(`SHOULD return (${param})`,
-          async function() {
-            generatorOptions.args.headers = [`(${param})`];
-            const result = await util.generate(
-              `${param}.httpMessage`, generatorOptions);
-            const expected = `(${param}): 1\n`;
-            expect(result, 'Expected a result').to.exist;
-            result.should.be.a('string');
-            result.should.equal(expected, 'expected signature string to match');
-          });
       });
+      const unDefined = `If the ${param} Signature Parameter is
+      not specified, an implementation MUST produce an error.`;
+      it(unDefined, async function() {
+        /**
+          * If the `created` Signature Parameter is
+          * not specified, or is not an integer, an implementation MUST
+          * produce an error.
+        */
+        /**
+          * If the `expires` Signature Parameter is
+          * not specified, or is not an integer, an implementation MUST
+          * produce an error.
+        */
+        generatorOptions.args.headers = [`(${param})`];
+        let error = null;
+        try {
+          await util.generate(`not-${param}.httpMessage`, generatorOptions);
+        } catch(e) {
+          error = e;
+        }
+        expect(error, 'expected and error to be thrown').to.exist;
+      });
+      const notInt = `If the ${param} Signature Parameter is
+      not an integer or unix timestamp, an 
+      implementation MUST produce an error.`;
+      it(notInt, async function() {
+        /**
+          * If the `created` Signature Parameter is
+          * not specified, or is not an integer, an implementation MUST
+          * produce an error.
+        */
+        /**
+          * If the `expires` Signature Parameter is
+          * not specified, or is not an integer, an implementation MUST
+          * produce an error.
+        */
+        generatorOptions.args.headers = [`(${param})`];
+        let error = null;
+        try {
+          await util.generate(
+            `${param}-not-int.httpMessage`, generatorOptions);
+        } catch(e) {
+          error = e;
+        }
+        expect(error, 'Expected an error to be thrown').to.exist;
+      });
+      it.skip(`SHOULD return (${param})`,
+        async function() {
+          generatorOptions.args.headers = [`(${param})`];
+          const result = await util.generate(
+            `${param}.httpMessage`, generatorOptions);
+          const expected = `(${param}): 1\n`;
+          expect(result, 'Expected a result').to.exist;
+          result.should.be.a('string');
+          result.should.equal(expected, 'expected signature string to match');
+        });
 
     it(`The client MUST use the values of each HTTP header field in the headers
         Signature Parameter, in the order they appear in the headers
