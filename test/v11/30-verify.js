@@ -76,7 +76,7 @@ describe('Verify', function() {
       * used.
     */
     const result = await util.generate(
-      'duplicate-headers-request.httpMessage', generatorOptions);
+      'duplicate-headers-request', generatorOptions);
     result.should.not.be.null;
     result.should.be.a('string');
     result.should.equal('duplicate: last\n');

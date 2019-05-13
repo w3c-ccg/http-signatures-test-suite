@@ -6,7 +6,7 @@ const exec = util.promisify(require('child_process').exec);
 
 async function generate(file, options) {
   options = options || {};
-  const filePath = path.join(__dirname, 'input', file);
+  const filePath = path.join(__dirname, 'input', `${file}.httpMessage`);
   const date = options.date || new Date().toGMTString();
   const latestDate = `date: ${date}`;
   let args = '';
