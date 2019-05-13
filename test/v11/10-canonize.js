@@ -3,7 +3,7 @@ const util = require('./util');
 const {algorithms} = require('./input/algorithms');
 const {expect} = require('chai');
 
-describe('Canonize should', function() {
+describe('Canonize', function() {
   let generatorOptions = null;
   before(function() {
     generatorOptions = {
@@ -13,7 +13,6 @@ describe('Canonize should', function() {
       date: new Date().toGMTString(),
     };
   });
-
   it('return a valid signature string', async function() {
     generatorOptions.args.headers = ['date'];
     const result = await util.generate(
@@ -202,15 +201,15 @@ describe('Canonize should', function() {
         * Signature Parameter, in the order they appear in the `headers`
         * Signature Parameter.
        */
-      generatorOptions.args.headers = ['Content-Length', 'Host'];
-      const result = await util.generate(
-        'default-test.httpMessage', generatorOptions);
-      expect(result, 'Expected a result').to.exist;
-      result.should.be.a('string');
-      let expected = 'content-length: 18\n';
-      expected += 'host: example.com\n';
-      result.should.equal(expected, 'expected signature string to match');
-    });
+        generatorOptions.args.headers = ['Content-Length', 'Host'];
+        const result = await util.generate(
+          'default-test.httpMessage', generatorOptions);
+        expect(result, 'Expected a result').to.exist;
+        result.should.be.a('string');
+        let expected = 'content-length: 18\n';
+        expected += 'host: example.com\n';
+        result.should.equal(expected, 'expected signature string to match');
+      });
 
     it(`All header field values associated with the
         header field MUST be concatenated, separated by an
@@ -224,9 +223,9 @@ describe('Canonize should', function() {
         * ASCII comma and an ASCII space `, `, and used in the
         * order in which they will appear in the transmitted HTTP message.
       */
-    });
+      });
 
-    it(`If a header specified in the headers parameter
+      it(`If a header specified in the headers parameter
         cannot be matched with a provided
         header in the message, the implementation
         MUST produce an error.`, async function() {
@@ -236,33 +235,32 @@ describe('Canonize should', function() {
         * header in the message, the implementation
         * MUST produce an error.
       */
-      let error = null;
-      try {
-        generatorOptions.args.headers = ['not-in-request'];
-        await util.generate('basic-request.httpMessage', generatorOptions);
-      } catch(e) {
-        error = e;
-      }
-      expect(error, 'Expected an error to be thrown').to.exist;
-    });
-    it.skip(`If a header specified in the headers parameter is
-        malformed the implementation MUST produce an error.`,
-    async function() {
+        let error = null;
+        try {
+          generatorOptions.args.headers = ['not-in-request'];
+          await util.generate('basic-request.httpMessage', generatorOptions);
+        } catch(e) {
+          error = e;
+        }
+        expect(error, 'Expected an error to be thrown').to.exist;
+      });
+      it.skip(`If a header specified in the headers parameter is
+        malformed the implementation MUST produce an error.`, async function() {
       /**
         * If a header specified in the headers parameter is
         * malformed or cannot be matched with a provided
         * header in the message, the implementation
         * MUST produce an error.
       */
-      let error = null;
-      generatorOptions.args.headers = ['Server'];
-      try {
-        await util.generate('malformed-request.httpMessage', generatorOptions);
-      } catch(e) {
-        error = e;
-      }
-      expect(error, 'Expected an error to be thrown').to.exist;
+        let error = null;
+        generatorOptions.args.headers = ['Server'];
+        try {
+          await util.generate(
+            'malformed-request.httpMessage', generatorOptions);
+        } catch(e) {
+          error = e;
+        }
+        expect(error, 'Expected an error to be thrown').to.exist;
+      });
     });
-
-  });
 });
