@@ -7,7 +7,7 @@ const {registry} = require('./input/algorithms');
 // numbers, and end with an = sign.
 const base64String = /[A-Za-z0-9+/=]=$/;
 
-describe.skip('Sign should', function() {
+describe.skip('Sign', function() {
   let generatorOptions = null;
   before(function() {
     generatorOptions = {
