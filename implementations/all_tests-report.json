@@ -1,88 +1,577 @@
 {
   "stats": {
-    "suites": 2,
-    "tests": 7,
-    "passes": 2,
-    "pending": 5,
+    "suites": 9,
+    "tests": 54,
+    "passes": 17,
+    "pending": 37,
     "failures": 0,
-    "start": "2019-05-06T21:54:58.621Z",
-    "end": "2019-05-06T21:54:58.837Z",
-    "duration": 216
+    "start": "2019-05-14T23:54:03.796Z",
+    "end": "2019-05-14T23:54:05.665Z",
+    "duration": 1869
   },
   "tests": [
     {
-      "title": "should return a valid signature",
-      "fullTitle": "Canonize Tests should return a valid signature",
-      "duration": 107,
+      "title": "For valid options MUST return a valid signature string.",
+      "fullTitle": "Canonize Signature String For valid options MUST return a valid signature string.",
+      "duration": 165,
       "currentRetry": 0,
       "err": {}
     },
     {
-      "title": "should return fail is a header is not in the request",
-      "fullTitle": "Canonize Tests should return fail is a header is not in the request",
-      "duration": 106,
+      "title": "If a value is not the last value then append an ASCII newline.",
+      "fullTitle": "Canonize Signature String If a value is not the last value then append an ASCII newline.",
       "currentRetry": 0,
       "err": {}
     },
     {
-      "title": "should fail if there is no keyId",
-      "fullTitle": "Sign Requests should fail if there is no keyId",
+      "title": "if duplicate parameters the last parameter\n        defined MUST be used.",
+      "fullTitle": "Canonize Signature String if duplicate parameters the last parameter\n        defined MUST be used.",
       "currentRetry": 0,
       "err": {}
     },
     {
-      "title": "should fail if there is no signature parameter",
-      "fullTitle": "Sign Requests should fail if there is no signature parameter",
+      "title": "The client MUST use the values of each HTTP header field\n        in the headers Signature Parameter, in the order they appear\n        in the headers Signature Parameter.",
+      "fullTitle": "Canonize Signature String Header Parameter The client MUST use the values of each HTTP header field\n        in the headers Signature Parameter, in the order they appear\n        in the headers Signature Parameter.",
+      "duration": 127,
       "currentRetry": 0,
       "err": {}
     },
     {
-      "title": "should succeed with out algorithm parameter",
-      "fullTitle": "Sign Requests should succeed with out algorithm parameter",
+      "title": "All header field values associated with the header field\n        MUST be concatenated, separated by an ASCII comma and an ASCII space,\n        and used in the order in which they will appear in the\n        transmitted HTTP message.",
+      "fullTitle": "Canonize Signature String Header Parameter All header field values associated with the header field\n        MUST be concatenated, separated by an ASCII comma and an ASCII space,\n        and used in the order in which they will appear in the\n        transmitted HTTP message.",
+      "duration": 0,
       "currentRetry": 0,
       "err": {}
     },
     {
-      "title": "should not process if created is in the future",
-      "fullTitle": "Sign Requests should not process if created is in the future",
+      "title": "If a header specified in the headers parameter cannot be\n        matched with a provided header in the message, the implementation\n        MUST produce an error.",
+      "fullTitle": "Canonize Signature String Header Parameter If a header specified in the headers parameter cannot be\n        matched with a provided header in the message, the implementation\n        MUST produce an error.",
+      "duration": 130,
       "currentRetry": 0,
       "err": {}
     },
     {
-      "title": "should return an empty Signing String",
-      "fullTitle": "Sign Requests should return an empty Signing String",
+      "title": "If a header specified in the headers parameter is\n        malformed the implementation MUST produce an error.",
+      "fullTitle": "Canonize Signature String Header Parameter If a header specified in the headers parameter is\n        malformed the implementation MUST produce an error.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "If the header value is a zero-length string,\n          the signature string line correlating with\n          that header will simply be the (lowercased) header name,\n          an ASCII colon :, and an ASCII space.",
+      "fullTitle": "Canonize Signature String Header Parameter If the header value is a zero-length string,\n          the signature string line correlating with\n          that header will simply be the (lowercased) header name,\n          an ASCII colon :, and an ASCII space.",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "SHOULD change capitalized Headers to lowercase.",
+      "fullTitle": "Canonize Signature String Header Parameter SHOULD change capitalized Headers to lowercase.",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "If the header field name is (request-target) then generate\n          the header field value by concatenating the lowercased :method,\n          an ASCII space, and the :path pseudo-headers.",
+      "fullTitle": "Canonize Signature String Header Parameter If the header field name is (request-target) then generate\n          the header field value by concatenating the lowercased :method,\n          an ASCII space, and the :path pseudo-headers.",
+      "duration": 128,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "SHOULD return \"\" if the headers paramter is empty.",
+      "fullTitle": "Canonize Signature String Header Parameter SHOULD return \"\" if the headers paramter is empty.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "If the header parameter is not specified, implementations\n        MUST operate as if the field were specified with a single\n        value, (created), in the list of HTTP headers.",
+      "fullTitle": "Canonize Signature String Header Parameter If the header parameter is not specified, implementations\n        MUST operate as if the field were specified with a single\n        value, (created), in the list of HTTP headers.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "If (created) is in headers & the algorithm param starts with rsa MUST produce an error.",
+      "fullTitle": "Canonize Signature String Header Parameter If (created) is in headers & the algorithm param starts with rsa MUST produce an error.",
+      "duration": 132,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "If (created) is in headers & the algorithm param starts with hmac MUST produce an error.",
+      "fullTitle": "Canonize Signature String Header Parameter If (created) is in headers & the algorithm param starts with hmac MUST produce an error.",
+      "duration": 130,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "If (created) is in headers & the algorithm param starts with ecdsa MUST produce an error.",
+      "fullTitle": "Canonize Signature String Header Parameter If (created) is in headers & the algorithm param starts with ecdsa MUST produce an error.",
+      "duration": 129,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "If the created Signature Parameter is\n          not specified, an implementation MUST produce an error.",
+      "fullTitle": "Canonize Signature String Header Parameter If the created Signature Parameter is\n          not specified, an implementation MUST produce an error.",
+      "duration": 137,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "If the created Signature Parameter is\n          not an integer or unix timestamp, an \n          implementation MUST produce an error.",
+      "fullTitle": "Canonize Signature String Header Parameter If the created Signature Parameter is\n          not an integer or unix timestamp, an \n          implementation MUST produce an error.",
+      "duration": 130,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "If given valid options SHOULD return (created).",
+      "fullTitle": "Canonize Signature String Header Parameter If given valid options SHOULD return (created).",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "If (expires) is in headers & the algorithm param starts with rsa MUST produce an error.",
+      "fullTitle": "Canonize Signature String Header Parameter If (expires) is in headers & the algorithm param starts with rsa MUST produce an error.",
+      "duration": 130,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "If (expires) is in headers & the algorithm param starts with hmac MUST produce an error.",
+      "fullTitle": "Canonize Signature String Header Parameter If (expires) is in headers & the algorithm param starts with hmac MUST produce an error.",
+      "duration": 128,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "If (expires) is in headers & the algorithm param starts with ecdsa MUST produce an error.",
+      "fullTitle": "Canonize Signature String Header Parameter If (expires) is in headers & the algorithm param starts with ecdsa MUST produce an error.",
+      "duration": 130,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "If the expires Signature Parameter is\n          not specified, an implementation MUST produce an error.",
+      "fullTitle": "Canonize Signature String Header Parameter If the expires Signature Parameter is\n          not specified, an implementation MUST produce an error.",
+      "duration": 129,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "If the expires Signature Parameter is\n          not an integer or unix timestamp, an \n          implementation MUST produce an error.",
+      "fullTitle": "Canonize Signature String Header Parameter If the expires Signature Parameter is\n          not an integer or unix timestamp, an \n          implementation MUST produce an error.",
+      "duration": 128,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "If given valid options SHOULD return (expires).",
+      "fullTitle": "Canonize Signature String Header Parameter If given valid options SHOULD return (expires).",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "MUST REQUIRE keyId.",
+      "fullTitle": "Sign MUST REQUIRE keyId.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "A client MUST generate a signature by base 64 encoding\n      the output of the digital signature algorithm.",
+      "fullTitle": "Sign A client MUST generate a signature by base 64 encoding\n      the output of the digital signature algorithm.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "A client MUST use the headers and algorithm values as\n      well as the contents of the HTTP message,\n      to create the signature string.",
+      "fullTitle": "Sign A client MUST use the headers and algorithm values as\n      well as the contents of the HTTP message,\n      to create the signature string.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "A client MUST use the key associated with keyId to \n      generate a digital signature on the\n      signature string.",
+      "fullTitle": "Sign A client MUST use the key associated with keyId to \n      generate a digital signature on the\n      signature string.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "MUST be able to discover metadata\n      about the key from the keyId.",
+      "fullTitle": "Sign MUST be able to discover metadata\n      about the key from the keyId.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "MUST NOT process a signature with a\n      created timestamp value that is in the future.",
+      "fullTitle": "Sign MUST NOT process a signature with a\n      created timestamp value that is in the future.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "MUST NOT process a signature with an expires\n      timestamp value that is in the past.",
+      "fullTitle": "Sign MUST NOT process a signature with an expires\n      timestamp value that is in the past.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "MUST produce an error if algorithm\n        parameter differs from key metadata.",
+      "fullTitle": "Sign Algorithm Parameter MUST produce an error if algorithm\n        parameter differs from key metadata.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "Signature scheme MUST be in the\n        HTTP Signatures Algorithms Registry.",
+      "fullTitle": "Sign Algorithm Parameter Signature scheme MUST be in the\n        HTTP Signatures Algorithms Registry.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "SHOULD sign for algorithm hs2019.",
+      "fullTitle": "Sign Algorithm Parameter signature scheme MUST NOT be marked deprecated. SHOULD sign for algorithm hs2019.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "MUST reject deprecated algorithm rsa-sha1.",
+      "fullTitle": "Sign Algorithm Parameter signature scheme MUST NOT be marked deprecated. MUST reject deprecated algorithm rsa-sha1.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "MUST reject deprecated algorithm rsa-sha256.",
+      "fullTitle": "Sign Algorithm Parameter signature scheme MUST NOT be marked deprecated. MUST reject deprecated algorithm rsa-sha256.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "MUST reject deprecated algorithm hmac-sha256.",
+      "fullTitle": "Sign Algorithm Parameter signature scheme MUST NOT be marked deprecated. MUST reject deprecated algorithm hmac-sha256.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "MUST reject deprecated algorithm ecdsa-sha256.",
+      "fullTitle": "Sign Algorithm Parameter signature scheme MUST NOT be marked deprecated. MUST reject deprecated algorithm ecdsa-sha256.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "MUST REQUIRE a signature parameter.",
+      "fullTitle": "Verify MUST REQUIRE a signature parameter.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "MUST derive the digital signature algorithm from \n      the metadata associated with the keyId.",
+      "fullTitle": "Verify MUST derive the digital signature algorithm from \n      the metadata associated with the keyId.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "MUST NOT use the value of\n      algorithm from the signed message.",
+      "fullTitle": "Verify MUST NOT use the value of\n      algorithm from the signed message.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "A server MUST use the received HTTP message, the headers value,\n      and the Signature String Construction algorithm\n      to recreate the signature.",
+      "fullTitle": "Verify A server MUST use the received HTTP message, the headers value,\n      and the Signature String Construction algorithm\n      to recreate the signature.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "A server MUST use the algorithm, keyId, and base 64\n      decoded signature listed in the Signature Parameters\n      to verify the authenticity of the digital signature.",
+      "fullTitle": "Verify A server MUST use the algorithm, keyId, and base 64\n      decoded signature listed in the Signature Parameters\n      to verify the authenticity of the digital signature.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "If a header specified in the headers value of\n      the Signature Parameters (or the default item (created)\n      where the headers value is not supplied) is absent from the message,\n      the implementation MUST produce an error.",
+      "fullTitle": "Verify If a header specified in the headers value of\n      the Signature Parameters (or the default item (created)\n      where the headers value is not supplied) is absent from the message,\n      the implementation MUST produce an error.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "MUST be able to discover metadata about the key from the keyId\n      such that they can determine the type of digital signature algorithm\n      to employ when verifying signatures.",
+      "fullTitle": "Verify MUST be able to discover metadata about the key from the keyId\n      such that they can determine the type of digital signature algorithm\n      to employ when verifying signatures.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "MUST have a keyId parameter.",
+      "fullTitle": "Verify MUST have a keyId parameter.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "MUST have a signature parameter.",
+      "fullTitle": "Verify MUST have a signature parameter.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "MUST produce an error if algorithm\n        parameter differs from key metadata.",
+      "fullTitle": "Verify Algorithm Parameter MUST produce an error if algorithm\n        parameter differs from key metadata.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "Signature scheme MUST be in the\n        HTTP Signatures Algorithms Registry.",
+      "fullTitle": "Verify Algorithm Parameter Signature scheme MUST be in the\n        HTTP Signatures Algorithms Registry.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "SHOULD sign for algorithm hs2019.",
+      "fullTitle": "Verify Algorithm Parameter signature scheme MUST NOT be marked deprecated. SHOULD sign for algorithm hs2019.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "MUST reject deprecated algorithm rsa-sha1.",
+      "fullTitle": "Verify Algorithm Parameter signature scheme MUST NOT be marked deprecated. MUST reject deprecated algorithm rsa-sha1.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "MUST reject deprecated algorithm rsa-sha256.",
+      "fullTitle": "Verify Algorithm Parameter signature scheme MUST NOT be marked deprecated. MUST reject deprecated algorithm rsa-sha256.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "MUST reject deprecated algorithm hmac-sha256.",
+      "fullTitle": "Verify Algorithm Parameter signature scheme MUST NOT be marked deprecated. MUST reject deprecated algorithm hmac-sha256.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "MUST reject deprecated algorithm ecdsa-sha256.",
+      "fullTitle": "Verify Algorithm Parameter signature scheme MUST NOT be marked deprecated. MUST reject deprecated algorithm ecdsa-sha256.",
       "currentRetry": 0,
       "err": {}
     }
   ],
   "pending": [
     {
-      "title": "should fail if there is no keyId",
-      "fullTitle": "Sign Requests should fail if there is no keyId",
+      "title": "If a value is not the last value then append an ASCII newline.",
+      "fullTitle": "Canonize Signature String If a value is not the last value then append an ASCII newline.",
       "currentRetry": 0,
       "err": {}
     },
     {
-      "title": "should fail if there is no signature parameter",
-      "fullTitle": "Sign Requests should fail if there is no signature parameter",
+      "title": "if duplicate parameters the last parameter\n        defined MUST be used.",
+      "fullTitle": "Canonize Signature String if duplicate parameters the last parameter\n        defined MUST be used.",
       "currentRetry": 0,
       "err": {}
     },
     {
-      "title": "should succeed with out algorithm parameter",
-      "fullTitle": "Sign Requests should succeed with out algorithm parameter",
+      "title": "If a header specified in the headers parameter is\n        malformed the implementation MUST produce an error.",
+      "fullTitle": "Canonize Signature String Header Parameter If a header specified in the headers parameter is\n        malformed the implementation MUST produce an error.",
       "currentRetry": 0,
       "err": {}
     },
     {
-      "title": "should not process if created is in the future",
-      "fullTitle": "Sign Requests should not process if created is in the future",
+      "title": "SHOULD return \"\" if the headers paramter is empty.",
+      "fullTitle": "Canonize Signature String Header Parameter SHOULD return \"\" if the headers paramter is empty.",
       "currentRetry": 0,
       "err": {}
     },
     {
-      "title": "should return an empty Signing String",
-      "fullTitle": "Sign Requests should return an empty Signing String",
+      "title": "If the header parameter is not specified, implementations\n        MUST operate as if the field were specified with a single\n        value, (created), in the list of HTTP headers.",
+      "fullTitle": "Canonize Signature String Header Parameter If the header parameter is not specified, implementations\n        MUST operate as if the field were specified with a single\n        value, (created), in the list of HTTP headers.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "If given valid options SHOULD return (created).",
+      "fullTitle": "Canonize Signature String Header Parameter If given valid options SHOULD return (created).",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "If given valid options SHOULD return (expires).",
+      "fullTitle": "Canonize Signature String Header Parameter If given valid options SHOULD return (expires).",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "MUST REQUIRE keyId.",
+      "fullTitle": "Sign MUST REQUIRE keyId.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "A client MUST generate a signature by base 64 encoding\n      the output of the digital signature algorithm.",
+      "fullTitle": "Sign A client MUST generate a signature by base 64 encoding\n      the output of the digital signature algorithm.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "A client MUST use the headers and algorithm values as\n      well as the contents of the HTTP message,\n      to create the signature string.",
+      "fullTitle": "Sign A client MUST use the headers and algorithm values as\n      well as the contents of the HTTP message,\n      to create the signature string.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "A client MUST use the key associated with keyId to \n      generate a digital signature on the\n      signature string.",
+      "fullTitle": "Sign A client MUST use the key associated with keyId to \n      generate a digital signature on the\n      signature string.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "MUST be able to discover metadata\n      about the key from the keyId.",
+      "fullTitle": "Sign MUST be able to discover metadata\n      about the key from the keyId.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "MUST NOT process a signature with a\n      created timestamp value that is in the future.",
+      "fullTitle": "Sign MUST NOT process a signature with a\n      created timestamp value that is in the future.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "MUST NOT process a signature with an expires\n      timestamp value that is in the past.",
+      "fullTitle": "Sign MUST NOT process a signature with an expires\n      timestamp value that is in the past.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "MUST produce an error if algorithm\n        parameter differs from key metadata.",
+      "fullTitle": "Sign Algorithm Parameter MUST produce an error if algorithm\n        parameter differs from key metadata.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "Signature scheme MUST be in the\n        HTTP Signatures Algorithms Registry.",
+      "fullTitle": "Sign Algorithm Parameter Signature scheme MUST be in the\n        HTTP Signatures Algorithms Registry.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "SHOULD sign for algorithm hs2019.",
+      "fullTitle": "Sign Algorithm Parameter signature scheme MUST NOT be marked deprecated. SHOULD sign for algorithm hs2019.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "MUST reject deprecated algorithm rsa-sha1.",
+      "fullTitle": "Sign Algorithm Parameter signature scheme MUST NOT be marked deprecated. MUST reject deprecated algorithm rsa-sha1.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "MUST reject deprecated algorithm rsa-sha256.",
+      "fullTitle": "Sign Algorithm Parameter signature scheme MUST NOT be marked deprecated. MUST reject deprecated algorithm rsa-sha256.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "MUST reject deprecated algorithm hmac-sha256.",
+      "fullTitle": "Sign Algorithm Parameter signature scheme MUST NOT be marked deprecated. MUST reject deprecated algorithm hmac-sha256.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "MUST reject deprecated algorithm ecdsa-sha256.",
+      "fullTitle": "Sign Algorithm Parameter signature scheme MUST NOT be marked deprecated. MUST reject deprecated algorithm ecdsa-sha256.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "MUST REQUIRE a signature parameter.",
+      "fullTitle": "Verify MUST REQUIRE a signature parameter.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "MUST derive the digital signature algorithm from \n      the metadata associated with the keyId.",
+      "fullTitle": "Verify MUST derive the digital signature algorithm from \n      the metadata associated with the keyId.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "MUST NOT use the value of\n      algorithm from the signed message.",
+      "fullTitle": "Verify MUST NOT use the value of\n      algorithm from the signed message.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "A server MUST use the received HTTP message, the headers value,\n      and the Signature String Construction algorithm\n      to recreate the signature.",
+      "fullTitle": "Verify A server MUST use the received HTTP message, the headers value,\n      and the Signature String Construction algorithm\n      to recreate the signature.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "A server MUST use the algorithm, keyId, and base 64\n      decoded signature listed in the Signature Parameters\n      to verify the authenticity of the digital signature.",
+      "fullTitle": "Verify A server MUST use the algorithm, keyId, and base 64\n      decoded signature listed in the Signature Parameters\n      to verify the authenticity of the digital signature.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "If a header specified in the headers value of\n      the Signature Parameters (or the default item (created)\n      where the headers value is not supplied) is absent from the message,\n      the implementation MUST produce an error.",
+      "fullTitle": "Verify If a header specified in the headers value of\n      the Signature Parameters (or the default item (created)\n      where the headers value is not supplied) is absent from the message,\n      the implementation MUST produce an error.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "MUST be able to discover metadata about the key from the keyId\n      such that they can determine the type of digital signature algorithm\n      to employ when verifying signatures.",
+      "fullTitle": "Verify MUST be able to discover metadata about the key from the keyId\n      such that they can determine the type of digital signature algorithm\n      to employ when verifying signatures.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "MUST have a keyId parameter.",
+      "fullTitle": "Verify MUST have a keyId parameter.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "MUST have a signature parameter.",
+      "fullTitle": "Verify MUST have a signature parameter.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "MUST produce an error if algorithm\n        parameter differs from key metadata.",
+      "fullTitle": "Verify Algorithm Parameter MUST produce an error if algorithm\n        parameter differs from key metadata.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "Signature scheme MUST be in the\n        HTTP Signatures Algorithms Registry.",
+      "fullTitle": "Verify Algorithm Parameter Signature scheme MUST be in the\n        HTTP Signatures Algorithms Registry.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "SHOULD sign for algorithm hs2019.",
+      "fullTitle": "Verify Algorithm Parameter signature scheme MUST NOT be marked deprecated. SHOULD sign for algorithm hs2019.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "MUST reject deprecated algorithm rsa-sha1.",
+      "fullTitle": "Verify Algorithm Parameter signature scheme MUST NOT be marked deprecated. MUST reject deprecated algorithm rsa-sha1.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "MUST reject deprecated algorithm rsa-sha256.",
+      "fullTitle": "Verify Algorithm Parameter signature scheme MUST NOT be marked deprecated. MUST reject deprecated algorithm rsa-sha256.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "MUST reject deprecated algorithm hmac-sha256.",
+      "fullTitle": "Verify Algorithm Parameter signature scheme MUST NOT be marked deprecated. MUST reject deprecated algorithm hmac-sha256.",
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "MUST reject deprecated algorithm ecdsa-sha256.",
+      "fullTitle": "Verify Algorithm Parameter signature scheme MUST NOT be marked deprecated. MUST reject deprecated algorithm ecdsa-sha256.",
       "currentRetry": 0,
       "err": {}
     }
@@ -90,16 +579,121 @@
   "failures": [],
   "passes": [
     {
-      "title": "should return a valid signature",
-      "fullTitle": "Canonize Tests should return a valid signature",
-      "duration": 107,
+      "title": "For valid options MUST return a valid signature string.",
+      "fullTitle": "Canonize Signature String For valid options MUST return a valid signature string.",
+      "duration": 165,
       "currentRetry": 0,
       "err": {}
     },
     {
-      "title": "should return fail is a header is not in the request",
-      "fullTitle": "Canonize Tests should return fail is a header is not in the request",
-      "duration": 106,
+      "title": "The client MUST use the values of each HTTP header field\n        in the headers Signature Parameter, in the order they appear\n        in the headers Signature Parameter.",
+      "fullTitle": "Canonize Signature String Header Parameter The client MUST use the values of each HTTP header field\n        in the headers Signature Parameter, in the order they appear\n        in the headers Signature Parameter.",
+      "duration": 127,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "All header field values associated with the header field\n        MUST be concatenated, separated by an ASCII comma and an ASCII space,\n        and used in the order in which they will appear in the\n        transmitted HTTP message.",
+      "fullTitle": "Canonize Signature String Header Parameter All header field values associated with the header field\n        MUST be concatenated, separated by an ASCII comma and an ASCII space,\n        and used in the order in which they will appear in the\n        transmitted HTTP message.",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "If a header specified in the headers parameter cannot be\n        matched with a provided header in the message, the implementation\n        MUST produce an error.",
+      "fullTitle": "Canonize Signature String Header Parameter If a header specified in the headers parameter cannot be\n        matched with a provided header in the message, the implementation\n        MUST produce an error.",
+      "duration": 130,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "If the header value is a zero-length string,\n          the signature string line correlating with\n          that header will simply be the (lowercased) header name,\n          an ASCII colon :, and an ASCII space.",
+      "fullTitle": "Canonize Signature String Header Parameter If the header value is a zero-length string,\n          the signature string line correlating with\n          that header will simply be the (lowercased) header name,\n          an ASCII colon :, and an ASCII space.",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "SHOULD change capitalized Headers to lowercase.",
+      "fullTitle": "Canonize Signature String Header Parameter SHOULD change capitalized Headers to lowercase.",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "If the header field name is (request-target) then generate\n          the header field value by concatenating the lowercased :method,\n          an ASCII space, and the :path pseudo-headers.",
+      "fullTitle": "Canonize Signature String Header Parameter If the header field name is (request-target) then generate\n          the header field value by concatenating the lowercased :method,\n          an ASCII space, and the :path pseudo-headers.",
+      "duration": 128,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "If (created) is in headers & the algorithm param starts with rsa MUST produce an error.",
+      "fullTitle": "Canonize Signature String Header Parameter If (created) is in headers & the algorithm param starts with rsa MUST produce an error.",
+      "duration": 132,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "If (created) is in headers & the algorithm param starts with hmac MUST produce an error.",
+      "fullTitle": "Canonize Signature String Header Parameter If (created) is in headers & the algorithm param starts with hmac MUST produce an error.",
+      "duration": 130,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "If (created) is in headers & the algorithm param starts with ecdsa MUST produce an error.",
+      "fullTitle": "Canonize Signature String Header Parameter If (created) is in headers & the algorithm param starts with ecdsa MUST produce an error.",
+      "duration": 129,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "If the created Signature Parameter is\n          not specified, an implementation MUST produce an error.",
+      "fullTitle": "Canonize Signature String Header Parameter If the created Signature Parameter is\n          not specified, an implementation MUST produce an error.",
+      "duration": 137,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "If the created Signature Parameter is\n          not an integer or unix timestamp, an \n          implementation MUST produce an error.",
+      "fullTitle": "Canonize Signature String Header Parameter If the created Signature Parameter is\n          not an integer or unix timestamp, an \n          implementation MUST produce an error.",
+      "duration": 130,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "If (expires) is in headers & the algorithm param starts with rsa MUST produce an error.",
+      "fullTitle": "Canonize Signature String Header Parameter If (expires) is in headers & the algorithm param starts with rsa MUST produce an error.",
+      "duration": 130,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "If (expires) is in headers & the algorithm param starts with hmac MUST produce an error.",
+      "fullTitle": "Canonize Signature String Header Parameter If (expires) is in headers & the algorithm param starts with hmac MUST produce an error.",
+      "duration": 128,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "If (expires) is in headers & the algorithm param starts with ecdsa MUST produce an error.",
+      "fullTitle": "Canonize Signature String Header Parameter If (expires) is in headers & the algorithm param starts with ecdsa MUST produce an error.",
+      "duration": 130,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "If the expires Signature Parameter is\n          not specified, an implementation MUST produce an error.",
+      "fullTitle": "Canonize Signature String Header Parameter If the expires Signature Parameter is\n          not specified, an implementation MUST produce an error.",
+      "duration": 129,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "If the expires Signature Parameter is\n          not an integer or unix timestamp, an \n          implementation MUST produce an error.",
+      "fullTitle": "Canonize Signature String Header Parameter If the expires Signature Parameter is\n          not an integer or unix timestamp, an \n          implementation MUST produce an error.",
+      "duration": 128,
       "currentRetry": 0,
       "err": {}
     }
