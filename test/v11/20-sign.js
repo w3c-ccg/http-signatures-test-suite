@@ -54,12 +54,6 @@ describe.skip('Sign', function() {
   });
 
   describe('Algorithm Parameter', function() {
-    it.skip('should be optional.', async function() {
-      const result = await util.generate(
-        'noalgorithm-request', generatorOptions);
-      result.should.not.be.null;
-      result.should.be.a('string');
-    });
 
     it(`MUST produce an error if algorithm
         parameter differs from key metadata.`, async function() {
@@ -108,7 +102,6 @@ describe.skip('Sign', function() {
     }
     error.should.not.be.null;
   });
-
 
   it.skip(`MUST NOT process a signature with a
       created timestamp value that is in the future`, async function() {
