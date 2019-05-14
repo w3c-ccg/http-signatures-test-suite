@@ -1,7 +1,7 @@
 const config = require('../../config.json');
 const util = require('./util');
 
-describe('Verify', function() {
+describe.skip('Verify', function() {
   let generatorOptions = null;
   before(function() {
     generatorOptions = {
