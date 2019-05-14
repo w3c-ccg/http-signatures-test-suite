@@ -54,6 +54,24 @@ describe.skip('Sign', function() {
   });
 
   describe('Algorithm Parameter', function() {
+    it.skip('should be optional.', async function() {
+      const result = await util.generate(
+        'noalgorithm-request', generatorOptions);
+      result.should.not.be.null;
+      result.should.be.a('string');
+    });
+
+    it(`MUST produce an error if algorithm
+        parameter differs from key metadata.`, async function() {
+      /**
+       * If `algorithm` is provided and differs from
+       * the key metadata identified by the `keyId`,
+       * for example `rsa-sha256` but an EdDSA key
+       * is identified via `keyId`,
+       * then an implementation MUST produce an error.
+      */
+    });
+
     it(`signature scheme MUST be in the
         HTTP Signatures Algorithms Registry.`, async function() {
 
@@ -91,12 +109,6 @@ describe.skip('Sign', function() {
     error.should.not.be.null;
   });
 
-  it.skip('should succeed with out algorithm parameter', async function() {
-    const result = await util.generate(
-      'noalgorithm-request', generatorOptions);
-    result.should.not.be.null;
-    result.should.be.a('string');
-  });
 
   it.skip(`MUST NOT process a signature with a
       created timestamp value that is in the future`, async function() {
@@ -128,13 +140,4 @@ describe.skip('Sign', function() {
     error.should.not.be.null;
   });
 
-  it(`MUST produce an error if algorithm
-      parameter differs from key metadata`, async function() {
-    /**
-     * If `algorithm` is provided and differs from
-     * the key metadata identified by the `keyId`,
-     * for example `rsa-sha256` but an EdDSA key
-     * is identified via `keyId`, then an implementation MUST produce an error.
-    */
-  });
 });
