@@ -1,5 +1,6 @@
 const config = require('../../config.json');
 const util = require('./util');
+const {registry} = require('./input/algorithms');
 
 describe.skip('Verify', function() {
   let generatorOptions = null;
@@ -67,4 +68,36 @@ describe.skip('Verify', function() {
   it('MUST have a signature parameter', function() {
 
   });
+  describe('Algorithm Parameter', function() {
+
+    it(`MUST produce an error if algorithm
+        parameter differs from key metadata.`, async function() {
+      /**
+       * If `algorithm` is provided and differs from
+       * the key metadata identified by the `keyId`,
+       * for example `rsa-sha256` but an EdDSA key
+       * is identified via `keyId`,
+       * then an implementation MUST produce an error.
+      */
+    });
+
+    it(`signature scheme MUST be in the
+        HTTP Signatures Algorithms Registry.`, async function() {
+
+    });
+    describe('signature scheme MUST NOT be marked deprecated.', function() {
+      registry.forEach(({scheme, deprecated}) => {
+        if(deprecated) {
+          it(`MUST reject deprecated algorithm ${scheme}`, async function() {
+
+          });
+        } else {
+          it(`SHOULD sign for algorithm ${scheme}`, async function() {
+
+          });
+        }
+      });
+    });
+  });
+
 });
