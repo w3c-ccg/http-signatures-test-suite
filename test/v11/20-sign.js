@@ -18,7 +18,7 @@ describe.skip('Sign', function() {
     };
   });
 
-  it('MUST REQUIRE keyId', async function() {
+  it('MUST REQUIRE keyId.', async function() {
 
   });
 
@@ -73,11 +73,11 @@ describe.skip('Sign', function() {
     describe('signature scheme MUST NOT be marked deprecated.', function() {
       registry.forEach(({scheme, deprecated}) => {
         if(deprecated) {
-          it(`MUST reject deprecated algorithm ${scheme}`, async function() {
+          it(`MUST reject deprecated algorithm ${scheme}.`, async function() {
 
           });
         } else {
-          it(`SHOULD sign for algorithm ${scheme}`, async function() {
+          it(`SHOULD sign for algorithm ${scheme}.`, async function() {
 
           });
         }
@@ -86,7 +86,7 @@ describe.skip('Sign', function() {
   });
 
   it.skip(`MUST be able to discover metadata
-      about the key from the keyId`, async function() {
+      about the key from the keyId.`, async function() {
     /**
       * Implementations MUST be able to discover metadata
       * about the key from the `keyId` such that they can
@@ -104,7 +104,7 @@ describe.skip('Sign', function() {
   });
 
   it.skip(`MUST NOT process a signature with a
-      created timestamp value that is in the future`, async function() {
+      created timestamp value that is in the future.`, async function() {
     /**
      * A signature with a `created` timestamp value
      * that is in the future MUST NOT be processed.
@@ -119,7 +119,7 @@ describe.skip('Sign', function() {
   });
 
   it.skip(`MUST NOT process a signature with an expires
-      timestamp value that is in the past`, async function() {
+      timestamp value that is in the past.`, async function() {
     /**
       * A signatures with a `expires` timestamp
       * value that is in the past MUST NOT be processed.
@@ -132,5 +132,4 @@ describe.skip('Sign', function() {
     }
     error.should.not.be.null;
   });
-
 });

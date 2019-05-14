@@ -62,10 +62,10 @@ describe.skip('Verify', function() {
       to employ when verifying signatures.`, async function() {
 
   });
-  it('MUST have a keyId parameter', function() {
+  it('MUST have a keyId parameter.', function() {
 
   });
-  it('MUST have a signature parameter', function() {
+  it('MUST have a signature parameter.', function() {
 
   });
   describe('Algorithm Parameter', function() {
@@ -88,16 +88,15 @@ describe.skip('Verify', function() {
     describe('signature scheme MUST NOT be marked deprecated.', function() {
       registry.forEach(({scheme, deprecated}) => {
         if(deprecated) {
-          it(`MUST reject deprecated algorithm ${scheme}`, async function() {
+          it(`MUST reject deprecated algorithm ${scheme}.`, async function() {
 
           });
         } else {
-          it(`SHOULD sign for algorithm ${scheme}`, async function() {
+          it(`SHOULD sign for algorithm ${scheme}.`, async function() {
 
           });
         }
       });
     });
   });
-
 });
