@@ -1,4 +1,9 @@
 /**
+ * Copyright (c) 2019 Digital Bazaar, Inc. All rights reserved.
+*/
+'use strict';
+
+/**
  * Generates the HTTP Signatures Implementation Report given
  * a set of *-report.json files.
  */
@@ -43,7 +48,6 @@ files.forEach(file => {
     allResults[implementation][test.fullTitle] =
       getTestStatus(test, pendingTitles);
     // assume vc.js tests all features
-    // TODO abstract this out
     if(implementation === testConfig.implementation) {
       allTests.push(test.fullTitle);
     }
