@@ -66,7 +66,7 @@ describe.skip('Sign', function() {
       */
     });
 
-    it(`signature scheme MUST be in the
+    it(`Signature scheme MUST be in the
         HTTP Signatures Algorithms Registry.`, async function() {
 
     });
