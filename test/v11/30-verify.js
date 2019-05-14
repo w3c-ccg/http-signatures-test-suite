@@ -69,17 +69,5 @@ describe.skip('Verify', function() {
 
   });
 
-  it.skip('conform to 2.2 - Ambiguous Parameters', async function() {
-    /**
-      * If any of the parameters listed above are erroneously duplicated in
-      * the associated header field, then the last parameter defined MUST be
-      * used.
-    */
-    const result = await util.generate(
-      'duplicate-headers-request', generatorOptions);
-    result.should.not.be.null;
-    result.should.be.a('string');
-    result.should.equal('duplicate: last\n');
-  });
 
 });

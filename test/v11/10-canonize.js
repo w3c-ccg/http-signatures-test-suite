@@ -40,6 +40,19 @@ describe('Canonize', function() {
         expected += 'host: example.com';
         result.should.equal(expected);
       });
+    it.skip(`if duplicate parameters the last parameter
+        defined MUST be used.`, async function() {
+      /**
+        * If any of the parameters listed above are erroneously duplicated in
+        * the associated header field, then the last parameter defined MUST be
+        * used.
+      */
+      const result = await util.generate(
+        'duplicate-headers-request', generatorOptions);
+      result.should.not.be.null;
+      result.should.be.a('string');
+      result.should.equal('duplicate: last\n');
+    });
 
     describe('Header Parameter', function() {
       it(`The client MUST use the values of each HTTP header field
@@ -180,9 +193,9 @@ describe('Canonize', function() {
       ['created', 'expires']
         .forEach(param => {
           algorithms.forEach(algorithm => {
-            const algTest = `If the header field name is (${param}) and the
-            algorithm parameter starts with ${algorithm} an implementation
-            MUST produce an error.`;
+            const algTest = `If (${param}) is in headers & the ` +
+            `algorithm param starts with ${algorithm}` +
+            ' MUST produce an error.';
             it(algTest, async function() {
               /**
                * If the header field name is `(created)` and the `algorithm`
@@ -191,8 +204,8 @@ describe('Canonize', function() {
               */
               /**
                * If the header field name is `(expires)` and the `algorithm`
-               * parameter starts with `rsa`, `hmac`, or `ecdsa` an implementation
-               * MUST produce an error.
+               * parameter starts with `rsa`, `hmac`, or `ecdsa`
+               * an implementation MUST produce an error.
               */
               generatorOptions.args.headers = [`(${algorithm})`];
               let error = null;
