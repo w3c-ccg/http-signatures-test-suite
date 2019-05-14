@@ -13,11 +13,11 @@ ensure conformance with the specification.
 
 
 ### Creating a Binary
-You web application will need to be accessible from the command line.
+The implementation will need to be accessible from the command line.
 It will also need to accept the following command line parameters:
 
 ```
-Usage: <your_program> [options] [command]
+Usage: <implementation_binary> [options] [command]
 
 Options:
   -V, --version                          output the version number
@@ -36,11 +36,11 @@ Commands:
   sign
   verify [options]
 ```
-All tests will run against your binary and assume that an exit code greater
+All tests will run against the implementation's binary and assume that an exit code greater
 than 0 represents an error.
-Your binary will receive an [HTTP message](https://developer.mozilla.org/en-US/docs/Web/HTTP/Messages) via [standard in](https://en.wikipedia.org/wiki/Standard_streams):
+The binary will receive an [HTTP message](https://developer.mozilla.org/en-US/docs/Web/HTTP/Messages) via [standard in](https://en.wikipedia.org/wiki/Standard_streams):
 
-Here is an example HTTP message your binary should receive via stdin:
+Here is an example HTTP message the binary should receive via stdin:
 ```
 POST /foo?param=value&pet=dog HTTP/1.1
 Host: example.com
@@ -50,12 +50,11 @@ Digest: SHA-256=X48E9qOokqqrvdts8nOJRJN3OWDUoyWxBf7kbu9DBPE=
 Content-Length: 18
 ```
 
-### Creating a config file
-An example local configuration for the test suite. To use:
-
+### Creating a Config File
 1. Copy the `config.json.example` file to `config.json` and modify.
-2. the generator should be a path to your binary.
+2. The generator should be a path to the app's binary.
 
+This is an example local configuration for the test suite. To use:
 ```
 {
   "generator": "../my-http-signatures-library/bin",
@@ -77,7 +76,7 @@ An example local configuration for the test suite. To use:
 4. Rename implementation/results.json to
    implementation/YOUR_IMPLEMENTATION-results.json.
 5. git add implementations/YOUR_IMPLEMENTATION-results.json and submit a
-   pull request for your implementation.
+   pull request for the implementation.
 
 ## Contributing
 
