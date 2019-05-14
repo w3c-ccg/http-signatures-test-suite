@@ -123,6 +123,17 @@ describe('Canonize', function() {
          */
       });
 
+      it('SHOULD change capitalized Headers to lowercase.', async function() {
+        /**
+          * Create the header field string by concatenating the lowercased
+          * header field name followed with an ASCII colon `:`,
+          * an ASCII space ` `, and the header field value.
+          * Leading and trailing optional whitespace (OWS) in the
+          * header field value MUST be omitted
+          * (as specified in RFC7230, Section 3.2.4).
+         */
+      });
+
       it(`If the header field name is (request-target) then generate
           the header field value by concatenating the lowercased :method,
           an ASCII space, and the :path pseudo-headers.`, async function() {
@@ -143,16 +154,6 @@ describe('Canonize', function() {
         result.should.equal(expected, 'expected signature string to match');
       });
 
-      it('SHOULD change capitalized Headers to lowercase.', async function() {
-        /**
-          * Create the header field string by concatenating the lowercased
-          * header field name followed with an ASCII colon `:`,
-          * an ASCII space ` `, and the header field value.
-          * Leading and trailing optional whitespace (OWS) in the
-          * header field value MUST be omitted
-          * (as specified in RFC7230, Section 3.2.4).
-         */
-      });
       it.skip(
         'SHOULD return "" if the headers paramter is empty.', async function() {
           const result = await util.generate(
@@ -160,10 +161,9 @@ describe('Canonize', function() {
           expect(result, 'Expected a result').to.exist;
           result.should.be.an('object');
         });
-      it.skip(`If the header parameter is not specified,
-        implementations MUST operate as if the field were specified with a
-        single value, (created), in the list of HTTP headers.`,
-      async function() {
+      it.skip(`If the header parameter is not specified, implementations
+        MUST operate as if the field were specified with a single
+        value, (created), in the list of HTTP headers.`, async function() {
         /**
             * If not specified (the header parameter),
             * implementations MUST operate as if the field were specified with a
@@ -176,95 +176,93 @@ describe('Canonize', function() {
         const expected = `created: ${generatorOptions.date}\n`;
         result.should.equal(expected, 'expected signature string to match');
       });
+      //TODO: should (created) & algorithm be in canonize or sign?
+      ['created', 'expires']
+        .forEach(param => {
+          algorithms.forEach(algorithm => {
+            const algTest = `If the header field name is (${param}) and the
+            algorithm parameter starts with ${algorithm} an implementation
+            MUST produce an error.`;
+            it(algTest, async function() {
+              /**
+               * If the header field name is `(created)` and the `algorithm`
+               * parameter starts with `rsa`, `hmac`, or `ecdsa`
+               * an implementation MUST produce an error.
+              */
+              /**
+               * If the header field name is `(expires)` and the `algorithm`
+               * parameter starts with `rsa`, `hmac`, or `ecdsa` an implementation
+               * MUST produce an error.
+              */
+              generatorOptions.args.headers = [`(${algorithm})`];
+              let error = null;
+              try {
+                await util.generate(
+                  `created-${algorithm}`, generatorOptions);
+              } catch(e) {
+                error = e;
+              }
+              expect(error, 'expected an error').to.exist;
+            });
+          });
+          const unDefined = `If the ${param} Signature Parameter is
+          not specified, an implementation MUST produce an error.`;
+          it(unDefined, async function() {
+            /**
+              * If the `created` Signature Parameter is
+              * not specified, or is not an integer, an implementation MUST
+              * produce an error.
+            */
+            /**
+              * If the `expires` Signature Parameter is
+              * not specified, or is not an integer, an implementation MUST
+              * produce an error.
+            */
+            generatorOptions.args.headers = [`(${param})`];
+            let error = null;
+            try {
+              await util.generate(`not-${param}`, generatorOptions);
+            } catch(e) {
+              error = e;
+            }
+            expect(error, 'expected and error to be thrown').to.exist;
+          });
+          const notInt = `If the ${param} Signature Parameter is
+          not an integer or unix timestamp, an 
+          implementation MUST produce an error.`;
+          it(notInt, async function() {
+            /**
+              * If the `created` Signature Parameter is
+              * not specified, or is not an integer, an implementation MUST
+              * produce an error.
+            */
+            /**
+              * If the `expires` Signature Parameter is
+              * not specified, or is not an integer, an implementation MUST
+              * produce an error.
+            */
+            generatorOptions.args.headers = [`(${param})`];
+            let error = null;
+            try {
+              await util.generate(
+                `${param}-not-int`, generatorOptions);
+            } catch(e) {
+              error = e;
+            }
+            expect(error, 'Expected an error to be thrown').to.exist;
+          });
+          it.skip(`If given valid options SHOULD return (${param}).`,
+            async function() {
+              generatorOptions.args.headers = [`(${param})`];
+              const result = await util.generate(
+                `${param}`, generatorOptions);
+              const expected = `(${param}): 1\n`;
+              expect(result, 'Expected a result').to.exist;
+              result.should.be.a('string');
+              result.should.equal(
+                expected, 'expected signature string to match');
+            });
+        });
     });
   });
-
-  //TODO: should (created) & algorithm be in canonize or sign?
-  ['created', 'expires']
-    .forEach(param => {
-      algorithms.forEach(algorithm => {
-        const algTest = `If the header field name is (${param}) and the
-        algorithm parameter starts with ${algorithm} an implementation
-        MUST produce an error.`;
-        it(algTest, async function() {
-          /**
-           * If the header field name is `(created)` and the `algorithm`
-           * parameter starts with `rsa`, `hmac`, or `ecdsa` an implementation
-           * MUST produce an error.
-          */
-          /**
-           * If the header field name is `(expires)` and the `algorithm`
-           * parameter starts with `rsa`, `hmac`, or `ecdsa` an implementation
-           * MUST produce an error.
-          */
-          generatorOptions.args.headers = [`(${algorithm})`];
-          let error = null;
-          try {
-            await util.generate(
-              `created-${algorithm}`, generatorOptions);
-          } catch(e) {
-            error = e;
-          }
-          expect(error, 'expected an error').to.exist;
-        });
-      });
-      const unDefined = `If the ${param} Signature Parameter is
-      not specified, an implementation MUST produce an error.`;
-      it(unDefined, async function() {
-        /**
-          * If the `created` Signature Parameter is
-          * not specified, or is not an integer, an implementation MUST
-          * produce an error.
-        */
-        /**
-          * If the `expires` Signature Parameter is
-          * not specified, or is not an integer, an implementation MUST
-          * produce an error.
-        */
-        generatorOptions.args.headers = [`(${param})`];
-        let error = null;
-        try {
-          await util.generate(`not-${param}`, generatorOptions);
-        } catch(e) {
-          error = e;
-        }
-        expect(error, 'expected and error to be thrown').to.exist;
-      });
-      const notInt = `If the ${param} Signature Parameter is
-      not an integer or unix timestamp, an 
-      implementation MUST produce an error.`;
-      it(notInt, async function() {
-        /**
-          * If the `created` Signature Parameter is
-          * not specified, or is not an integer, an implementation MUST
-          * produce an error.
-        */
-        /**
-          * If the `expires` Signature Parameter is
-          * not specified, or is not an integer, an implementation MUST
-          * produce an error.
-        */
-        generatorOptions.args.headers = [`(${param})`];
-        let error = null;
-        try {
-          await util.generate(
-            `${param}-not-int`, generatorOptions);
-        } catch(e) {
-          error = e;
-        }
-        expect(error, 'Expected an error to be thrown').to.exist;
-      });
-      it.skip(`If given valid options SHOULD return (${param}).`,
-        async function() {
-          generatorOptions.args.headers = [`(${param})`];
-          const result = await util.generate(
-            `${param}`, generatorOptions);
-          const expected = `(${param}): 1\n`;
-          expect(result, 'Expected a result').to.exist;
-          result.should.be.a('string');
-          result.should.equal(expected, 'expected signature string to match');
-        });
-
-
-    });
 });
