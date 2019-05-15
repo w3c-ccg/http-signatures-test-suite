@@ -85,14 +85,14 @@ describe.skip('Verify', function() {
         HTTP Signatures Algorithms Registry.`, async function() {
 
     });
-    describe('signature scheme MUST NOT be marked deprecated.', function() {
+    describe('signature scheme', function() {
       registry.forEach(({scheme, deprecated}) => {
         if(deprecated) {
           it(`MUST reject deprecated algorithm ${scheme}.`, async function() {
 
           });
         } else {
-          it(`SHOULD sign for algorithm ${scheme}.`, async function() {
+          it(`MUST sign for algorithm ${scheme}.`, async function() {
 
           });
         }
