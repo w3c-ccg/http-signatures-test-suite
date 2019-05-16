@@ -30,7 +30,6 @@ describe.skip('Sign', function() {
       'basic-request', generatorOptions);
     expect(result, 'Expected sign to return a Signature').to.exist;
     result.should.match(base64String);
-    console.log(result);
   });
   it(`A client MUST use the headers and algorithm values as
       well as the contents of the HTTP message,
@@ -39,7 +38,6 @@ describe.skip('Sign', function() {
       'basic-request', generatorOptions);
     expect(result, 'Expected sign to return a Signature').to.exist;
     result.should.match(base64String);
-    console.log(result);
   });
   it(`A client MUST use the key associated with keyId to 
       generate a digital signature on the
@@ -50,7 +48,6 @@ describe.skip('Sign', function() {
       'basic-request', generatorOptions);
     expect(result, 'Expected sign to return a Signature').to.exist;
     result.should.match(base64String);
-    console.log(result);
   });
 
   describe('Algorithm Parameter', function() {
