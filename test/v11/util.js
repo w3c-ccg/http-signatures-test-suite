@@ -1,8 +1,7 @@
 'use strict';
-const path = require('path');
-const util = require('util');
 
-const exec = util.promisify(require('child_process').exec);
+const path = require('path');
+const {exec} = require('child_process');
 
 async function generate(file, options) {
   options = options || {};
@@ -22,11 +21,36 @@ async function generate(file, options) {
   // this cat filePath - the dash is the last pipe op
   const httpMessage = `echo ${latestDate} | cat ${filePath} - | `;
   const generate = `${options.generator} ${options.command} `;
-  const {stdout, stderr} = await exec(httpMessage + generate + args);
-  if(stderr) {
-    throw new Error(stderr);
-  }
-  return stdout;
+  return new Promise((resolve, reject) => {
+    const child = exec(httpMessage + generate + args);
+    const streams = Promise.all([
+      streamToString(child.stdout),
+      streamToString(child.stderr)
+    ]);
+    child.addListener('exit', async (code, signal) => {
+      console.log('code', code);
+      console.log('signal', signal);
+      const [stdout, stderr] = await streams;
+      if(code !== 0) {
+        resolve(stdout);
+      } else {
+        const error = new Error(`Driver exited with error code ${code}.`);
+        error.code = code;
+        error.stdout = stdout;
+        error.stderr = stderr;
+        reject(error);
+      }
+    });
+  });
+}
+
+function streamToString(stream) {
+  const chunks = [];
+  return new Promise((resolve, reject) => {
+    stream.on('data', chunk => chunks.push(chunk));
+    stream.on('error', reject);
+    stream.on('end', () => resolve(Buffer.concat(chunks).toString('utf8')));
+  });
 }
 
 module.exports = {
