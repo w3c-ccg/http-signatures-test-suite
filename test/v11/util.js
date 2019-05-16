@@ -20,18 +20,22 @@ async function generate(file, options) {
   }
   // this cat filePath - the dash is the last pipe op
   const httpMessage = `echo ${latestDate} | cat ${filePath} - | `;
-  const generate = `${options.generator} ${options.command} `;
+  const binaryOps = `${options.generator} ${options.command} `;
+  const command = httpMessage + binaryOps + args;
+  const result = await runTest(command);
+  return result;
+}
+
+function runTest(command) {
   return new Promise((resolve, reject) => {
-    const child = exec(httpMessage + generate + args);
+    const child = exec(command);
     const streams = Promise.all([
       streamToString(child.stdout),
       streamToString(child.stderr)
     ]);
-    child.addListener('exit', async (code, signal) => {
-      console.log('code', code);
-      console.log('signal', signal);
+    child.addListener('exit', async code => {
       const [stdout, stderr] = await streams;
-      if(code !== 0) {
+      if(code === 0) {
         resolve(stdout);
       } else {
         const error = new Error(`Driver exited with error code ${code}.`);
@@ -49,7 +53,7 @@ function streamToString(stream) {
   return new Promise((resolve, reject) => {
     stream.on('data', chunk => chunks.push(chunk));
     stream.on('error', reject);
-    stream.on('end', () => resolve(Buffer.concat(chunks).toString('utf8')));
+    stream.on('end', () => resolve(chunks.join('')));
   });
 }
 

@@ -20,6 +20,7 @@ describe('Canonize', function() {
         generatorOptions.args.headers = ['date'];
         const result = await util.generate(
           'basic-request', generatorOptions);
+        console.log('result', result);
         result.should.not.be.null;
         result.should.be.a('string');
         result.should.equal(`date: ${generatorOptions.date}\n`
