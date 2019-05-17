@@ -7,9 +7,9 @@
     "test": "test"
   },
   "scripts": {
-    "report": "mocha --require test/test-mocha.js --recursive test/v11 -R json > implementations/report.json",
+    "report": "mocha --require test/test-mocha.js --recursive test/latest -R json > implementations/report.json",
     "summary": "cd implementations && node generate.js",
-    "test": "mocha --require test/test-mocha.js --recursive test/v11"
+    "test": "mocha --require test/test-mocha.js --recursive test/latest"
   },
   "repository": {
     "type": "git",
