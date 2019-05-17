@@ -3,36 +3,50 @@
     "suites": 9,
     "tests": 54,
     "passes": 17,
-    "pending": 37,
-    "failures": 0,
-    "start": "2019-05-17T14:56:20.521Z",
-    "end": "2019-05-17T14:56:22.366Z",
-    "duration": 1845
+    "pending": 30,
+    "failures": 7,
+    "start": "2019-05-17T15:45:12.982Z",
+    "end": "2019-05-17T15:45:15.762Z",
+    "duration": 2780
   },
   "tests": [
     {
       "title": "For valid options MUST return a valid signature string.",
       "fullTitle": "Canonicalize Signature String For valid options MUST return a valid signature string.",
-      "duration": 136,
+      "duration": 135,
       "currentRetry": 0,
       "err": {}
     },
     {
       "title": "If a value is not the last value then append an ASCII newline.",
       "fullTitle": "Canonicalize Signature String If a value is not the last value then append an ASCII newline.",
+      "duration": 134,
       "currentRetry": 0,
-      "err": {}
+      "err": {
+        "message": "expected 'digest: SHA-256=X48E9qOokqqrvdts8nOJRJN3OWDUoyWxBf7kbu9DBPE=\\nhost: example.com\\n' to equal 'digest: SHA-256=X48E9qOokqqrvdts8nOJRJN3OWDUoyWxBf7kbu9DBPE=\\nhost: example.com'",
+        "showDiff": true,
+        "actual": "digest: SHA-256=X48E9qOokqqrvdts8nOJRJN3OWDUoyWxBf7kbu9DBPE=\nhost: example.com\n",
+        "expected": "digest: SHA-256=X48E9qOokqqrvdts8nOJRJN3OWDUoyWxBf7kbu9DBPE=\nhost: example.com",
+        "stack": "AssertionError: expected 'digest: SHA-256=X48E9qOokqqrvdts8nOJRJN3OWDUoyWxBf7kbu9DBPE=\\nhost: example.com\\n' to equal 'digest: SHA-256=X48E9qOokqqrvdts8nOJRJN3OWDUoyWxBf7kbu9DBPE=\\nhost: example.com'\n    at Context.<anonymous> (test/latest/10-canonicalize.js:41:23)\n    at processTicksAndRejections (internal/process/next_tick.js:81:5)"
+      }
     },
     {
       "title": "if duplicate parameters the last parameter\n        defined MUST be used.",
       "fullTitle": "Canonicalize Signature String if duplicate parameters the last parameter\n        defined MUST be used.",
+      "duration": 141,
       "currentRetry": 0,
-      "err": {}
+      "err": {
+        "stack": "Error: Driver exited with error code 1.\n    at ChildProcess.child.addListener (test/latest/util.js:41:23)\n    at processTicksAndRejections (internal/process/next_tick.js:81:5)",
+        "message": "Driver exited with error code 1.",
+        "code": 1,
+        "stdout": "",
+        "stderr": "c14n command failed : DataError: digest was not found in `requestOptions.headers`\n"
+      }
     },
     {
       "title": "The client MUST use the values of each HTTP header field\n        in the headers Signature Parameter, in the order they appear\n        in the headers Signature Parameter.",
       "fullTitle": "Canonicalize Signature String Header Parameter The client MUST use the values of each HTTP header field\n        in the headers Signature Parameter, in the order they appear\n        in the headers Signature Parameter.",
-      "duration": 132,
+      "duration": 133,
       "currentRetry": 0,
       "err": {}
     },
@@ -46,15 +60,21 @@
     {
       "title": "If a header specified in the headers parameter cannot be\n        matched with a provided header in the message, the implementation\n        MUST produce an error.",
       "fullTitle": "Canonicalize Signature String Header Parameter If a header specified in the headers parameter cannot be\n        matched with a provided header in the message, the implementation\n        MUST produce an error.",
-      "duration": 132,
+      "duration": 129,
       "currentRetry": 0,
       "err": {}
     },
     {
       "title": "If a header specified in the headers parameter is\n        malformed the implementation MUST produce an error.",
       "fullTitle": "Canonicalize Signature String Header Parameter If a header specified in the headers parameter is\n        malformed the implementation MUST produce an error.",
+      "duration": 131,
       "currentRetry": 0,
-      "err": {}
+      "err": {
+        "message": "Expected an error to be thrown: expected null to exist",
+        "showDiff": false,
+        "actual": null,
+        "stack": "AssertionError: Expected an error to be thrown: expected null to exist\n    at Context.<anonymous> (test/latest/10-canonicalize.js:124:59)\n    at processTicksAndRejections (internal/process/next_tick.js:81:5)"
+      }
     },
     {
       "title": "If the header value is a zero-length string,\n          the signature string line correlating with\n          that header will simply be the (lowercased) header name,\n          an ASCII colon :, and an ASCII space.",
@@ -73,62 +93,82 @@
     {
       "title": "If the header field name is (request-target) then generate\n          the header field value by concatenating the lowercased :method,\n          an ASCII space, and the :path pseudo-headers.",
       "fullTitle": "Canonicalize Signature String Header Parameter If the header field name is (request-target) then generate\n          the header field value by concatenating the lowercased :method,\n          an ASCII space, and the :path pseudo-headers.",
-      "duration": 129,
+      "duration": 130,
       "currentRetry": 0,
       "err": {}
     },
     {
       "title": "SHOULD return \"\" if the headers paramter is empty.",
       "fullTitle": "Canonicalize Signature String Header Parameter SHOULD return \"\" if the headers paramter is empty.",
+      "duration": 130,
       "currentRetry": 0,
-      "err": {}
+      "err": {
+        "message": "expected '(request-target): get /basic/request\\n' to be an object",
+        "showDiff": false,
+        "actual": "(request-target): get /basic/request\n",
+        "stack": "AssertionError: expected '(request-target): get /basic/request\\n' to be an object\n    at Context.<anonymous> (test/latest/10-canonicalize.js:175:28)\n    at processTicksAndRejections (internal/process/next_tick.js:81:5)"
+      }
     },
     {
       "title": "If the header parameter is not specified, implementations\n        MUST operate as if the field were specified with a single\n        value, (created), in the list of HTTP headers.",
       "fullTitle": "Canonicalize Signature String Header Parameter If the header parameter is not specified, implementations\n        MUST operate as if the field were specified with a single\n        value, (created), in the list of HTTP headers.",
+      "duration": 129,
       "currentRetry": 0,
-      "err": {}
+      "err": {
+        "message": "expected signature string to match: expected '(request-target): get /basic/request\\n' to equal 'created: Fri, 17 May 2019 15:45:12 GMT\\n'",
+        "showDiff": true,
+        "actual": "(request-target): get /basic/request\n",
+        "expected": "created: Fri, 17 May 2019 15:45:12 GMT\n",
+        "stack": "AssertionError: expected signature string to match: expected '(request-target): get /basic/request\\n' to equal 'created: Fri, 17 May 2019 15:45:12 GMT\\n'\n    at Context.<anonymous> (test/latest/10-canonicalize.js:190:23)\n    at processTicksAndRejections (internal/process/next_tick.js:81:5)"
+      }
     },
     {
       "title": "If (created) is in headers & the algorithm param starts with rsa MUST produce an error.",
       "fullTitle": "Canonicalize Signature String Header Parameter If (created) is in headers & the algorithm param starts with rsa MUST produce an error.",
-      "duration": 131,
+      "duration": 129,
       "currentRetry": 0,
       "err": {}
     },
     {
       "title": "If (created) is in headers & the algorithm param starts with hmac MUST produce an error.",
       "fullTitle": "Canonicalize Signature String Header Parameter If (created) is in headers & the algorithm param starts with hmac MUST produce an error.",
-      "duration": 129,
+      "duration": 130,
       "currentRetry": 0,
       "err": {}
     },
     {
       "title": "If (created) is in headers & the algorithm param starts with ecdsa MUST produce an error.",
       "fullTitle": "Canonicalize Signature String Header Parameter If (created) is in headers & the algorithm param starts with ecdsa MUST produce an error.",
-      "duration": 132,
+      "duration": 130,
       "currentRetry": 0,
       "err": {}
     },
     {
       "title": "If the created Signature Parameter is\n          not specified, an implementation MUST produce an error.",
       "fullTitle": "Canonicalize Signature String Header Parameter If the created Signature Parameter is\n          not specified, an implementation MUST produce an error.",
-      "duration": 136,
+      "duration": 131,
       "currentRetry": 0,
       "err": {}
     },
     {
       "title": "If the created Signature Parameter is\n          not an integer or unix timestamp, an \n          implementation MUST produce an error.",
       "fullTitle": "Canonicalize Signature String Header Parameter If the created Signature Parameter is\n          not an integer or unix timestamp, an \n          implementation MUST produce an error.",
-      "duration": 129,
+      "duration": 130,
       "currentRetry": 0,
       "err": {}
     },
     {
       "title": "If given valid options SHOULD return (created).",
       "fullTitle": "Canonicalize Signature String Header Parameter If given valid options SHOULD return (created).",
+      "duration": 131,
       "currentRetry": 0,
-      "err": {}
+      "err": {
+        "stack": "Error: Driver exited with error code 1.\n    at ChildProcess.child.addListener (test/latest/util.js:41:23)\n    at processTicksAndRejections (internal/process/next_tick.js:81:5)",
+        "message": "Driver exited with error code 1.",
+        "code": 1,
+        "stdout": "",
+        "stderr": "c14n command failed : DataError: (created) was not found in `requestOptions.headers`\n"
+      }
     },
     {
       "title": "If (expires) is in headers & the algorithm param starts with rsa MUST produce an error.",
@@ -140,40 +180,47 @@
     {
       "title": "If (expires) is in headers & the algorithm param starts with hmac MUST produce an error.",
       "fullTitle": "Canonicalize Signature String Header Parameter If (expires) is in headers & the algorithm param starts with hmac MUST produce an error.",
-      "duration": 129,
+      "duration": 130,
       "currentRetry": 0,
       "err": {}
     },
     {
       "title": "If (expires) is in headers & the algorithm param starts with ecdsa MUST produce an error.",
       "fullTitle": "Canonicalize Signature String Header Parameter If (expires) is in headers & the algorithm param starts with ecdsa MUST produce an error.",
-      "duration": 130,
+      "duration": 131,
       "currentRetry": 0,
       "err": {}
     },
     {
       "title": "If the expires Signature Parameter is\n          not specified, an implementation MUST produce an error.",
       "fullTitle": "Canonicalize Signature String Header Parameter If the expires Signature Parameter is\n          not specified, an implementation MUST produce an error.",
-      "duration": 129,
+      "duration": 131,
       "currentRetry": 0,
       "err": {}
     },
     {
       "title": "If the expires Signature Parameter is\n          not an integer or unix timestamp, an \n          implementation MUST produce an error.",
       "fullTitle": "Canonicalize Signature String Header Parameter If the expires Signature Parameter is\n          not an integer or unix timestamp, an \n          implementation MUST produce an error.",
-      "duration": 130,
+      "duration": 144,
       "currentRetry": 0,
       "err": {}
     },
     {
       "title": "If given valid options SHOULD return (expires).",
       "fullTitle": "Canonicalize Signature String Header Parameter If given valid options SHOULD return (expires).",
+      "duration": 132,
       "currentRetry": 0,
-      "err": {}
+      "err": {
+        "stack": "Error: Driver exited with error code 1.\n    at ChildProcess.child.addListener (test/latest/util.js:41:23)\n    at processTicksAndRejections (internal/process/next_tick.js:81:5)",
+        "message": "Driver exited with error code 1.",
+        "code": 1,
+        "stdout": "",
+        "stderr": "cat: /Users/andrewjones/Programs/javascript/digital_bazaar/http-signatures-test-suite/test/latest/input/expires.httpMessage: No such file or directory\nc14n command failed : AssertionError [ERR_ASSERTION]: requestOption.headers (object) is required\n"
+      }
     },
     {
-      "title": "MUST REQUIRE keyId.",
-      "fullTitle": "Sign MUST REQUIRE keyId.",
+      "title": "MUST require keyId.",
+      "fullTitle": "Sign MUST require keyId.",
       "currentRetry": 0,
       "err": {}
     },
@@ -256,8 +303,8 @@
       "err": {}
     },
     {
-      "title": "MUST REQUIRE a signature parameter.",
-      "fullTitle": "Verify MUST REQUIRE a signature parameter.",
+      "title": "MUST require a signature parameter.",
+      "fullTitle": "Verify MUST require a signature parameter.",
       "currentRetry": 0,
       "err": {}
     },
@@ -354,50 +401,8 @@
   ],
   "pending": [
     {
-      "title": "If a value is not the last value then append an ASCII newline.",
-      "fullTitle": "Canonicalize Signature String If a value is not the last value then append an ASCII newline.",
-      "currentRetry": 0,
-      "err": {}
-    },
-    {
-      "title": "if duplicate parameters the last parameter\n        defined MUST be used.",
-      "fullTitle": "Canonicalize Signature String if duplicate parameters the last parameter\n        defined MUST be used.",
-      "currentRetry": 0,
-      "err": {}
-    },
-    {
-      "title": "If a header specified in the headers parameter is\n        malformed the implementation MUST produce an error.",
-      "fullTitle": "Canonicalize Signature String Header Parameter If a header specified in the headers parameter is\n        malformed the implementation MUST produce an error.",
-      "currentRetry": 0,
-      "err": {}
-    },
-    {
-      "title": "SHOULD return \"\" if the headers paramter is empty.",
-      "fullTitle": "Canonicalize Signature String Header Parameter SHOULD return \"\" if the headers paramter is empty.",
-      "currentRetry": 0,
-      "err": {}
-    },
-    {
-      "title": "If the header parameter is not specified, implementations\n        MUST operate as if the field were specified with a single\n        value, (created), in the list of HTTP headers.",
-      "fullTitle": "Canonicalize Signature String Header Parameter If the header parameter is not specified, implementations\n        MUST operate as if the field were specified with a single\n        value, (created), in the list of HTTP headers.",
-      "currentRetry": 0,
-      "err": {}
-    },
-    {
-      "title": "If given valid options SHOULD return (created).",
-      "fullTitle": "Canonicalize Signature String Header Parameter If given valid options SHOULD return (created).",
-      "currentRetry": 0,
-      "err": {}
-    },
-    {
-      "title": "If given valid options SHOULD return (expires).",
-      "fullTitle": "Canonicalize Signature String Header Parameter If given valid options SHOULD return (expires).",
-      "currentRetry": 0,
-      "err": {}
-    },
-    {
-      "title": "MUST REQUIRE keyId.",
-      "fullTitle": "Sign MUST REQUIRE keyId.",
+      "title": "MUST require keyId.",
+      "fullTitle": "Sign MUST require keyId.",
       "currentRetry": 0,
       "err": {}
     },
@@ -480,8 +485,8 @@
       "err": {}
     },
     {
-      "title": "MUST REQUIRE a signature parameter.",
-      "fullTitle": "Verify MUST REQUIRE a signature parameter.",
+      "title": "MUST require a signature parameter.",
+      "fullTitle": "Verify MUST require a signature parameter.",
       "currentRetry": 0,
       "err": {}
     },
@@ -576,19 +581,109 @@
       "err": {}
     }
   ],
-  "failures": [],
+  "failures": [
+    {
+      "title": "If a value is not the last value then append an ASCII newline.",
+      "fullTitle": "Canonicalize Signature String If a value is not the last value then append an ASCII newline.",
+      "duration": 134,
+      "currentRetry": 0,
+      "err": {
+        "message": "expected 'digest: SHA-256=X48E9qOokqqrvdts8nOJRJN3OWDUoyWxBf7kbu9DBPE=\\nhost: example.com\\n' to equal 'digest: SHA-256=X48E9qOokqqrvdts8nOJRJN3OWDUoyWxBf7kbu9DBPE=\\nhost: example.com'",
+        "showDiff": true,
+        "actual": "digest: SHA-256=X48E9qOokqqrvdts8nOJRJN3OWDUoyWxBf7kbu9DBPE=\nhost: example.com\n",
+        "expected": "digest: SHA-256=X48E9qOokqqrvdts8nOJRJN3OWDUoyWxBf7kbu9DBPE=\nhost: example.com",
+        "stack": "AssertionError: expected 'digest: SHA-256=X48E9qOokqqrvdts8nOJRJN3OWDUoyWxBf7kbu9DBPE=\\nhost: example.com\\n' to equal 'digest: SHA-256=X48E9qOokqqrvdts8nOJRJN3OWDUoyWxBf7kbu9DBPE=\\nhost: example.com'\n    at Context.<anonymous> (test/latest/10-canonicalize.js:41:23)\n    at processTicksAndRejections (internal/process/next_tick.js:81:5)"
+      }
+    },
+    {
+      "title": "if duplicate parameters the last parameter\n        defined MUST be used.",
+      "fullTitle": "Canonicalize Signature String if duplicate parameters the last parameter\n        defined MUST be used.",
+      "duration": 141,
+      "currentRetry": 0,
+      "err": {
+        "stack": "Error: Driver exited with error code 1.\n    at ChildProcess.child.addListener (test/latest/util.js:41:23)\n    at processTicksAndRejections (internal/process/next_tick.js:81:5)",
+        "message": "Driver exited with error code 1.",
+        "code": 1,
+        "stdout": "",
+        "stderr": "c14n command failed : DataError: digest was not found in `requestOptions.headers`\n"
+      }
+    },
+    {
+      "title": "If a header specified in the headers parameter is\n        malformed the implementation MUST produce an error.",
+      "fullTitle": "Canonicalize Signature String Header Parameter If a header specified in the headers parameter is\n        malformed the implementation MUST produce an error.",
+      "duration": 131,
+      "currentRetry": 0,
+      "err": {
+        "message": "Expected an error to be thrown: expected null to exist",
+        "showDiff": false,
+        "actual": null,
+        "stack": "AssertionError: Expected an error to be thrown: expected null to exist\n    at Context.<anonymous> (test/latest/10-canonicalize.js:124:59)\n    at processTicksAndRejections (internal/process/next_tick.js:81:5)"
+      }
+    },
+    {
+      "title": "SHOULD return \"\" if the headers paramter is empty.",
+      "fullTitle": "Canonicalize Signature String Header Parameter SHOULD return \"\" if the headers paramter is empty.",
+      "duration": 130,
+      "currentRetry": 0,
+      "err": {
+        "message": "expected '(request-target): get /basic/request\\n' to be an object",
+        "showDiff": false,
+        "actual": "(request-target): get /basic/request\n",
+        "stack": "AssertionError: expected '(request-target): get /basic/request\\n' to be an object\n    at Context.<anonymous> (test/latest/10-canonicalize.js:175:28)\n    at processTicksAndRejections (internal/process/next_tick.js:81:5)"
+      }
+    },
+    {
+      "title": "If the header parameter is not specified, implementations\n        MUST operate as if the field were specified with a single\n        value, (created), in the list of HTTP headers.",
+      "fullTitle": "Canonicalize Signature String Header Parameter If the header parameter is not specified, implementations\n        MUST operate as if the field were specified with a single\n        value, (created), in the list of HTTP headers.",
+      "duration": 129,
+      "currentRetry": 0,
+      "err": {
+        "message": "expected signature string to match: expected '(request-target): get /basic/request\\n' to equal 'created: Fri, 17 May 2019 15:45:12 GMT\\n'",
+        "showDiff": true,
+        "actual": "(request-target): get /basic/request\n",
+        "expected": "created: Fri, 17 May 2019 15:45:12 GMT\n",
+        "stack": "AssertionError: expected signature string to match: expected '(request-target): get /basic/request\\n' to equal 'created: Fri, 17 May 2019 15:45:12 GMT\\n'\n    at Context.<anonymous> (test/latest/10-canonicalize.js:190:23)\n    at processTicksAndRejections (internal/process/next_tick.js:81:5)"
+      }
+    },
+    {
+      "title": "If given valid options SHOULD return (created).",
+      "fullTitle": "Canonicalize Signature String Header Parameter If given valid options SHOULD return (created).",
+      "duration": 131,
+      "currentRetry": 0,
+      "err": {
+        "stack": "Error: Driver exited with error code 1.\n    at ChildProcess.child.addListener (test/latest/util.js:41:23)\n    at processTicksAndRejections (internal/process/next_tick.js:81:5)",
+        "message": "Driver exited with error code 1.",
+        "code": 1,
+        "stdout": "",
+        "stderr": "c14n command failed : DataError: (created) was not found in `requestOptions.headers`\n"
+      }
+    },
+    {
+      "title": "If given valid options SHOULD return (expires).",
+      "fullTitle": "Canonicalize Signature String Header Parameter If given valid options SHOULD return (expires).",
+      "duration": 132,
+      "currentRetry": 0,
+      "err": {
+        "stack": "Error: Driver exited with error code 1.\n    at ChildProcess.child.addListener (test/latest/util.js:41:23)\n    at processTicksAndRejections (internal/process/next_tick.js:81:5)",
+        "message": "Driver exited with error code 1.",
+        "code": 1,
+        "stdout": "",
+        "stderr": "cat: /Users/andrewjones/Programs/javascript/digital_bazaar/http-signatures-test-suite/test/latest/input/expires.httpMessage: No such file or directory\nc14n command failed : AssertionError [ERR_ASSERTION]: requestOption.headers (object) is required\n"
+      }
+    }
+  ],
   "passes": [
     {
       "title": "For valid options MUST return a valid signature string.",
       "fullTitle": "Canonicalize Signature String For valid options MUST return a valid signature string.",
-      "duration": 136,
+      "duration": 135,
       "currentRetry": 0,
       "err": {}
     },
     {
       "title": "The client MUST use the values of each HTTP header field\n        in the headers Signature Parameter, in the order they appear\n        in the headers Signature Parameter.",
       "fullTitle": "Canonicalize Signature String Header Parameter The client MUST use the values of each HTTP header field\n        in the headers Signature Parameter, in the order they appear\n        in the headers Signature Parameter.",
-      "duration": 132,
+      "duration": 133,
       "currentRetry": 0,
       "err": {}
     },
@@ -602,7 +697,7 @@
     {
       "title": "If a header specified in the headers parameter cannot be\n        matched with a provided header in the message, the implementation\n        MUST produce an error.",
       "fullTitle": "Canonicalize Signature String Header Parameter If a header specified in the headers parameter cannot be\n        matched with a provided header in the message, the implementation\n        MUST produce an error.",
-      "duration": 132,
+      "duration": 129,
       "currentRetry": 0,
       "err": {}
     },
@@ -623,42 +718,42 @@
     {
       "title": "If the header field name is (request-target) then generate\n          the header field value by concatenating the lowercased :method,\n          an ASCII space, and the :path pseudo-headers.",
       "fullTitle": "Canonicalize Signature String Header Parameter If the header field name is (request-target) then generate\n          the header field value by concatenating the lowercased :method,\n          an ASCII space, and the :path pseudo-headers.",
-      "duration": 129,
+      "duration": 130,
       "currentRetry": 0,
       "err": {}
     },
     {
       "title": "If (created) is in headers & the algorithm param starts with rsa MUST produce an error.",
       "fullTitle": "Canonicalize Signature String Header Parameter If (created) is in headers & the algorithm param starts with rsa MUST produce an error.",
-      "duration": 131,
+      "duration": 129,
       "currentRetry": 0,
       "err": {}
     },
     {
       "title": "If (created) is in headers & the algorithm param starts with hmac MUST produce an error.",
       "fullTitle": "Canonicalize Signature String Header Parameter If (created) is in headers & the algorithm param starts with hmac MUST produce an error.",
-      "duration": 129,
+      "duration": 130,
       "currentRetry": 0,
       "err": {}
     },
     {
       "title": "If (created) is in headers & the algorithm param starts with ecdsa MUST produce an error.",
       "fullTitle": "Canonicalize Signature String Header Parameter If (created) is in headers & the algorithm param starts with ecdsa MUST produce an error.",
-      "duration": 132,
+      "duration": 130,
       "currentRetry": 0,
       "err": {}
     },
     {
       "title": "If the created Signature Parameter is\n          not specified, an implementation MUST produce an error.",
       "fullTitle": "Canonicalize Signature String Header Parameter If the created Signature Parameter is\n          not specified, an implementation MUST produce an error.",
-      "duration": 136,
+      "duration": 131,
       "currentRetry": 0,
       "err": {}
     },
     {
       "title": "If the created Signature Parameter is\n          not an integer or unix timestamp, an \n          implementation MUST produce an error.",
       "fullTitle": "Canonicalize Signature String Header Parameter If the created Signature Parameter is\n          not an integer or unix timestamp, an \n          implementation MUST produce an error.",
-      "duration": 129,
+      "duration": 130,
       "currentRetry": 0,
       "err": {}
     },
@@ -672,28 +767,28 @@
     {
       "title": "If (expires) is in headers & the algorithm param starts with hmac MUST produce an error.",
       "fullTitle": "Canonicalize Signature String Header Parameter If (expires) is in headers & the algorithm param starts with hmac MUST produce an error.",
-      "duration": 129,
+      "duration": 130,
       "currentRetry": 0,
       "err": {}
     },
     {
       "title": "If (expires) is in headers & the algorithm param starts with ecdsa MUST produce an error.",
       "fullTitle": "Canonicalize Signature String Header Parameter If (expires) is in headers & the algorithm param starts with ecdsa MUST produce an error.",
-      "duration": 130,
+      "duration": 131,
       "currentRetry": 0,
       "err": {}
     },
     {
       "title": "If the expires Signature Parameter is\n          not specified, an implementation MUST produce an error.",
       "fullTitle": "Canonicalize Signature String Header Parameter If the expires Signature Parameter is\n          not specified, an implementation MUST produce an error.",
-      "duration": 129,
+      "duration": 131,
       "currentRetry": 0,
       "err": {}
     },
     {
       "title": "If the expires Signature Parameter is\n          not an integer or unix timestamp, an \n          implementation MUST produce an error.",
       "fullTitle": "Canonicalize Signature String Header Parameter If the expires Signature Parameter is\n          not an integer or unix timestamp, an \n          implementation MUST produce an error.",
-      "duration": 130,
+      "duration": 144,
       "currentRetry": 0,
       "err": {}
     }

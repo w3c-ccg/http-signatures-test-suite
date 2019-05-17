@@ -25,7 +25,7 @@ describe('Canonicalize', function() {
         result.should.equal(`date: ${generatorOptions.date}\n`
           , `expected signature string to match`);
       });
-    it.skip('If a value is not the last value then append an ASCII newline.',
+    it('If a value is not the last value then append an ASCII newline.',
       async function() {
       /**
         * If value is not the last value then append an ASCII newline `\n`.
@@ -40,7 +40,7 @@ describe('Canonicalize', function() {
         expected += 'host: example.com';
         result.should.equal(expected);
       });
-    it.skip(`if duplicate parameters the last parameter
+    it(`if duplicate parameters the last parameter
         defined MUST be used.`, async function() {
       /**
         * If any of the parameters listed above are erroneously duplicated in
@@ -105,7 +105,7 @@ describe('Canonicalize', function() {
         }
         expect(error, 'Expected an error to be thrown').to.exist;
       });
-      it.skip(`If a header specified in the headers parameter is
+      it(`If a header specified in the headers parameter is
         malformed the implementation MUST produce an error.`, async function() {
       /**
         * If a header specified in the headers parameter is
@@ -167,14 +167,14 @@ describe('Canonicalize', function() {
         result.should.equal(expected, 'expected signature string to match');
       });
 
-      it.skip(
+      it(
         'SHOULD return "" if the headers paramter is empty.', async function() {
           const result = await util.generate(
             'invalidheaders-request', generatorOptions);
           expect(result, 'Expected a result').to.exist;
           result.should.be.an('object');
         });
-      it.skip(`If the header parameter is not specified, implementations
+      it(`If the header parameter is not specified, implementations
         MUST operate as if the field were specified with a single
         value, (created), in the list of HTTP headers.`, async function() {
         /**
@@ -264,7 +264,7 @@ describe('Canonicalize', function() {
             }
             expect(error, 'Expected an error to be thrown').to.exist;
           });
-          it.skip(`If given valid options SHOULD return (${param}).`,
+          it(`If given valid options SHOULD return (${param}).`,
             async function() {
               generatorOptions.args.headers = [`(${param})`];
               const result = await util.generate(
