@@ -1,3 +1,3 @@
 {
-  "generator": "/bin/cat"
+  "generator": "../http-signature-header/bin/http-signature-header-js"
 }

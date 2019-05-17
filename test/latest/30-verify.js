@@ -13,7 +13,7 @@ describe.skip('Verify', function() {
     };
   });
 
-  it('MUST REQUIRE a signature parameter.', async function() {
+  it('MUST require a signature parameter.', async function() {
 
   });
 

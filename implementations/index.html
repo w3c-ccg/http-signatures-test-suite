@@ -166,29 +166,29 @@ The results of the conformance testing are shown below:
   <tbody>
 
     <tr>
-      <td>Canonize Signature String For valid options MUST return a valid signature string.</td>
+      <td>Canonicalize Signature String For valid options MUST return a valid signature string.</td>
   
       <td class="success">✓</td>
     
     </tr>
   
     <tr>
-      <td>Canonize Signature String If a value is not the last value then append an ASCII newline.</td>
+      <td>Canonicalize Signature String If a value is not the last value then append an ASCII newline.</td>
   
-      <td class="skipped">&#9208;</td>
+      <td class="skipped">-</td>
     
     </tr>
   
     <tr>
-      <td>Canonize Signature String if duplicate parameters the last parameter
+      <td>Canonicalize Signature String if duplicate parameters the last parameter
         defined MUST be used.</td>
   
-      <td class="skipped">&#9208;</td>
+      <td class="skipped">-</td>
     
     </tr>
   
     <tr>
-      <td>Canonize Signature String Header Parameter The client MUST use the values of each HTTP header field
+      <td>Canonicalize Signature String Header Parameter The client MUST use the values of each HTTP header field
         in the headers Signature Parameter, in the order they appear
         in the headers Signature Parameter.</td>
   
@@ -197,7 +197,7 @@ The results of the conformance testing are shown below:
     </tr>
   
     <tr>
-      <td>Canonize Signature String Header Parameter All header field values associated with the header field
+      <td>Canonicalize Signature String Header Parameter All header field values associated with the header field
         MUST be concatenated, separated by an ASCII comma and an ASCII space,
         and used in the order in which they will appear in the
         transmitted HTTP message.</td>
@@ -207,7 +207,7 @@ The results of the conformance testing are shown below:
     </tr>
   
     <tr>
-      <td>Canonize Signature String Header Parameter If a header specified in the headers parameter cannot be
+      <td>Canonicalize Signature String Header Parameter If a header specified in the headers parameter cannot be
         matched with a provided header in the message, the implementation
         MUST produce an error.</td>
   
@@ -216,15 +216,15 @@ The results of the conformance testing are shown below:
     </tr>
   
     <tr>
-      <td>Canonize Signature String Header Parameter If a header specified in the headers parameter is
+      <td>Canonicalize Signature String Header Parameter If a header specified in the headers parameter is
         malformed the implementation MUST produce an error.</td>
   
-      <td class="skipped">&#9208;</td>
+      <td class="skipped">-</td>
     
     </tr>
   
     <tr>
-      <td>Canonize Signature String Header Parameter If the header value is a zero-length string,
+      <td>Canonicalize Signature String Header Parameter If the header value is a zero-length string,
           the signature string line correlating with
           that header will simply be the (lowercased) header name,
           an ASCII colon :, and an ASCII space.</td>
@@ -234,14 +234,14 @@ The results of the conformance testing are shown below:
     </tr>
   
     <tr>
-      <td>Canonize Signature String Header Parameter SHOULD change capitalized Headers to lowercase.</td>
+      <td>Canonicalize Signature String Header Parameter SHOULD change capitalized Headers to lowercase.</td>
   
       <td class="success">✓</td>
     
     </tr>
   
     <tr>
-      <td>Canonize Signature String Header Parameter If the header field name is (request-target) then generate
+      <td>Canonicalize Signature String Header Parameter If the header field name is (request-target) then generate
           the header field value by concatenating the lowercased :method,
           an ASCII space, and the :path pseudo-headers.</td>
   
@@ -250,44 +250,44 @@ The results of the conformance testing are shown below:
     </tr>
   
     <tr>
-      <td>Canonize Signature String Header Parameter SHOULD return "" if the headers paramter is empty.</td>
+      <td>Canonicalize Signature String Header Parameter SHOULD return "" if the headers paramter is empty.</td>
   
-      <td class="skipped">&#9208;</td>
+      <td class="skipped">-</td>
     
     </tr>
   
     <tr>
-      <td>Canonize Signature String Header Parameter If the header parameter is not specified, implementations
+      <td>Canonicalize Signature String Header Parameter If the header parameter is not specified, implementations
         MUST operate as if the field were specified with a single
         value, (created), in the list of HTTP headers.</td>
   
-      <td class="skipped">&#9208;</td>
+      <td class="skipped">-</td>
     
     </tr>
   
     <tr>
-      <td>Canonize Signature String Header Parameter If (created) is in headers & the algorithm param starts with rsa MUST produce an error.</td>
+      <td>Canonicalize Signature String Header Parameter If (created) is in headers & the algorithm param starts with rsa MUST produce an error.</td>
   
       <td class="success">✓</td>
     
     </tr>
   
     <tr>
-      <td>Canonize Signature String Header Parameter If (created) is in headers & the algorithm param starts with hmac MUST produce an error.</td>
+      <td>Canonicalize Signature String Header Parameter If (created) is in headers & the algorithm param starts with hmac MUST produce an error.</td>
   
       <td class="success">✓</td>
     
     </tr>
   
     <tr>
-      <td>Canonize Signature String Header Parameter If (created) is in headers & the algorithm param starts with ecdsa MUST produce an error.</td>
+      <td>Canonicalize Signature String Header Parameter If (created) is in headers & the algorithm param starts with ecdsa MUST produce an error.</td>
   
       <td class="success">✓</td>
     
     </tr>
   
     <tr>
-      <td>Canonize Signature String Header Parameter If the created Signature Parameter is
+      <td>Canonicalize Signature String Header Parameter If the created Signature Parameter is
           not specified, an implementation MUST produce an error.</td>
   
       <td class="success">✓</td>
@@ -295,7 +295,7 @@ The results of the conformance testing are shown below:
     </tr>
   
     <tr>
-      <td>Canonize Signature String Header Parameter If the created Signature Parameter is
+      <td>Canonicalize Signature String Header Parameter If the created Signature Parameter is
           not an integer or unix timestamp, an 
           implementation MUST produce an error.</td>
   
@@ -304,35 +304,35 @@ The results of the conformance testing are shown below:
     </tr>
   
     <tr>
-      <td>Canonize Signature String Header Parameter If given valid options SHOULD return (created).</td>
+      <td>Canonicalize Signature String Header Parameter If given valid options SHOULD return (created).</td>
   
-      <td class="skipped">&#9208;</td>
+      <td class="skipped">-</td>
     
     </tr>
   
     <tr>
-      <td>Canonize Signature String Header Parameter If (expires) is in headers & the algorithm param starts with rsa MUST produce an error.</td>
+      <td>Canonicalize Signature String Header Parameter If (expires) is in headers & the algorithm param starts with rsa MUST produce an error.</td>
   
       <td class="success">✓</td>
     
     </tr>
   
     <tr>
-      <td>Canonize Signature String Header Parameter If (expires) is in headers & the algorithm param starts with hmac MUST produce an error.</td>
+      <td>Canonicalize Signature String Header Parameter If (expires) is in headers & the algorithm param starts with hmac MUST produce an error.</td>
   
       <td class="success">✓</td>
     
     </tr>
   
     <tr>
-      <td>Canonize Signature String Header Parameter If (expires) is in headers & the algorithm param starts with ecdsa MUST produce an error.</td>
+      <td>Canonicalize Signature String Header Parameter If (expires) is in headers & the algorithm param starts with ecdsa MUST produce an error.</td>
   
       <td class="success">✓</td>
     
     </tr>
   
     <tr>
-      <td>Canonize Signature String Header Parameter If the expires Signature Parameter is
+      <td>Canonicalize Signature String Header Parameter If the expires Signature Parameter is
           not specified, an implementation MUST produce an error.</td>
   
       <td class="success">✓</td>
@@ -340,7 +340,7 @@ The results of the conformance testing are shown below:
     </tr>
   
     <tr>
-      <td>Canonize Signature String Header Parameter If the expires Signature Parameter is
+      <td>Canonicalize Signature String Header Parameter If the expires Signature Parameter is
           not an integer or unix timestamp, an 
           implementation MUST produce an error.</td>
   
@@ -349,16 +349,16 @@ The results of the conformance testing are shown below:
     </tr>
   
     <tr>
-      <td>Canonize Signature String Header Parameter If given valid options SHOULD return (expires).</td>
+      <td>Canonicalize Signature String Header Parameter If given valid options SHOULD return (expires).</td>
   
-      <td class="skipped">&#9208;</td>
+      <td class="skipped">-</td>
     
     </tr>
   
     <tr>
       <td>Sign MUST REQUIRE keyId.</td>
   
-      <td class="skipped">&#9208;</td>
+      <td class="skipped">-</td>
     
     </tr>
   
@@ -366,7 +366,7 @@ The results of the conformance testing are shown below:
       <td>Sign A client MUST generate a signature by base 64 encoding
       the output of the digital signature algorithm.</td>
   
-      <td class="skipped">&#9208;</td>
+      <td class="skipped">-</td>
     
     </tr>
   
@@ -375,7 +375,7 @@ The results of the conformance testing are shown below:
       well as the contents of the HTTP message,
       to create the signature string.</td>
   
-      <td class="skipped">&#9208;</td>
+      <td class="skipped">-</td>
     
     </tr>
   
@@ -384,7 +384,7 @@ The results of the conformance testing are shown below:
       generate a digital signature on the
       signature string.</td>
   
-      <td class="skipped">&#9208;</td>
+      <td class="skipped">-</td>
     
     </tr>
   
@@ -392,7 +392,7 @@ The results of the conformance testing are shown below:
       <td>Sign MUST be able to discover metadata
       about the key from the keyId.</td>
   
-      <td class="skipped">&#9208;</td>
+      <td class="skipped">-</td>
     
     </tr>
   
@@ -400,7 +400,7 @@ The results of the conformance testing are shown below:
       <td>Sign MUST NOT process a signature with a
       created timestamp value that is in the future.</td>
   
-      <td class="skipped">&#9208;</td>
+      <td class="skipped">-</td>
     
     </tr>
   
@@ -408,7 +408,7 @@ The results of the conformance testing are shown below:
       <td>Sign MUST NOT process a signature with an expires
       timestamp value that is in the past.</td>
   
-      <td class="skipped">&#9208;</td>
+      <td class="skipped">-</td>
     
     </tr>
   
@@ -416,7 +416,7 @@ The results of the conformance testing are shown below:
       <td>Sign Algorithm Parameter MUST produce an error if algorithm
         parameter differs from key metadata.</td>
   
-      <td class="skipped">&#9208;</td>
+      <td class="skipped">-</td>
     
     </tr>
   
@@ -424,49 +424,49 @@ The results of the conformance testing are shown below:
       <td>Sign Algorithm Parameter Signature scheme MUST be in the
         HTTP Signatures Algorithms Registry.</td>
   
-      <td class="skipped">&#9208;</td>
+      <td class="skipped">-</td>
     
     </tr>
   
     <tr>
       <td>Sign Algorithm Parameter signature scheme MUST sign for algorithm hs2019.</td>
   
-      <td class="skipped">&#9208;</td>
+      <td class="skipped">-</td>
     
     </tr>
   
     <tr>
       <td>Sign Algorithm Parameter signature scheme MUST reject deprecated algorithm rsa-sha1.</td>
   
-      <td class="skipped">&#9208;</td>
+      <td class="skipped">-</td>
     
     </tr>
   
     <tr>
       <td>Sign Algorithm Parameter signature scheme MUST reject deprecated algorithm rsa-sha256.</td>
   
-      <td class="skipped">&#9208;</td>
+      <td class="skipped">-</td>
     
     </tr>
   
     <tr>
       <td>Sign Algorithm Parameter signature scheme MUST reject deprecated algorithm hmac-sha256.</td>
   
-      <td class="skipped">&#9208;</td>
+      <td class="skipped">-</td>
     
     </tr>
   
     <tr>
       <td>Sign Algorithm Parameter signature scheme MUST reject deprecated algorithm ecdsa-sha256.</td>
   
-      <td class="skipped">&#9208;</td>
+      <td class="skipped">-</td>
     
     </tr>
   
     <tr>
       <td>Verify MUST REQUIRE a signature parameter.</td>
   
-      <td class="skipped">&#9208;</td>
+      <td class="skipped">-</td>
     
     </tr>
   
@@ -474,7 +474,7 @@ The results of the conformance testing are shown below:
       <td>Verify MUST derive the digital signature algorithm from 
       the metadata associated with the keyId.</td>
   
-      <td class="skipped">&#9208;</td>
+      <td class="skipped">-</td>
     
     </tr>
   
@@ -482,7 +482,7 @@ The results of the conformance testing are shown below:
       <td>Verify MUST NOT use the value of
       algorithm from the signed message.</td>
   
-      <td class="skipped">&#9208;</td>
+      <td class="skipped">-</td>
     
     </tr>
   
@@ -491,7 +491,7 @@ The results of the conformance testing are shown below:
       and the Signature String Construction algorithm
       to recreate the signature.</td>
   
-      <td class="skipped">&#9208;</td>
+      <td class="skipped">-</td>
     
     </tr>
   
@@ -500,7 +500,7 @@ The results of the conformance testing are shown below:
       decoded signature listed in the Signature Parameters
       to verify the authenticity of the digital signature.</td>
   
-      <td class="skipped">&#9208;</td>
+      <td class="skipped">-</td>
     
     </tr>
   
@@ -510,7 +510,7 @@ The results of the conformance testing are shown below:
       where the headers value is not supplied) is absent from the message,
       the implementation MUST produce an error.</td>
   
-      <td class="skipped">&#9208;</td>
+      <td class="skipped">-</td>
     
     </tr>
   
@@ -519,21 +519,21 @@ The results of the conformance testing are shown below:
       such that they can determine the type of digital signature algorithm
       to employ when verifying signatures.</td>
   
-      <td class="skipped">&#9208;</td>
+      <td class="skipped">-</td>
     
     </tr>
   
     <tr>
       <td>Verify MUST have a keyId parameter.</td>
   
-      <td class="skipped">&#9208;</td>
+      <td class="skipped">-</td>
     
     </tr>
   
     <tr>
       <td>Verify MUST have a signature parameter.</td>
   
-      <td class="skipped">&#9208;</td>
+      <td class="skipped">-</td>
     
     </tr>
   
@@ -541,7 +541,7 @@ The results of the conformance testing are shown below:
       <td>Verify Algorithm Parameter MUST produce an error if algorithm
         parameter differs from key metadata.</td>
   
-      <td class="skipped">&#9208;</td>
+      <td class="skipped">-</td>
     
     </tr>
   
@@ -549,42 +549,42 @@ The results of the conformance testing are shown below:
       <td>Verify Algorithm Parameter Signature scheme MUST be in the
         HTTP Signatures Algorithms Registry.</td>
   
-      <td class="skipped">&#9208;</td>
+      <td class="skipped">-</td>
     
     </tr>
   
     <tr>
       <td>Verify Algorithm Parameter signature scheme MUST sign for algorithm hs2019.</td>
   
-      <td class="skipped">&#9208;</td>
+      <td class="skipped">-</td>
     
     </tr>
   
     <tr>
       <td>Verify Algorithm Parameter signature scheme MUST reject deprecated algorithm rsa-sha1.</td>
   
-      <td class="skipped">&#9208;</td>
+      <td class="skipped">-</td>
     
     </tr>
   
     <tr>
       <td>Verify Algorithm Parameter signature scheme MUST reject deprecated algorithm rsa-sha256.</td>
   
-      <td class="skipped">&#9208;</td>
+      <td class="skipped">-</td>
     
     </tr>
   
     <tr>
       <td>Verify Algorithm Parameter signature scheme MUST reject deprecated algorithm hmac-sha256.</td>
   
-      <td class="skipped">&#9208;</td>
+      <td class="skipped">-</td>
     
     </tr>
   
     <tr>
       <td>Verify Algorithm Parameter signature scheme MUST reject deprecated algorithm ecdsa-sha256.</td>
   
-      <td class="skipped">&#9208;</td>
+      <td class="skipped">-</td>
     
     </tr>
   

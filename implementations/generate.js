@@ -87,7 +87,7 @@ allTests.forEach(test => {
     }
     if(status === 'skipped') {
       //skipped tests get a pause button
-      statusMark = '&#9208;';
+      statusMark = '-';
     }
 
     conformanceTable += `

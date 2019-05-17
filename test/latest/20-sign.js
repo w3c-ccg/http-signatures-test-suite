@@ -18,7 +18,7 @@ describe.skip('Sign', function() {
     };
   });
 
-  it('MUST REQUIRE keyId.', async function() {
+  it('MUST require keyId.', async function() {
 
   });
 
