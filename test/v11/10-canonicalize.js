@@ -3,7 +3,7 @@ const util = require('./util');
 const {algorithms} = require('./input/algorithms');
 const {expect} = require('chai');
 
-describe('Canonize', function() {
+describe('Canonicalize', function() {
   let generatorOptions = null;
   before(function() {
     generatorOptions = {
@@ -189,7 +189,7 @@ describe('Canonize', function() {
         const expected = `created: ${generatorOptions.date}\n`;
         result.should.equal(expected, 'expected signature string to match');
       });
-      //TODO: should (created) & algorithm be in canonize or sign?
+      //TODO: should (created) & algorithm be in canonicalize or sign?
       ['created', 'expires']
         .forEach(param => {
           algorithms.forEach(algorithm => {
