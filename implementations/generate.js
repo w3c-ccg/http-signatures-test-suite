@@ -44,7 +44,7 @@ files.forEach(file => {
   const pendingTitles = results.pending.map(t => t.fullTitle);
   const notPending = results.tests
     .filter(t => !pendingTitles.includes(t.fullTitle));
-  // process each test, noting the result
+  // process each non-pending test, noting the result
   notPending.forEach(test => {
     allResults[implementation][test.fullTitle] =
       getTestStatus(test, pendingTitles);
