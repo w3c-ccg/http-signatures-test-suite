@@ -1,14 +1,14 @@
 # W3C HTTP Signatures Working Group Test Suite
 
 This repository contains the W3C
-[HTTP Signatures](https://tools.ietf.org/html/draft-cavage-http-signatures-11) test suite.
+[HTTP Signatures](https://tools.ietf.org/html/draft-cavage-http-signatures) test suite.
 Any conforming implementation MUST pass all tests in the test suite.
 
 There are multiple test suites, each of which is detailed below.
 
-## HTTP Signatures Version 11 Tests
+## HTTP Signatures Tests
 
-This test suite will check any application that generates [HTTP Signatures](https://tools.ietf.org/html/draft-cavage-http-signatures-11) Headers to
+This test suite will check any application that generates [HTTP Signatures](https://tools.ietf.org/html/draft-cavage-http-signatures) Headers to
 ensure conformance with the specification.
 
 
