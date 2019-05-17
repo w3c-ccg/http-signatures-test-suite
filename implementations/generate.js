@@ -42,9 +42,10 @@ files.forEach(file => {
     path.join(__dirname, file)), 'utf-8');
   allResults[implementation] = {};
   const pendingTitles = results.pending.map(t => t.fullTitle);
-
+  const notPending = results.tests
+    .filter(t => !pendingTitles.includes(t.fullTitle));
   // process each test, noting the result
-  results.tests.forEach(test => {
+  notPending.forEach(test => {
     allResults[implementation][test.fullTitle] =
       getTestStatus(test, pendingTitles);
     // assume vc.js tests all features
