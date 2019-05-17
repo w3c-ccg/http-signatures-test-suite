@@ -20,21 +20,21 @@ It will also need to accept the following command line parameters:
 Usage: <implementation_binary> [options] [command]
 
 Options:
-  -V, --version                          output the version number
-  -H, --headers <headers>                A list of header names.
-  -k, --keyId <keyId>                    A Key Id string.
-  -private, --private-key <privateKey>.  A private key file name filename.
-  -kt, --key-type <keyType>              The type of the keys.
-  -public, --public-key <publicKey>.     A public key file name filename.
-  -a, --algorithm [algorithm]            One of: rsa-sha1, hmac-sha1, rsa-sha256, hmac-sha256, hs2019.
-  -c, --created [created]                The created param for the signature.
-  -e, --expires [expires]                The expires param for the signature.
-  -h, --help                             output usage information
+  -V, --version                    output the version number
+  -d, --headers <headers>          A list of header names.
+  -k, --keyId <keyId>              A Key Id string.
+  -p, --private-key <privateKey>.  A private key file name filename.
+  -t, --key-type <keyType>         The type of the keys.
+  -u, --public-key <publicKey>.    A public key file name filename.
+  -a, --algorithm [algorithm]      One of: rsa-sha1, hmac-sha1, rsa-sha256, hmac-sha256, hs2019.
+  -c, --created [created]          The created param for the signature.
+  -e, --expires [expires]          The expires param for the signature.
+  -h, --help                       output usage information
 
 Commands:
-  c14n|cannonize
+  c14n|canonicalize
   sign
-  verify [options]
+  verify
 ```
 All tests will run against the implementation's binary and assume that an exit code greater
 than 0 represents an error.
