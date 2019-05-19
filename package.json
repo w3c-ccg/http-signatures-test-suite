@@ -7,9 +7,10 @@
     "test": "test"
   },
   "scripts": {
-    "report": "mocha --require test/test-mocha.js --recursive test/latest -R json > implementations/report.json",
+    "report": "mocha --require test/test-mocha.js --recursive test/latest -R ImplementationReporter > implementations/report.json",
     "summary": "cd implementations && node generate.js",
-    "test": "mocha --require test/test-mocha.js --recursive test/latest"
+    "test": "mocha --require test/test-mocha.js --recursive test/latest",
+    "handlebars": "handlebars ./implementations/report-template.hbs -f ./implementations/report-template.js"
   },
   "repository": {
     "type": "git",
@@ -35,6 +36,7 @@
     "eslint": "^5.16.0",
     "eslint-config-digitalbazaar": "^2.0.0",
     "eslint-plugin-jsdoc": "^4.8.3",
+    "handlebars": "^4.1.2",
     "mocha": "^6.1.4"
   }
 }
