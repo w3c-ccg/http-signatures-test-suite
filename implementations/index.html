@@ -1,366 +1,374 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>HTTP Signatures Implementation Report 1.0</title>
-    <meta http-equiv='Content-Type' content='text/html;charset=utf-8'/>
-    <!--
-      === NOTA BENE ===
-      For the three scripts below, if your spec resides on dev.w3 you can check them
-      out in the same tree and use relative links so that they'll work offline,
-     -->
-    <script src='https://www.w3.org/Tools/respec/respec-w3c-common' class='remove'></script>
-    <script type="text/javascript" class="remove">
-      var respecConfig = {
-        // specification status (e.g., WD, LCWD, NOTE, etc.). If in doubt use ED.
-        specStatus: "ED",
-
-        // the specification's short name, as in http://www.w3.org/TR/short-name/
-        shortName: "http-signatures-implementation-report",
-
-        // subtitle for the spec
-        subtitle: "Implementation Report for HTTP Signatures Spec",
-
-        // if you wish the publication date to be other than today, set this
-        //publishDate:  "2017-08-03",
-
-        // if there is a previously published draft, uncomment this and set its YYYY-MM-DD date
-        // and its maturity status
-        // previousPublishDate:  "1977-03-15",
-        // previousMaturity:  "WD",
-
-        // extend the bibliography entries
-        doJsonLd: true,
-
-        github: "https://github.com/w3c-dvcg/http-signatures-test-suite",
-        includePermalinks: false,
-
-        // if there a publicly available Editor's Draft, this is the link
-        edDraftURI: null,
-
-        // if this is a LCWD, uncomment and set the end of its review period
-        // lcEnd: "2009-08-05",
-
-        // editors, add as many as you like
-        // only "name" is required
-        editors:  [
-          { name: "Manu Sporny", url: "http://manu.sporny.org/",
-            company: "Digital Bazaar", companyURL: "http://digitalbazaar.com/" },
-          { name: "Andrew Jones", url: "https://github.com/aljones15",
-            company: "Digital Bazaar", companyURL: "http://digitalbazaar.com/" }
-        ],
-        // authors, add as many as you like.
-        // This is optional, uncomment if you have authors as well as editors.
-        // only "name" is required. Same format as editors.
-        authors:
-        [
-          { name: "Manu Sporny", url: "http://digitalbazaar.com/",
-            company: "Digital Bazaar", companyURL: "http://digitalbazaar.com/" }
-        ],
-        // name of the WG
-        wg:           "W3C Digital Verification Community Group",
-
-        // URI of the public WG page
-        wgURI:        "https://w3c-dvcg.github.io/",
-
-        // name (with the @w3c.org) of the public mailing to which comments are due
-        wgPublicList: "public-credentials",
-
-        // URI of the patent status for this WG, for Rec-track documents
-        // !!!! IMPORTANT !!!!
-        // This is important for Rec-track documents, do not copy a patent URI from a random
-        // document unless you know what you're doing. If in doubt ask your friendly neighbourhood
-        // Team Contact.
-        // TODO: find patent URI
-        wgPatentURI:  "unknown",
-        maxTocLevel: 2,
-        inlineCSS: true
-      };
-    </script>
-    <style>
-.success {
-  font-weight: bold;
-  background-color: lightgreen;
-  text-align: center;
-}
-.failure {
-  font-weight: bold;
-  background-color: pink;
-  text-align: center;
-}
-.unimplemented {
-  font-weight: bold;
-  background-color: lightyellow;
-  text-align: center;
-}
-    </style>
+        <title>HTTP Signatures Implementation Report 1.0</title>
+        <meta http-equiv='Content-Type' content='text/html;charset=utf-8'/>
+        <!--
+          === NOTA BENE ===
+          For the three scripts below, if your spec resides on dev.w3 you can check them
+          out in the same tree and use relative links so that they'll work offline,
+         -->
+        <script src='https://www.w3.org/Tools/respec/respec-w3c-common' class='remove'></script>
+        <script type="text/javascript" class="remove">
+          var respecConfig = {
+            // specification status (e.g., WD, LCWD, NOTE, etc.). If in doubt use ED.
+            specStatus: "ED",
+    
+            // the specification's short name, as in http://www.w3.org/TR/short-name/
+            shortName: "http-signatures-implementation-report",
+    
+            // subtitle for the spec
+            subtitle: "Implementation Report for HTTP Signatures Spec",
+    
+            // if you wish the publication date to be other than today, set this
+            //publishDate:  "2017-08-03",
+    
+            // if there is a previously published draft, uncomment this and set its YYYY-MM-DD date
+            // and its maturity status
+            // previousPublishDate:  "1977-03-15",
+            // previousMaturity:  "WD",
+    
+            // extend the bibliography entries
+            doJsonLd: true,
+    
+            github: "https://github.com/w3c-dvcg/http-signatures-test-suite",
+            includePermalinks: false,
+    
+            // if there a publicly available Editor's Draft, this is the link
+            edDraftURI: "https://tools.ietf.org/html/draft-cavage-http-signatures",
+    
+            // if this is a LCWD, uncomment and set the end of its review period
+            // lcEnd: "2009-08-05",
+    
+            // editors, add as many as you like
+            // only "name" is required
+            editors:  [
+              { name: "Manu Sporny", url: "http://manu.sporny.org/",
+                company: "Digital Bazaar", companyURL: "http://digitalbazaar.com/" },
+              { name: "Andrew Jones", url: "https://github.com/aljones15",
+                company: "Digital Bazaar", companyURL: "http://digitalbazaar.com/" }
+            ],
+            // authors, add as many as you like.
+            // This is optional, uncomment if you have authors as well as editors.
+            // only "name" is required. Same format as editors.
+            authors:
+            [
+              { name: "Manu Sporny", url: "http://digitalbazaar.com/",
+                company: "Digital Bazaar", companyURL: "http://digitalbazaar.com/" }
+            ],
+            // name of the WG
+            wg:           "W3C Digital Verification Community Group",
+    
+            // URI of the public WG page
+            wgURI:        "https://w3c-dvcg.github.io/",
+    
+            // name (with the @w3c.org) of the public mailing to which comments are due
+            wgPublicList: "public-credentials",
+    
+            // URI of the patent status for this WG, for Rec-track documents
+            // !!!! IMPORTANT !!!!
+            // This is important for Rec-track documents, do not copy a patent URI from a random
+            // document unless you know what you're doing. If in doubt ask your friendly neighbourhood
+            // Team Contact.
+            // TODO: find patent URI
+            wgPatentURI:  "unknown",
+            maxTocLevel: 2,
+            inlineCSS: true
+          };
+        </script>
+        <style>
+    .passed {
+      font-weight: bold;
+      background-color: lightgreen;
+      text-align: center;
+    }
+    .failed {
+      font-weight: bold;
+      background-color: pink;
+      text-align: center;
+    }
+    .unimplemented {
+      font-weight: bold;
+      background-color: lightyellow;
+      text-align: center;
+    }
+        </style>
   </head>
   <body>
-    <section id='abstract'>
-      <p>
-This is the most recent implementation report for the
-<a href="https://tools.ietf.org/html/draft-cavage-http-signatures">HTTP Signatures</a> specification.
-      </p>
-    </section>
-
-    <section id='sotd'>
-      <p>
-Comments regarding this document are welcome. Please file issues
-directly on <a href="https://github.com/w3c-dvcg/http-signatures-test-suite">GitHub</a>,
-or send them to
-<a href="mailto:public-credentials@w3.org">public-vc-comments@w3.org</a>
-(<a href="mailto:public-credentials@w3.org?subject=subscribe">subscribe</a>,
-<a href="https://lists.w3.org/Archives/Public/public-credentials/">archives</a>).
-      </p>
-
-    </section>
-
-    <section class="informative">
-      <h1>Introduction</h1>
-
-      <p>
-The purpose of this document is to demonstrate that there are multiple
-interoperable implementations of HTTP Signatures that are capable of generating
-output that is conformant to the latest version.
-      </p>
-
-      <section class="informative">
-        <h2>Testing Methodology</h2>
-
-        <p>
-The testing framework for HTTP Signatures executes the
-following process for every conformance statement in the 
-<a href="https://tools.ietf.org/html/draft-cavage-http-signatures">
-Http Signatures specification</a> :
-        </p>
-
-        <ol class="algorithm">
-          <li>
-Take an input HTTP Message that exercises the feature and feed it to a
-developer provided HTTP Signatures binary.
-          </li>
-          <li>
-If the input is valid, generate a HTTP Signature that is conformant
-to options and HTTP message.
-          </li>
-          <li>
-The test suite then ensures that the generated HTTP message is
-conformant to the feature being tested.
-          </li>
-        </ol>
-
-      </section>
-
-    </section>
-
+        <section id='abstract'>
+          <p>
+    This is the most recent implementation report for the
+    <a href="https://tools.ietf.org/html/draft-cavage-http-signatures">HTTP Signatures</a> specification.
+          </p>
+        </section>
+    
+        <section id='sotd'>
+          <p>
+    Comments regarding this document are welcome. Please file issues
+    directly on <a href="https://github.com/w3c-dvcg/http-signatures-test-suite">GitHub</a>,
+    or send them to
+    <a href="mailto:public-credentials@w3.org">public-vc-comments@w3.org</a>
+    (<a href="mailto:public-credentials@w3.org?subject=subscribe">subscribe</a>,
+    <a href="https://lists.w3.org/Archives/Public/public-credentials/">archives</a>).
+          </p>
+    
+        </section>
+    
+        <section class="informative">
+          <h1>Introduction</h1>
+    
+          <p>
+    The purpose of this document is to demonstrate that there are multiple
+    interoperable implementations of HTTP Signatures that are capable of generating
+    output that is conformant to the latest version.
+          </p>
+    
+          <section class="informative">
+            <h2>Testing Methodology</h2>
+    
+            <p>
+    The testing framework for HTTP Signatures executes the
+    following process for every conformance statement in the 
+    <a href="https://tools.ietf.org/html/draft-cavage-http-signatures">
+    Http Signatures specification</a> :
+            </p>
+    
+            <ol class="algorithm">
+              <li>
+    Take an input HTTP Message that exercises the feature and feed it to a
+    developer provided HTTP Signatures binary.
+              </li>
+              <li>
+    If the input is valid, generate a HTTP Signature that is conformant
+    to options and HTTP message.
+              </li>
+              <li>
+    The test suite then ensures that the generated HTTP message is
+    conformant to the feature being tested.
+              </li>
+            </ol>
+    
+          </section>
+    
+        </section>
     <section class="informative">
       <h1>Conformance Testing Results</h1>
-
       <p>
-The results of the conformance testing are shown below:
+        The results of the conformance testing are shown below:
       </p>
-
-      
-<table class="simple">
-  <thead>
-    <th width="80%">Test</th>
-<th>all_tests</th>
-  </thead>
-  <tbody>
-
-    <tr>
-      <td>Canonicalize Signature String For valid options MUST return a valid signature string.</td>
-  
-      <td class="success">✓</td>
-    
-    </tr>
-  
-    <tr>
-      <td>Canonicalize Signature String If a value is not the last value then append an ASCII newline.</td>
-  
-      <td class="failure">❌</td>
-    
-    </tr>
-  
-    <tr>
-      <td>Canonicalize Signature String if duplicate parameters the last parameter
-        defined MUST be used.</td>
-  
-      <td class="failure">❌</td>
-    
-    </tr>
-  
-    <tr>
-      <td>Canonicalize Signature String Header Parameter The client MUST use the values of each HTTP header field
-        in the headers Signature Parameter, in the order they appear
-        in the headers Signature Parameter.</td>
-  
-      <td class="success">✓</td>
-    
-    </tr>
-  
-    <tr>
-      <td>Canonicalize Signature String Header Parameter All header field values associated with the header field
-        MUST be concatenated, separated by an ASCII comma and an ASCII space,
-        and used in the order in which they will appear in the
-        transmitted HTTP message.</td>
-  
-      <td class="success">✓</td>
-    
-    </tr>
-  
-    <tr>
-      <td>Canonicalize Signature String Header Parameter If a header specified in the headers parameter cannot be
-        matched with a provided header in the message, the implementation
-        MUST produce an error.</td>
-  
-      <td class="success">✓</td>
-    
-    </tr>
-  
-    <tr>
-      <td>Canonicalize Signature String Header Parameter If a header specified in the headers parameter is
-        malformed the implementation MUST produce an error.</td>
-  
-      <td class="failure">❌</td>
-    
-    </tr>
-  
-    <tr>
-      <td>Canonicalize Signature String Header Parameter If the header value is a zero-length string,
-          the signature string line correlating with
-          that header will simply be the (lowercased) header name,
-          an ASCII colon :, and an ASCII space.</td>
-  
-      <td class="success">✓</td>
-    
-    </tr>
-  
-    <tr>
-      <td>Canonicalize Signature String Header Parameter SHOULD change capitalized Headers to lowercase.</td>
-  
-      <td class="success">✓</td>
-    
-    </tr>
-  
-    <tr>
-      <td>Canonicalize Signature String Header Parameter If the header field name is (request-target) then generate
-          the header field value by concatenating the lowercased :method,
-          an ASCII space, and the :path pseudo-headers.</td>
-  
-      <td class="success">✓</td>
-    
-    </tr>
-  
-    <tr>
-      <td>Canonicalize Signature String Header Parameter SHOULD return "" if the headers paramter is empty.</td>
-  
-      <td class="failure">❌</td>
-    
-    </tr>
-  
-    <tr>
-      <td>Canonicalize Signature String Header Parameter If the header parameter is not specified, implementations
-        MUST operate as if the field were specified with a single
-        value, (created), in the list of HTTP headers.</td>
-  
-      <td class="failure">❌</td>
-    
-    </tr>
-  
-    <tr>
-      <td>Canonicalize Signature String Header Parameter If (created) is in headers & the algorithm param starts with rsa MUST produce an error.</td>
-  
-      <td class="success">✓</td>
-    
-    </tr>
-  
-    <tr>
-      <td>Canonicalize Signature String Header Parameter If (created) is in headers & the algorithm param starts with hmac MUST produce an error.</td>
-  
-      <td class="success">✓</td>
-    
-    </tr>
-  
-    <tr>
-      <td>Canonicalize Signature String Header Parameter If (created) is in headers & the algorithm param starts with ecdsa MUST produce an error.</td>
-  
-      <td class="success">✓</td>
-    
-    </tr>
-  
-    <tr>
-      <td>Canonicalize Signature String Header Parameter If the created Signature Parameter is
-          not specified, an implementation MUST produce an error.</td>
-  
-      <td class="success">✓</td>
-    
-    </tr>
-  
-    <tr>
-      <td>Canonicalize Signature String Header Parameter If the created Signature Parameter is
-          not an integer or unix timestamp, an 
-          implementation MUST produce an error.</td>
-  
-      <td class="success">✓</td>
-    
-    </tr>
-  
-    <tr>
-      <td>Canonicalize Signature String Header Parameter If given valid options SHOULD return (created).</td>
-  
-      <td class="failure">❌</td>
-    
-    </tr>
-  
-    <tr>
-      <td>Canonicalize Signature String Header Parameter If (expires) is in headers & the algorithm param starts with rsa MUST produce an error.</td>
-  
-      <td class="success">✓</td>
-    
-    </tr>
-  
-    <tr>
-      <td>Canonicalize Signature String Header Parameter If (expires) is in headers & the algorithm param starts with hmac MUST produce an error.</td>
-  
-      <td class="success">✓</td>
-    
-    </tr>
-  
-    <tr>
-      <td>Canonicalize Signature String Header Parameter If (expires) is in headers & the algorithm param starts with ecdsa MUST produce an error.</td>
-  
-      <td class="success">✓</td>
-    
-    </tr>
-  
-    <tr>
-      <td>Canonicalize Signature String Header Parameter If the expires Signature Parameter is
-          not specified, an implementation MUST produce an error.</td>
-  
-      <td class="success">✓</td>
-    
-    </tr>
-  
-    <tr>
-      <td>Canonicalize Signature String Header Parameter If the expires Signature Parameter is
-          not an integer or unix timestamp, an 
-          implementation MUST produce an error.</td>
-  
-      <td class="success">✓</td>
-    
-    </tr>
-  
-    <tr>
-      <td>Canonicalize Signature String Header Parameter If given valid options SHOULD return (expires).</td>
-  
-      <td class="failure">❌</td>
-    
-    </tr>
-  
-  </tbody>
-</table>
-
-
+            <section>
+              <h2>Canonicalize</h2>
+              <table class="simple">
+                <style>
+                  td.subtest {
+                    padding-left: 2rem;
+                  }
+                  td.optional {
+                    background-color: #b9b7b7;
+                  }
+                </style>
+                <thead>
+                  <th width="80%">Test</th>
+                      <th>next</th>
+                      <th>node</th>
+                      <th>skip</th>
+                </thead>
+                <tbody>
+              <tr>
+                <td class="subtest not-optional">Signature String For valid options MUST return a valid signature string.</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+              </tr>
+              <tr>
+                <td class="subtest not-optional">Signature String If a value is not the last value then append an ASCII newline.</td>
+                  <td class="failed not-optional">❌</td>
+                  <td class="failed not-optional">❌</td>
+                  <td class="failed not-optional">❌</td>
+              </tr>
+              <tr>
+                <td class="subtest not-optional">Signature String if duplicate parameters the last parameter defined MUST be used.</td>
+                  <td class="failed not-optional">❌</td>
+                  <td class="failed not-optional">❌</td>
+                  <td class="failed not-optional">❌</td>
+              </tr>
+              <tr>
+                <td class="subtest not-optional">Signature String Header Parameter The client MUST use the values of each HTTP header field in the headers Signature Parameter, in the order they appear in the headers Signature Parameter.</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+              </tr>
+              <tr>
+                <td class="subtest not-optional">Signature String Header Parameter All header field values associated with the header field MUST be concatenated, separated by an ASCII comma and an ASCII space, and used in the order in which they will appear in the transmitted HTTP message.</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+              </tr>
+              <tr>
+                <td class="subtest not-optional">Signature String Header Parameter If a header specified in the headers parameter cannot be matched with a provided header in the message, the implementation MUST produce an error.</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+              </tr>
+              <tr>
+                <td class="subtest not-optional">Signature String Header Parameter If a header specified in the headers parameter is malformed the implementation MUST produce an error.</td>
+                  <td class="failed not-optional">❌</td>
+                  <td class="failed not-optional">❌</td>
+                  <td class="failed not-optional">❌</td>
+              </tr>
+              <tr>
+                <td class="subtest not-optional">Signature String Header Parameter If the header value is a zero-length string, the signature string line correlating with that header will simply be the (lowercased) header name, an ASCII colon :, and an ASCII space.</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+              </tr>
+              <tr>
+                <td class="subtest not-optional">Signature String Header Parameter SHOULD change capitalized Headers to lowercase.</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+              </tr>
+              <tr>
+                <td class="subtest not-optional">Signature String Header Parameter If the header field name is (request-target) then generate the header field value by concatenating the lowercased :method, an ASCII space, and the :path pseudo-headers.</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+              </tr>
+              <tr>
+                <td class="subtest not-optional">Signature String Header Parameter SHOULD return &quot;&quot; if the headers paramter is empty.</td>
+                  <td class="failed not-optional">❌</td>
+                  <td class="failed not-optional">❌</td>
+                  <td class="failed not-optional">❌</td>
+              </tr>
+              <tr>
+                <td class="subtest not-optional">Signature String Header Parameter If the header parameter is not specified, implementations MUST operate as if the field were specified with a single value, (created), in the list of HTTP headers.</td>
+                  <td class="failed not-optional">❌</td>
+                  <td class="failed not-optional">❌</td>
+                  <td class="failed not-optional">❌</td>
+              </tr>
+              <tr>
+                <td class="subtest not-optional">Signature String Header Parameter If (created) is in headers &amp; the algorithm param starts with rsa MUST produce an error.</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+              </tr>
+              <tr>
+                <td class="subtest not-optional">Signature String Header Parameter If (created) is in headers &amp; the algorithm param starts with hmac MUST produce an error.</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+              </tr>
+              <tr>
+                <td class="subtest not-optional">Signature String Header Parameter If (created) is in headers &amp; the algorithm param starts with ecdsa MUST produce an error.</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+              </tr>
+              <tr>
+                <td class="subtest not-optional">Signature String Header Parameter If the created Signature Parameter is not specified, an implementation MUST produce an error.</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+              </tr>
+              <tr>
+                <td class="subtest not-optional">Signature String Header Parameter If the created Signature Parameter is not an integer or unix timestamp, animplementation MUST produce an error.</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+              </tr>
+              <tr>
+                <td class="subtest not-optional">Signature String Header Parameter If given valid options SHOULD return (created).</td>
+                  <td class="failed not-optional">❌</td>
+                  <td class="failed not-optional">❌</td>
+                  <td class="failed not-optional">❌</td>
+              </tr>
+              <tr>
+                <td class="subtest not-optional">Signature String Header Parameter If (expires) is in headers &amp; the algorithm param starts with rsa MUST produce an error.</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+              </tr>
+              <tr>
+                <td class="subtest not-optional">Signature String Header Parameter If (expires) is in headers &amp; the algorithm param starts with hmac MUST produce an error.</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+              </tr>
+              <tr>
+                <td class="subtest not-optional">Signature String Header Parameter If (expires) is in headers &amp; the algorithm param starts with ecdsa MUST produce an error.</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+              </tr>
+              <tr>
+                <td class="subtest not-optional">Signature String Header Parameter If the expires Signature Parameter is not specified, an implementation MUST produce an error.</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+              </tr>
+              <tr>
+                <td class="subtest not-optional">Signature String Header Parameter If the expires Signature Parameter is not an integer or unix timestamp, animplementation MUST produce an error.</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+              </tr>
+              <tr>
+                <td class="subtest not-optional">Signature String Header Parameter If given valid options SHOULD return (expires).</td>
+                  <td class="failed not-optional">❌</td>
+                  <td class="failed not-optional">❌</td>
+                  <td class="failed not-optional">❌</td>
+              </tr>
+              <tr>
+                <td class="subtest optional">Optional should be able to parse json</td>
+                  <td class="passed optional">✓</td>
+                  <td class="passed optional">✓</td>
+                  <td class="passed optional">✓</td>
+              </tr>
+              </tbody>
+              </table>
+            </section>
+            <section>
+              <h2>Sign</h2>
+              <table class="simple">
+                <style>
+                  td.subtest {
+                    padding-left: 2rem;
+                  }
+                  td.optional {
+                    background-color: #b9b7b7;
+                  }
+                </style>
+                <thead>
+                  <th width="80%">Test</th>
+                      <th>next</th>
+                      <th>node</th>
+                      <th>skip</th>
+                </thead>
+                <tbody>
+              </tbody>
+              </table>
+            </section>
+            <section>
+              <h2>Verify</h2>
+              <table class="simple">
+                <style>
+                  td.subtest {
+                    padding-left: 2rem;
+                  }
+                  td.optional {
+                    background-color: #b9b7b7;
+                  }
+                </style>
+                <thead>
+                  <th width="80%">Test</th>
+                      <th>next</th>
+                      <th>node</th>
+                      <th>skip</th>
+                </thead>
+                <tbody>
+              </tbody>
+              </table>
+            </section>
     </section>
   </body>
 </html>
