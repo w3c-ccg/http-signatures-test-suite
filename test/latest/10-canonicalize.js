@@ -13,6 +13,11 @@ describe('Canonicalize', function() {
       date: new Date().toGMTString(),
     };
   });
+  describe('Optional', function() {
+    it('should be able to parse json', function() {
+
+    });
+  });
   describe('Signature String', function() {
     it(
       'For valid options MUST return a valid signature string.',

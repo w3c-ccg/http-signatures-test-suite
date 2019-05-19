@@ -1,0 +1,56 @@
+    <section id='abstract'>
+      <p>
+This is the most recent implementation report for the
+<a href="https://tools.ietf.org/html/draft-cavage-http-signatures">HTTP Signatures</a> specification.
+      </p>
+    </section>
+
+    <section id='sotd'>
+      <p>
+Comments regarding this document are welcome. Please file issues
+directly on <a href="https://github.com/w3c-dvcg/http-signatures-test-suite">GitHub</a>,
+or send them to
+<a href="mailto:public-credentials@w3.org">public-vc-comments@w3.org</a>
+(<a href="mailto:public-credentials@w3.org?subject=subscribe">subscribe</a>,
+<a href="https://lists.w3.org/Archives/Public/public-credentials/">archives</a>).
+      </p>
+
+    </section>
+
+    <section class="informative">
+      <h1>Introduction</h1>
+
+      <p>
+The purpose of this document is to demonstrate that there are multiple
+interoperable implementations of HTTP Signatures that are capable of generating
+output that is conformant to the latest version.
+      </p>
+
+      <section class="informative">
+        <h2>Testing Methodology</h2>
+
+        <p>
+The testing framework for HTTP Signatures executes the
+following process for every conformance statement in the 
+<a href="https://tools.ietf.org/html/draft-cavage-http-signatures">
+Http Signatures specification</a> :
+        </p>
+
+        <ol class="algorithm">
+          <li>
+Take an input HTTP Message that exercises the feature and feed it to a
+developer provided HTTP Signatures binary.
+          </li>
+          <li>
+If the input is valid, generate a HTTP Signature that is conformant
+to options and HTTP message.
+          </li>
+          <li>
+The test suite then ensures that the generated HTTP message is
+conformant to the feature being tested.
+          </li>
+        </ol>
+
+      </section>
+
+    </section>
