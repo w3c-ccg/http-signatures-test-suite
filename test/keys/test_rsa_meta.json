@@ -1,0 +1,6 @@
+{
+  "authentication": [{
+    "type": "rsa",
+    "publicKeyPem":""
+  }]
+}

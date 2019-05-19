@@ -1,0 +1,37 @@
+<section class="informative">
+  <h1>Conformance Testing Results</h1>
+  <p>
+    The results of the conformance testing are shown below:
+  </p>
+      {{#each tests}}
+        <section>
+          <h2>{{@key}}</h2>
+          <table class="simple">
+            <style>
+              td.subtest {
+                padding-left: 2rem;
+              }
+              td.optional {
+                background-color: #b9b7b7;
+              }
+            </style>
+            <thead>
+              <th width="80%">Test</th>
+                {{#each @root.implementations}}
+                  <th>{{this}}</th>
+                {{/each}} 
+            </thead>
+            <tbody>
+        {{#each this}}
+          <tr>
+            <td class="subtest {{getOptionalTitle @key}}">{{@key}}</td>
+            {{#each this}}
+              <td class="{{state}} {{getOptional optional}}">{{getStatusMark state}}</td>
+            {{/each}}
+          </tr>
+        {{/each}}
+          </tbody>
+          </table>
+        </section>
+      {{/each}}
+</section>
