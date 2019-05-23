@@ -4,7 +4,7 @@ const {registry} = require('./input/algorithms');
 
 describe.skip('Verify', function() {
   let generatorOptions = null;
-  before(function() {
+  beforeEach(function() {
     generatorOptions = {
       generator: config.generator,
       command: 'verify',
