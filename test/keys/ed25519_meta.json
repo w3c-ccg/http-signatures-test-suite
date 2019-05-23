@@ -1,0 +1,6 @@
+{
+  "authentication": [{
+    "type": "ed25519",
+    "publicKeyBase58": "GycSSui454dpYRKiFdsQ5uaE8Gy3ac6dSMPcAoQsk8yq"
+  }]
+}

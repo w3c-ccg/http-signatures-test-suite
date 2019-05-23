@@ -1,0 +1,6 @@
+{
+  "authentication": [{
+    "type": "not_in_http_signature_algorithm_registry",
+    "publicKeyBase58": "GycSSui454dpYRKiFdsQ5uaE8Gy3ac6dSMPcAoQsk8yq"
+  }]
+}
