@@ -2,14 +2,15 @@ const config = require('../../config.json');
 const util = require('./util');
 const {expect} = require('chai');
 const {registry} = require('./input/algorithms');
+const path = require('path');
 
 // base64 string should only consist of letters,
 // numbers, and end with an = sign.
 const base64String = /[A-Za-z0-9+/=]=$/;
 
-describe.skip('Sign', function() {
+describe('Sign', function() {
   let generatorOptions = null;
-  before(function() {
+  beforeEach(function() {
     generatorOptions = {
       generator: config.generator,
       command: 'sign',
@@ -19,7 +20,17 @@ describe.skip('Sign', function() {
   });
 
   it('MUST require keyId.', async function() {
-
+    let error = null;
+    delete generatorOptions.args.keyId;
+    generatorOptions.args['private-key'] = path.join(
+      __dirname, '../keys/test_rsa');
+    try {
+      await util.generate('basic-request', generatorOptions);
+    } catch(e) {
+      console.error(e);
+      error = e;
+    }
+    expect(error, 'Expected an error if no keyId is set').to.not.be.null;
   });
 
   it(`A client MUST generate a signature by base 64 encoding
@@ -82,7 +93,7 @@ describe.skip('Sign', function() {
     });
   });
 
-  it.skip(`MUST be able to discover metadata
+  it(`MUST be able to discover metadata
       about the key from the keyId.`, async function() {
     /**
       * Implementations MUST be able to discover metadata
@@ -100,7 +111,7 @@ describe.skip('Sign', function() {
     error.should.not.be.null;
   });
 
-  it.skip(`MUST NOT process a signature with a
+  it(`MUST NOT process a signature with a
       created timestamp value that is in the future.`, async function() {
     /**
      * A signature with a `created` timestamp value
@@ -115,7 +126,7 @@ describe.skip('Sign', function() {
     error.should.not.be.null;
   });
 
-  it.skip(`MUST NOT process a signature with an expires
+  it(`MUST NOT process a signature with an expires
       timestamp value that is in the past.`, async function() {
     /**
       * A signatures with a `expires` timestamp
