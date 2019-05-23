@@ -5,7 +5,7 @@ const {expect} = require('chai');
 
 describe('Canonicalize', function() {
   let generatorOptions = null;
-  before(function() {
+  beforeEach(function() {
     generatorOptions = {
       generator: config.generator,
       command: 'c14n',
