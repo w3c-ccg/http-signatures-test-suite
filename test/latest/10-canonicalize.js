@@ -55,6 +55,24 @@ describe('Canonicalize', function() {
     });
 
     describe('Header Parameter', function() {
+
+      it(`SHOULD be a lowercased, quoted list of HTTP header fields,
+         separated by a single space character.`, async function() {
+      /** If specified, it
+       * SHOULD be a lowercased, quoted list of HTTP header fields,
+       * separated by a single space character.
+       */
+        generatorOptions.args.headers = ['content-Length', 'host', 'digest'];
+        const result = await util.generate(
+          'default-test', generatorOptions);
+        expect(result, 'Expected a result').to.exist;
+        result.should.be.a('string');
+        let expected = 'content-length: 18\n';
+        expected += 'host: example.com\n' +
+        'digest: SHA-256=X48E9qOokqqrvdts8nOJRJN3OWDUoyWxBf7kbu9DBPE=';
+        result.should.equal(expected, 'expected signature string to match');
+      });
+
       it(`The client MUST use the values of each HTTP header field
         in the headers Signature Parameter, in the order they appear
         in the headers Signature Parameter.`, async function() {
@@ -70,7 +88,7 @@ describe('Canonicalize', function() {
         expect(result, 'Expected a result').to.exist;
         result.should.be.a('string');
         let expected = 'content-length: 18\n';
-        expected += 'host: example.com\n';
+        expected += 'host: example.com';
         result.should.equal(expected, 'expected signature string to match');
       });
 
