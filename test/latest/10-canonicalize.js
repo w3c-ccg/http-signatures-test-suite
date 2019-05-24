@@ -22,7 +22,7 @@ describe('Canonicalize', function() {
           'basic-request', generatorOptions);
         result.should.not.be.null;
         result.should.be.a('string');
-        result.should.equal(`date: ${generatorOptions.date}\n`
+        result.should.equal(`date: ${generatorOptions.date}`
           , `expected signature string to match`);
       });
     it('If a value is not the last value then append an ASCII newline.',
@@ -181,7 +181,7 @@ describe('Canonicalize', function() {
           'basic-request', generatorOptions);
         expect(result, 'Expected a result').to.exist;
         result.should.be.a('string');
-        const expected = '(request-target): get /basic/request\n';
+        const expected = '(request-target): get /basic/request';
         result.should.equal(expected, 'expected signature string to match');
       });
 
