@@ -26,7 +26,7 @@ describe('Sign', function() {
     // encoding the output of the digital signature algorithm.
     generatorOptions.args['private-key'] = path.join(
       __dirname, '../keys/rsa.private');
-    generatorOptions.args['headers'] = 'Digest';
+    generatorOptions.args['headers'] = 'digest';
     generatorOptions.args['algorithm'] = 'hs2019';
     generatorOptions.args['key-type'] = 'rsa';
     const result = await util.generate(
@@ -39,7 +39,7 @@ describe('Sign', function() {
       to create the signature string.`, async function() {
     generatorOptions.args['private-key'] = path.join(
       __dirname, '../keys/rsa.private');
-    generatorOptions.args['headers'] = 'Date';
+    generatorOptions.args['headers'] = 'date';
     generatorOptions.args['algorithm'] = 'hs2019';
     generatorOptions.args['key-type'] = 'rsa';
     const result = await util.generate(
@@ -54,7 +54,7 @@ describe('Sign', function() {
       signature string.`, async function() {
     generatorOptions.args['private-key'] = path.join(
       __dirname, '../keys/rsa.private');
-    generatorOptions.args['headers'] = 'Date';
+    generatorOptions.args['headers'] = 'date';
     generatorOptions.args['algorithm'] = 'hs2019';
     generatorOptions.args['key-type'] = 'rsa';
     // Use the key associated with `keyId`
@@ -78,7 +78,7 @@ describe('Sign', function() {
       */
       generatorOptions.args['private-key'] = path.join(
         __dirname, '../keys/rsa.private');
-      generatorOptions.args['headers'] = 'Date';
+      generatorOptions.args['headers'] = 'date';
       generatorOptions.args['algorithm'] = 'hs2019';
       generatorOptions.args['key-type'] = 'unknown';
       let error = null;
@@ -96,7 +96,7 @@ describe('Sign', function() {
         HTTP Signatures Algorithms Registry.`, async function() {
       generatorOptions.args['private-key'] = path.join(
         __dirname, '../keys/rsa.private');
-      generatorOptions.args['headers'] = 'Date';
+      generatorOptions.args['headers'] = 'date';
       generatorOptions.args['algorithm'] = 'unknown';
       generatorOptions.args['key-type'] = 'rsa';
       let error = null;
@@ -117,7 +117,7 @@ describe('Sign', function() {
             let error = null;
             generatorOptions.args['private-key'] = path.join(
               __dirname, '../keys/test_ed');
-            generatorOptions.args['headers'] = 'Date';
+            generatorOptions.args['headers'] = 'date';
             generatorOptions.args['algorithm'] = scheme;
             generatorOptions.args['key-type'] = 'ed25519';
             try {
@@ -133,7 +133,7 @@ describe('Sign', function() {
           it(`MUST sign for algorithm ${scheme}.`, async function() {
             generatorOptions.args['private-key'] = path.join(
               __dirname, '../keys/rsa.private');
-            generatorOptions.args['headers'] = 'Date';
+            generatorOptions.args['headers'] = 'date';
             generatorOptions.args['algorithm'] = scheme;
             generatorOptions.args['key-type'] = 'rsa';
             const result = await util.generate(
@@ -157,7 +157,7 @@ describe('Sign', function() {
     let error = null;
     generatorOptions.args['private-key'] = path.join(
       __dirname, '../keys/rsa.private');
-    generatorOptions.args['headers'] = 'Date';
+    generatorOptions.args['headers'] = 'date';
     generatorOptions.args['algorithm'] = 'hs2019';
     generatorOptions.args['key-type'] = 'rsa';
     try {
@@ -178,7 +178,7 @@ describe('Sign', function() {
     let error = null;
     generatorOptions.args['private-key'] = path.join(
       __dirname, '../keys/rsa.private');
-    generatorOptions.args['headers'] = 'Date';
+    generatorOptions.args['headers'] = 'date';
     generatorOptions.args['algorithm'] = 'hs2019';
     generatorOptions.args['key-type'] = 'rsa';
     generatorOptions.args['created'] = Date.now() + 1000;
@@ -199,7 +199,7 @@ describe('Sign', function() {
     let error = null;
     generatorOptions.args['private-key'] = path.join(
       __dirname, '../keys/rsa.private');
-    generatorOptions.args['headers'] = 'Date';
+    generatorOptions.args['headers'] = 'date';
     generatorOptions.args['algorithm'] = 'hs2019';
     generatorOptions.args['key-type'] = 'rsa';
     generatorOptions.args['expires'] = Date.now() - 1000;
@@ -215,7 +215,7 @@ describe('Sign', function() {
       it(`should sign with a/an ${key} private key.`, async function() {
         const filePath = path.join(__dirname, '..', 'keys', keys.private[key]);
         generatorOptions.args['private-key'] = filePath;
-        generatorOptions.args['headers'] = 'Date';
+        generatorOptions.args['headers'] = 'date';
         generatorOptions.args['algorithm'] = 'hs2019';
         generatorOptions.args['key-type'] = key;
         const result = await util.generate(

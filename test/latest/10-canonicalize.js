@@ -30,7 +30,7 @@ describe('Canonicalize', function() {
       /**
         * If value is not the last value then append an ASCII newline `\n`.
       */
-        generatorOptions.args.headers = ['Digest', 'Host'];
+        generatorOptions.args.headers = ['digest', 'host'];
         const result = await util.generate(
           'default-test', generatorOptions);
         expect(result, 'Expected a result').to.exist;
@@ -64,7 +64,7 @@ describe('Canonicalize', function() {
         * Signature Parameter, in the order they appear in the `headers`
         * Signature Parameter.
        */
-        generatorOptions.args.headers = ['Content-Length', 'Host'];
+        generatorOptions.args.headers = ['content-Length', 'host'];
         const result = await util.generate(
           'default-test', generatorOptions);
         expect(result, 'Expected a result').to.exist;
@@ -114,7 +114,7 @@ describe('Canonicalize', function() {
         * MUST produce an error.
       */
         let error = null;
-        generatorOptions.args.headers = ['Server'];
+        generatorOptions.args.headers = ['server'];
         try {
           await util.generate(
             'malformed-request', generatorOptions);
