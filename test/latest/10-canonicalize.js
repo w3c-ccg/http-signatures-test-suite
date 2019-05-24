@@ -103,6 +103,14 @@ describe('Canonicalize', function() {
         * ASCII comma and an ASCII space `, `, and used in the
         * order in which they will appear in the transmitted HTTP message.
       */
+        generatorOptions.args.headers = ['host', 'duplicate'];
+        const result = await util.generate(
+          'duplicate-headers-request', generatorOptions);
+        expect(result, 'Expected a result').to.exist;
+        result.should.be.a('string');
+        const expected = 'host: example.com\n' +
+        'duplicate: one, two';
+        result.should.equal(expected, 'expected signature string to match');
       });
 
       it(`If a header specified in the headers parameter cannot be
@@ -152,6 +160,12 @@ describe('Canonicalize', function() {
          * that header will simply be the (lowercased) header name,
          * an ASCII colon `:`, and an ASCII space ` `.
          */
+        generatorOptions.args.headers = ['zero'];
+        const result = await util.generate(
+          'zero-length', generatorOptions);
+        const expected = 'zero: ';
+        expect(result, 'Expected a result').to.not.be.null;
+        result.should.equal(expected);
       });
 
       it('SHOULD change capitalized Headers to lowercase.', async function() {
@@ -163,6 +177,12 @@ describe('Canonicalize', function() {
           * header field value MUST be omitted
           * (as specified in RFC7230, Section 3.2.4).
          */
+        generatorOptions.args.headers = ['connection'];
+        const result = await util.generate(
+          'basic-request', generatorOptions);
+        const expected = 'connection: keep-alive';
+        expect(result, 'Expected a result').to.not.be.null;
+        result.should.equal(expected);
       });
 
       it(`If the header field name is (request-target) then generate
@@ -187,8 +207,9 @@ describe('Canonicalize', function() {
 
       it(
         'SHOULD return "" if the headers paramter is empty.', async function() {
+          generatorOptions.args.headers = '""';
           const result = await util.generate(
-            'invalidheaders-request', generatorOptions);
+            'basic-request', generatorOptions);
           expect(result, 'Expected a result').to.exist;
           result.should.be.an('object');
         });
@@ -202,10 +223,10 @@ describe('Canonicalize', function() {
           */
         generatorOptions.args.headers = [''];
         const result = await util.generate(
-          'basic-request', generatorOptions);
+          'created', generatorOptions);
         expect(result, 'Expected a result').to.exist;
         result.should.be.a('string');
-        const expected = `created: ${generatorOptions.date}\n`;
+        const expected = `created: 1`;
         result.should.equal(expected, 'expected signature string to match');
       });
       //TODO: should (created) & algorithm be in canonicalize or sign?
