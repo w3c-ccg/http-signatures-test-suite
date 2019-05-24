@@ -1,6 +1,0 @@
-{
-  "authentication": [{
-    "type": "rsa",
-    "publicKey": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDCFENGw33yGihy92pDjZQhl0C3\r\n6rPJj+CvfSC8+q28hxA161QFNUd13wuCTUcq0Qd2qsBe\/2hFyc2DCJJg0h1L78+6\r\nZ4UMR7EOcpfdUE9Hf3m\/hs+FUR45uBJeDK1HSFHD8bHKD6kv8FPGfJTotc+2xjJw\r\noYi+1hqp1fIekaxsyQIDAQAB"
-  }]
-}
