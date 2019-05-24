@@ -38,7 +38,8 @@ function runTest(command) {
       if(code === 0) {
         resolve(stdout);
       } else {
-        const error = new Error(`Driver exited with error code ${code}.`);
+        const error = new Error(
+          `Driver exited with error code ${code}. \n ${stderr}`);
         error.code = code;
         error.stdout = stdout;
         error.stderr = stderr;

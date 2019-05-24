@@ -182,6 +182,7 @@ describe('Canonicalize', function() {
             * implementations MUST operate as if the field were specified with a
             * single value, `(created)`, in the list of HTTP headers.
           */
+        generatorOptions.args.headers = [''];
         const result = await util.generate(
           'basic-request', generatorOptions);
         expect(result, 'Expected a result').to.exist;
