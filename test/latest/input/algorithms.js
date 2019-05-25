@@ -24,6 +24,6 @@ const keys = {
     P256: 'P256.pub',
     ED25519: 'ed25519.pub',
     ECDSA: 'koblitzCurve.pub'
-  }
+  },
 };
 exports.keys = keys;

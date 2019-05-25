@@ -1,8 +1,11 @@
 const config = require('../../config.json');
+const {registry, keys} = require('./input/algorithms');
 const util = require('./util');
-const {registry} = require('./input/algorithms');
+const path = require('path');
 
-describe.skip('Verify', function() {
+const publicKeys = Object.keys(keys.public);
+
+describe('Verify', function() {
   let generatorOptions = null;
   beforeEach(function() {
     generatorOptions = {
@@ -12,7 +15,20 @@ describe.skip('Verify', function() {
       date: new Date().toGMTString(),
     };
   });
-
+  describe('Public Keys', function() {
+    publicKeys.forEach(key => {
+      it(`should verify for a ${key} public key`, async function() {
+        const requestName = `${key.toLowerCase()}-signed`;
+        const filePath = path.join(__dirname, '..', 'keys', keys.public[key]);
+        generatorOptions.args['headers'] = ['host', 'digest'];
+        generatorOptions.args['algorithm'] = 'hs2019';
+        generatorOptions.args['key-type'] = key;
+        generatorOptions.args['public-key'] = filePath;
+        const result = await util.generate(requestName, generatorOptions);
+        console.log(result);
+      });
+    });
+  });
   it('MUST require a signature parameter.', async function() {
 
   });
