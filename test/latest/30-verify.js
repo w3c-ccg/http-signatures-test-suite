@@ -2,6 +2,7 @@ const config = require('../../config.json');
 const {registry, keys} = require('./input/algorithms');
 const util = require('./util');
 const path = require('path');
+const {expect} = require('chai');
 
 const publicKeys = Object.keys(keys.public);
 
@@ -25,7 +26,8 @@ describe('Verify', function() {
         generatorOptions.args['key-type'] = key;
         generatorOptions.args['public-key'] = filePath;
         const result = await util.generate(requestName, generatorOptions);
-        console.log(result);
+        expect(result, 'Expected a result').to.not.be.null;
+        result.should.contain('true');
       });
     });
   });
