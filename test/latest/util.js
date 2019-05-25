@@ -7,7 +7,7 @@ async function generate(file, options) {
   options = options || {};
   const filePath = path.join(__dirname, 'input', `${file}.httpMessage`);
   const date = options.date || new Date().toGMTString();
-  const latestDate = `date: ${date}`;
+  const latestDate = `Date: ${date}`;
   let args = '';
   for(const key in options.args) {
     let value = options.args[key];
