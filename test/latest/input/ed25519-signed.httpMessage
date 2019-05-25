@@ -1,8 +1,6 @@
 GET /basic/request HTTP/1.1
 Host: example.com
-Date: Sun, 05 Jan 2014 21:31:40 GMT
 Content-Type: application/json
 Digest: SHA-256=X48E9qOokqqrvdts8nOJRJN3OWDUoyWxBf7kbu9DBPE=
 Content-Length: 18
-date: Fri, 24 May 2019 20:35:52 GMT
 Authorization: Signature keyId="test-key",headers="host digest",signature="1bjiIua/Hu0NVeWsL0gDBy7mDE9e1TsmnQk/nmLtd5vQW4V7VP0FkcVVeXJrC+x1bG2xXfsUQvOKgGsJ4GjZBQ=="
