@@ -215,13 +215,14 @@ describe('Sign', function() {
       it(`should sign with a/an ${key} private key.`, async function() {
         const filePath = path.join(__dirname, '..', 'keys', keys.private[key]);
         generatorOptions.args['private-key'] = filePath;
-        generatorOptions.args['headers'] = 'date';
+        generatorOptions.args['headers'] = ['host', 'digest'];
         generatorOptions.args['algorithm'] = 'hs2019';
         generatorOptions.args['key-type'] = key;
         const result = await util.generate(
           'default-test', generatorOptions);
         expect(result, 'Expected sign to return a Signature').to.exist;
         result.should.match(base64Signature);
+        console.log(result);
       });
     });
   });
