@@ -49,6 +49,8 @@ describe('Sign', function() {
   });
   //TODO while for an hmac this might work
   //this would mean exposing the private key via the keyId
+  // better to say A client MUST a private key of the type in
+  // the metadata derefernced from the keyId to generate a digital signature.
   it.skip(`A client MUST use the key associated with keyId to 
       generate a digital signature on the
       signature string.`, async function() {
@@ -87,8 +89,7 @@ describe('Sign', function() {
       } catch(e) {
         error = e;
       }
-      expect(error,
-        'Expected an error to be thrown.')
+      expect(error, 'Expected an error to be thrown.')
         .to.not.be.null;
     });
 
@@ -222,7 +223,6 @@ describe('Sign', function() {
           'default-test', generatorOptions);
         expect(result, 'Expected sign to return a Signature').to.exist;
         result.should.match(base64Signature);
-        console.log(result);
       });
     });
   });

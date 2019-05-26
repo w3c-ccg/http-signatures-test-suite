@@ -5,6 +5,17 @@ const path = require('path');
 const {expect} = require('chai');
 
 const publicKeys = Object.keys(keys.public);
+const commonRequest = 'rsa-signed';
+const commonKey = path.join(__dirname, '..', 'keys', 'rsa.pub');
+
+function commonOptions(ops) {
+  ops.args['public-key'] = path.join(__dirname, '..', 'keys', 'rsa.pub');
+  ops.args['headers'] = ['host', 'digest'];
+  ops.args['algorithm'] = 'hs2019';
+  ops.args['key-type'] = 'rsa';
+  ops.args['keyId'] = 'test-rsa';
+  return ops;
+}
 
 describe('Verify', function() {
   let generatorOptions = null;
@@ -27,12 +38,20 @@ describe('Verify', function() {
         generatorOptions.args['public-key'] = filePath;
         const result = await util.generate(requestName, generatorOptions);
         expect(result, 'Expected a result').to.not.be.null;
-        result.should.contain('true');
       });
     });
   });
-  it('MUST require a signature parameter.', async function() {
 
+  it('MUST require a signature parameter.', async function() {
+    let error = null;
+    commonOptions(generatorOptions);
+    try {
+      await util.generate('nosignature-request', generatorOptions);
+
+    } catch(e) {
+      error = e;
+    }
+    expect(error, 'Expected an error to be thrown').to.not.be.null;
   });
 
   it(`MUST derive the digital signature algorithm from 
@@ -46,7 +65,10 @@ describe('Verify', function() {
       * with the `keyId` and MUST NOT use the value of
       * `algorithm` from the signed message.
     */
+    const options = commonOptions(generatorOptions);
   });
+  // this is hard to test because only 1
+  // http signature algorithm is current not deprecated.
   it(`MUST NOT use the value of
       algorithm from the signed message.`, async function() {
     /**
@@ -58,32 +80,43 @@ describe('Verify', function() {
       * with the `keyId` and MUST NOT use the value of
       * `algorithm` from the signed message.
     */
+    const options = commonOptions(generatorOptions);
   });
   it(`A server MUST use the received HTTP message, the headers value,
       and the Signature String Construction algorithm
       to recreate the signature.`, async function() {
-
+    commonOptions(generatorOptions);
+    const result = await util
+      .generate(commonRequest, generatorOptions);
+    expect(result, 'Expected there to be a result');
   });
   it(`A server MUST use the algorithm, keyId, and base 64
       decoded signature listed in the Signature Parameters
       to verify the authenticity of the digital signature.`, async function() {
-
+    commonOptions(generatorOptions);
   });
   it(`If a header specified in the headers value of
       the Signature Parameters (or the default item (created)
       where the headers value is not supplied) is absent from the message,
       the implementation MUST produce an error.`, async function() {
+    let error = null;
+    commonOptions(generatorOptions);
+    try {
 
-  });
-  it(`MUST be able to discover metadata about the key from the keyId
-      such that they can determine the type of digital signature algorithm
-      to employ when verifying signatures.`, async function() {
-
+    } catch(e) {
+      error = e;
+    }
+    expect(error, 'Expected an error to be thrown').to.not.be.null;
   });
   it('MUST have a keyId parameter.', function() {
+    let error = null;
+    commonOptions(generatorOptions);
+    try {
 
-  });
-  it('MUST have a signature parameter.', function() {
+    } catch(e) {
+      error = e;
+    }
+    expect(error, 'Expected an error to be thrown').to.not.be.null;
 
   });
   describe('Algorithm Parameter', function() {
@@ -97,21 +130,55 @@ describe('Verify', function() {
        * is identified via `keyId`,
        * then an implementation MUST produce an error.
       */
+      let error = null;
+      const options = commonOptions(generatorOptions);
+      options.args['key-type'] = 'unknown';
+      try {
+        await util.generate(commonRequest, options);
+      } catch(e) {
+        error = e;
+      }
+      expect(error, 'Expected an error to be thrown').to.not.be.null;
     });
 
     it(`Signature scheme MUST be in the
         HTTP Signatures Algorithms Registry.`, async function() {
+      let error = null;
+      const options = commonOptions(generatorOptions);
+      options.algorithm = 'unknown';
+      try {
+        await util.generate(commonRequest, options);
+      } catch(e) {
+        error = e;
+      }
+      expect(error, 'Expected an error to be thrown').to.not.be.null;
 
     });
     describe('signature scheme', function() {
       registry.forEach(({scheme, deprecated}) => {
         if(deprecated) {
           it(`MUST reject deprecated algorithm ${scheme}.`, async function() {
-
+            let error = null;
+            generatorOptions.args['public-key'] = commonKey;
+            generatorOptions.args['headers'] = 'date';
+            generatorOptions.args['algorithm'] = scheme;
+            generatorOptions.args['key-type'] = 'rsa';
+            try {
+              await util.generate('basic-request', generatorOptions);
+            } catch(e) {
+              error = e;
+            }
+            expect(error,
+              `Expected deprecated algorithm ${scheme}
+               to be rejected`).to.not.be.null;
           });
         } else {
-          it(`MUST sign for algorithm ${scheme}.`, async function() {
-
+          it(`MUST not reject algorithm ${scheme}.`, async function() {
+            commonOptions(generatorOptions);
+            generatorOptions.args['algorithm'] = scheme;
+            const result = await util.generate(
+              'rsa-signed', generatorOptions);
+            expect(result, 'Expected a result').to.not.be.null;
           });
         }
       });
