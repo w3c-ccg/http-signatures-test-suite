@@ -9,7 +9,7 @@ const commonRequest = 'rsa-signed';
 const commonKey = path.join(__dirname, '..', 'keys', 'rsa.pub');
 
 function commonOptions(ops) {
-  ops.args['public-key'] = path.join(__dirname, '..', 'keys', 'rsa.pub');
+  ops.args['public-key'] = commonKey;
   ops.args['headers'] = ['host', 'digest'];
   ops.args['algorithm'] = 'hs2019';
   ops.args['key-type'] = 'rsa';
@@ -47,7 +47,6 @@ describe('Verify', function() {
     commonOptions(generatorOptions);
     try {
       await util.generate('nosignature-request', generatorOptions);
-
     } catch(e) {
       error = e;
     }
@@ -66,6 +65,9 @@ describe('Verify', function() {
       * `algorithm` from the signed message.
     */
     const options = commonOptions(generatorOptions);
+    delete options.args.algorithm;
+    const result = await util.generate(commonRequest, generatorOptions);
+    expect(result, 'Expected a result').to.not.be.null;
   });
   // this is hard to test because only 1
   // http signature algorithm is current not deprecated.
@@ -81,6 +83,9 @@ describe('Verify', function() {
       * `algorithm` from the signed message.
     */
     const options = commonOptions(generatorOptions);
+    delete options.args.algorithm;
+    const result = await util.generate(commonRequest, generatorOptions);
+    expect(result, 'Expected a result').to.not.be.null;
   });
   it(`A server MUST use the received HTTP message, the headers value,
       and the Signature String Construction algorithm
@@ -94,33 +99,35 @@ describe('Verify', function() {
       decoded signature listed in the Signature Parameters
       to verify the authenticity of the digital signature.`, async function() {
     commonOptions(generatorOptions);
+    const result = await util.generate(commonRequest, generatorOptions);
+    expect(result, 'Expected a result').to.not.be.null;
   });
   it(`If a header specified in the headers value of
       the Signature Parameters (or the default item (created)
       where the headers value is not supplied) is absent from the message,
       the implementation MUST produce an error.`, async function() {
     let error = null;
-    commonOptions(generatorOptions);
+    const options = commonOptions(generatorOptions);
+    options.args.headers = ['not-in-request'];
     try {
-
+      await util.generate(commonRequest, generatorOptions);
     } catch(e) {
       error = e;
     }
     expect(error, 'Expected an error to be thrown').to.not.be.null;
   });
-  it('MUST have a keyId parameter.', function() {
+  it('MUST have a keyId parameter.', async function() {
     let error = null;
-    commonOptions(generatorOptions);
+    const options = commonOptions(generatorOptions);
+    delete options.args['key-id'];
     try {
-
+      await util.generate('nokeyid-request', options);
     } catch(e) {
       error = e;
     }
     expect(error, 'Expected an error to be thrown').to.not.be.null;
-
   });
   describe('Algorithm Parameter', function() {
-
     it(`MUST produce an error if algorithm
         parameter differs from key metadata.`, async function() {
       /**
@@ -145,7 +152,7 @@ describe('Verify', function() {
         HTTP Signatures Algorithms Registry.`, async function() {
       let error = null;
       const options = commonOptions(generatorOptions);
-      options.algorithm = 'unknown';
+      options.args.algorithm = 'unknown';
       try {
         await util.generate(commonRequest, options);
       } catch(e) {
