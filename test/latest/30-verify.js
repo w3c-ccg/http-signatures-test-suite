@@ -54,7 +54,7 @@ describe('Verify', function() {
   });
 
   it(`MUST derive the digital signature algorithm from 
-      the metadata associated with the keyId.`, async function() {
+       the metadata associated with the keyId.`, async function() {
     /**
       * The `algorithm`, `keyId`, and base 64 decoded `signature`
       * listed in the Signature Parameters are then used to verify
@@ -161,7 +161,7 @@ describe('Verify', function() {
       expect(error, 'Expected an error to be thrown').to.not.be.null;
 
     });
-    describe('signature scheme', function() {
+    describe('Signature scheme', function() {
       registry.forEach(({scheme, deprecated}) => {
         if(deprecated) {
           it(`MUST reject deprecated algorithm ${scheme}.`, async function() {
