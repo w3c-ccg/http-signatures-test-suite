@@ -6,7 +6,7 @@
       "title": "For valid options MUST return a valid signature string.",
       "pending": false,
       "state": "passed",
-      "duration": 86,
+      "duration": 89,
       "speed": "slow",
       "errors": ""
     },
@@ -16,7 +16,7 @@
       "title": "If a value is not the last value then append an ASCII newline.",
       "pending": false,
       "state": "passed",
-      "duration": 80,
+      "duration": 86,
       "speed": "slow",
       "errors": ""
     },
@@ -26,7 +26,7 @@
       "title": "if duplicate parameters the last parameter defined MUST be used.",
       "pending": false,
       "state": "failed",
-      "duration": 80,
+      "duration": 82,
       "errors": "Driver exited with error code 1. \n canonicalize command failed : DataError:  was not found in `requestOptions.headers`\n"
     },
     {
@@ -35,7 +35,7 @@
       "title": "SHOULD be a lowercased, quoted list of HTTP header fields,separated by a single space character.",
       "pending": false,
       "state": "passed",
-      "duration": 80,
+      "duration": 81,
       "speed": "slow",
       "errors": ""
     },
@@ -55,7 +55,7 @@
       "title": "All header field values associated with the header field MUST be concatenated, separated by an ASCII comma and an ASCII space, and used in the order in which they will appear in the transmitted HTTP message.",
       "pending": false,
       "state": "failed",
-      "duration": 82,
+      "duration": 81,
       "errors": "expected signature string to match: expected 'host: example.com\\nduplicate: two' to equal 'host: example.com\\nduplicate: one, two'"
     },
     {
@@ -64,7 +64,7 @@
       "title": "If a header specified in the headers parameter cannot be matched with a provided header in the message, the implementation MUST produce an error.",
       "pending": false,
       "state": "passed",
-      "duration": 81,
+      "duration": 83,
       "speed": "slow",
       "errors": ""
     },
@@ -74,7 +74,7 @@
       "title": "If a header specified in the headers parameter is malformed the implementation MUST produce an error.",
       "pending": false,
       "state": "failed",
-      "duration": 79,
+      "duration": 81,
       "errors": "Expected an error to be thrown: expected null to exist"
     },
     {
@@ -83,7 +83,7 @@
       "title": "If the header value is a zero-length string, the signature string line correlating with that header will simply be the (lowercased) header name, an ASCII colon :, and an ASCII space.",
       "pending": false,
       "state": "failed",
-      "duration": 80,
+      "duration": 81,
       "errors": "Driver exited with error code 1. \n canonicalize command failed : DataError: zero was not found in `requestOptions.headers`\n"
     },
     {
@@ -102,7 +102,7 @@
       "title": "If the header field name is (request-target) then generate the header field value by concatenating the lowercased :method, an ASCII space, and the :path pseudo-headers.",
       "pending": false,
       "state": "passed",
-      "duration": 80,
+      "duration": 82,
       "speed": "slow",
       "errors": ""
     },
@@ -112,7 +112,7 @@
       "title": "SHOULD return \"\" if the headers paramter is empty.",
       "pending": false,
       "state": "failed",
-      "duration": 82,
+      "duration": 84,
       "errors": "Driver exited with error code 1. \n canonicalize command failed : DataError:  was not found in `requestOptions.headers`\n"
     },
     {
@@ -140,7 +140,7 @@
       "title": "If (created) is in headers & the algorithm param starts with hmac MUST produce an error.",
       "pending": false,
       "state": "passed",
-      "duration": 79,
+      "duration": 81,
       "speed": "slow",
       "errors": ""
     },
@@ -150,7 +150,7 @@
       "title": "If (created) is in headers & the algorithm param starts with ecdsa MUST produce an error.",
       "pending": false,
       "state": "passed",
-      "duration": 80,
+      "duration": 83,
       "speed": "slow",
       "errors": ""
     },
@@ -160,7 +160,7 @@
       "title": "If the created Signature Parameter is not specified, an implementation MUST produce an error.",
       "pending": false,
       "state": "passed",
-      "duration": 82,
+      "duration": 83,
       "speed": "slow",
       "errors": ""
     },
@@ -180,7 +180,7 @@
       "title": "If given valid options SHOULD return (created).",
       "pending": false,
       "state": "failed",
-      "duration": 81,
+      "duration": 85,
       "errors": "Driver exited with error code 1. \n canonicalize command failed : DataError: (created) was not found in `requestOptions.headers`\n"
     },
     {
@@ -189,7 +189,7 @@
       "title": "If (expires) is in headers & the algorithm param starts with rsa MUST produce an error.",
       "pending": false,
       "state": "passed",
-      "duration": 81,
+      "duration": 84,
       "speed": "slow",
       "errors": ""
     },
@@ -199,7 +199,7 @@
       "title": "If (expires) is in headers & the algorithm param starts with hmac MUST produce an error.",
       "pending": false,
       "state": "passed",
-      "duration": 78,
+      "duration": 81,
       "speed": "slow",
       "errors": ""
     },
@@ -209,7 +209,7 @@
       "title": "If (expires) is in headers & the algorithm param starts with ecdsa MUST produce an error.",
       "pending": false,
       "state": "passed",
-      "duration": 80,
+      "duration": 81,
       "speed": "slow",
       "errors": ""
     },
@@ -219,7 +219,7 @@
       "title": "If the expires Signature Parameter is not specified, an implementation MUST produce an error.",
       "pending": false,
       "state": "passed",
-      "duration": 80,
+      "duration": 79,
       "speed": "slow",
       "errors": ""
     },
@@ -260,7 +260,7 @@
       "title": "A client MUST generate a signature by base 64 encoding the output of the digital signature algorithm.",
       "pending": false,
       "state": "passed",
-      "duration": 85,
+      "duration": 84,
       "speed": "slow",
       "errors": ""
     },
@@ -270,7 +270,7 @@
       "title": "A client MUST use the headers and algorithm values as well as the contents of the HTTP message, to create the signature string.",
       "pending": false,
       "state": "passed",
-      "duration": 84,
+      "duration": 83,
       "speed": "slow",
       "errors": ""
     },
@@ -294,7 +294,7 @@
       "title": "MUST NOT process a signature with a created timestamp value that is in the future.",
       "pending": false,
       "state": "passed",
-      "duration": 78,
+      "duration": 76,
       "speed": "slow",
       "errors": ""
     },
@@ -324,7 +324,7 @@
       "title": "Signature scheme MUST be in the HTTP Signatures Algorithms Registry.",
       "pending": false,
       "state": "passed",
-      "duration": 84,
+      "duration": 83,
       "speed": "slow",
       "errors": ""
     },
@@ -344,7 +344,7 @@
       "title": "MUST reject deprecated algorithm rsa-sha1.",
       "pending": false,
       "state": "passed",
-      "duration": 78,
+      "duration": 77,
       "speed": "slow",
       "errors": ""
     },
@@ -354,7 +354,7 @@
       "title": "MUST reject deprecated algorithm rsa-sha256.",
       "pending": false,
       "state": "passed",
-      "duration": 78,
+      "duration": 77,
       "speed": "slow",
       "errors": ""
     },
@@ -364,7 +364,7 @@
       "title": "MUST reject deprecated algorithm hmac-sha256.",
       "pending": false,
       "state": "passed",
-      "duration": 81,
+      "duration": 78,
       "speed": "slow",
       "errors": ""
     },
@@ -426,7 +426,7 @@
       "title": "MUST require a signature parameter.",
       "pending": false,
       "state": "passed",
-      "duration": 81,
+      "duration": 82,
       "speed": "slow",
       "errors": ""
     },
@@ -436,7 +436,7 @@
       "title": "MUST derive the digital signature algorithm fromthe metadata associated with the keyId.",
       "pending": false,
       "state": "passed",
-      "duration": 86,
+      "duration": 85,
       "speed": "slow",
       "errors": ""
     },
@@ -456,7 +456,7 @@
       "title": "A server MUST use the received HTTP message, the headers value, and the Signature String Construction algorithm to recreate the signature.",
       "pending": false,
       "state": "passed",
-      "duration": 86,
+      "duration": 87,
       "speed": "slow",
       "errors": ""
     },
@@ -466,7 +466,7 @@
       "title": "A server MUST use the algorithm, keyId, and base 64 decoded signature listed in the Signature Parameters to verify the authenticity of the digital signature.",
       "pending": false,
       "state": "passed",
-      "duration": 88,
+      "duration": 87,
       "speed": "slow",
       "errors": ""
     },
@@ -476,7 +476,7 @@
       "title": "If a header specified in the headers value of the Signature Parameters (or the default item (created) where the headers value is not supplied) is absent from the message, the implementation MUST produce an error.",
       "pending": false,
       "state": "passed",
-      "duration": 81,
+      "duration": 82,
       "speed": "slow",
       "errors": ""
     },
@@ -486,7 +486,7 @@
       "title": "MUST have a keyId parameter.",
       "pending": false,
       "state": "passed",
-      "duration": 82,
+      "duration": 83,
       "speed": "slow",
       "errors": ""
     },
@@ -496,7 +496,7 @@
       "title": "should verify for a RSA public key",
       "pending": false,
       "state": "passed",
-      "duration": 88,
+      "duration": 86,
       "speed": "slow",
       "errors": ""
     },
@@ -506,7 +506,7 @@
       "title": "should verify for a P256 public key",
       "pending": false,
       "state": "passed",
-      "duration": 88,
+      "duration": 87,
       "speed": "slow",
       "errors": ""
     },
@@ -516,7 +516,7 @@
       "title": "should verify for a ED25519 public key",
       "pending": false,
       "state": "passed",
-      "duration": 86,
+      "duration": 87,
       "speed": "slow",
       "errors": ""
     },
@@ -546,7 +546,7 @@
       "title": "Signature scheme MUST be in the HTTP Signatures Algorithms Registry.",
       "pending": false,
       "state": "passed",
-      "duration": 83,
+      "duration": 84,
       "speed": "slow",
       "errors": ""
     },
@@ -576,7 +576,7 @@
       "title": "MUST reject deprecated algorithm rsa-sha256.",
       "pending": false,
       "state": "passed",
-      "duration": 83,
+      "duration": 84,
       "speed": "slow",
       "errors": ""
     },
@@ -586,7 +586,7 @@
       "title": "MUST reject deprecated algorithm hmac-sha256.",
       "pending": false,
       "state": "passed",
-      "duration": 81,
+      "duration": 82,
       "speed": "slow",
       "errors": ""
     },
@@ -596,7 +596,7 @@
       "title": "MUST reject deprecated algorithm ecdsa-sha256.",
       "pending": false,
       "state": "passed",
-      "duration": 83,
+      "duration": 82,
       "speed": "slow",
       "errors": ""
     }
