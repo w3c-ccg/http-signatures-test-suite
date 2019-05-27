@@ -105,7 +105,7 @@ describe('Sign', function() {
         .to.not.be.null;
     });
 
-    describe('signature scheme', function() {
+    describe('Signature scheme', function() {
       registry.forEach(({scheme, deprecated}) => {
         if(deprecated) {
           it(`MUST reject deprecated algorithm ${scheme}.`, async function() {
@@ -161,7 +161,7 @@ describe('Sign', function() {
     error.should.not.be.null;
   });
 
-  it(`MUST NOT process a signature with a
+  it(`MUST NOT process a Signature with a
       created timestamp value that is in the future.`, async function() {
     /**
      * A signature with a `created` timestamp value
@@ -179,7 +179,7 @@ describe('Sign', function() {
     expect(error, 'Expected an Error').to.not.be.null;
   });
 
-  it(`MUST NOT process a signature with an expires
+  it(`MUST NOT process a Signature with an expires
       timestamp value that is in the past.`, async function() {
     /**
       * A signatures with a `expires` timestamp
