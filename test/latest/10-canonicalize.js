@@ -87,7 +87,7 @@ describe('Canonicalize', function() {
         * Signature Parameter, in the order they appear in the `headers`
         * Signature Parameter.
        */
-        generatorOptions.args.headers = ['content-Length', 'host'];
+        generatorOptions.args.headers = ['content-length', 'host'];
         const result = await util.generate(
           'default-test', generatorOptions);
         expect(result, 'Expected a result').to.exist;
