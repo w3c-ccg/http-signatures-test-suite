@@ -182,15 +182,21 @@
               </tr>
               <tr>
                 <td class="subtest not-optional">Signature String If a value is not the last value then append an ASCII newline.</td>
-                  <td class="failed not-optional">❌</td>
-                  <td class="failed not-optional">❌</td>
-                  <td class="failed not-optional">❌</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
               </tr>
               <tr>
                 <td class="subtest not-optional">Signature String if duplicate parameters the last parameter defined MUST be used.</td>
                   <td class="failed not-optional">❌</td>
                   <td class="failed not-optional">❌</td>
                   <td class="failed not-optional">❌</td>
+              </tr>
+              <tr>
+                <td class="subtest not-optional">Signature String Header Parameter SHOULD be a lowercased, quoted list of HTTP header fields,separated by a single space character.</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
               </tr>
               <tr>
                 <td class="subtest not-optional">Signature String Header Parameter The client MUST use the values of each HTTP header field in the headers Signature Parameter, in the order they appear in the headers Signature Parameter.</td>
@@ -200,9 +206,9 @@
               </tr>
               <tr>
                 <td class="subtest not-optional">Signature String Header Parameter All header field values associated with the header field MUST be concatenated, separated by an ASCII comma and an ASCII space, and used in the order in which they will appear in the transmitted HTTP message.</td>
-                  <td class="passed not-optional">✓</td>
-                  <td class="passed not-optional">✓</td>
-                  <td class="passed not-optional">✓</td>
+                  <td class="failed not-optional">❌</td>
+                  <td class="failed not-optional">❌</td>
+                  <td class="failed not-optional">❌</td>
               </tr>
               <tr>
                 <td class="subtest not-optional">Signature String Header Parameter If a header specified in the headers parameter cannot be matched with a provided header in the message, the implementation MUST produce an error.</td>
@@ -218,9 +224,9 @@
               </tr>
               <tr>
                 <td class="subtest not-optional">Signature String Header Parameter If the header value is a zero-length string, the signature string line correlating with that header will simply be the (lowercased) header name, an ASCII colon :, and an ASCII space.</td>
-                  <td class="passed not-optional">✓</td>
-                  <td class="passed not-optional">✓</td>
-                  <td class="passed not-optional">✓</td>
+                  <td class="failed not-optional">❌</td>
+                  <td class="failed not-optional">❌</td>
+                  <td class="failed not-optional">❌</td>
               </tr>
               <tr>
                 <td class="subtest not-optional">Signature String Header Parameter SHOULD change capitalized Headers to lowercase.</td>
@@ -345,6 +351,96 @@
                       <th>skip</th>
                 </thead>
                 <tbody>
+              <tr>
+                <td class="subtest not-optional">A client MUST generate a signature by base 64 encoding the output of the digital signature algorithm.</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+              </tr>
+              <tr>
+                <td class="subtest not-optional">A client MUST use the headers and algorithm values as well as the contents of the HTTP message, to create the signature string.</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+              </tr>
+              <tr>
+                <td class="subtest not-optional">MUST NOT process a signature with a created timestamp value that is in the future.</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+              </tr>
+              <tr>
+                <td class="subtest not-optional">MUST NOT process a signature with an expires timestamp value that is in the past.</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+              </tr>
+              <tr>
+                <td class="subtest not-optional">Algorithm Parameter MUST produce an error if algorithm parameter differs from key metadata.</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+              </tr>
+              <tr>
+                <td class="subtest not-optional">Algorithm Parameter Signature scheme MUST be in the HTTP Signatures Algorithms Registry.</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+              </tr>
+              <tr>
+                <td class="subtest not-optional">Algorithm Parameter signature scheme MUST sign for algorithm hs2019.</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+              </tr>
+              <tr>
+                <td class="subtest not-optional">Algorithm Parameter signature scheme MUST reject deprecated algorithm rsa-sha1.</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+              </tr>
+              <tr>
+                <td class="subtest not-optional">Algorithm Parameter signature scheme MUST reject deprecated algorithm rsa-sha256.</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+              </tr>
+              <tr>
+                <td class="subtest not-optional">Algorithm Parameter signature scheme MUST reject deprecated algorithm hmac-sha256.</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+              </tr>
+              <tr>
+                <td class="subtest not-optional">Algorithm Parameter signature scheme MUST reject deprecated algorithm ecdsa-sha256.</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+              </tr>
+              <tr>
+                <td class="subtest not-optional">Private Keys should sign with a/an RSA private key.</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+              </tr>
+              <tr>
+                <td class="subtest not-optional">Private Keys should sign with a/an P256 private key.</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+              </tr>
+              <tr>
+                <td class="subtest not-optional">Private Keys should sign with a/an ED25519 private key.</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+              </tr>
+              <tr>
+                <td class="subtest not-optional">Private Keys should sign with a/an ECDSA private key.</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+              </tr>
               </tbody>
               </table>
             </section>
@@ -366,6 +462,114 @@
                       <th>skip</th>
                 </thead>
                 <tbody>
+              <tr>
+                <td class="subtest not-optional">MUST require a signature parameter.</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+              </tr>
+              <tr>
+                <td class="subtest not-optional">MUST derive the digital signature algorithm fromthe metadata associated with the keyId.</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+              </tr>
+              <tr>
+                <td class="subtest not-optional">MUST NOT use the value of algorithm from the signed message.</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+              </tr>
+              <tr>
+                <td class="subtest not-optional">A server MUST use the received HTTP message, the headers value, and the Signature String Construction algorithm to recreate the signature.</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+              </tr>
+              <tr>
+                <td class="subtest not-optional">A server MUST use the algorithm, keyId, and base 64 decoded signature listed in the Signature Parameters to verify the authenticity of the digital signature.</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+              </tr>
+              <tr>
+                <td class="subtest not-optional">If a header specified in the headers value of the Signature Parameters (or the default item (created) where the headers value is not supplied) is absent from the message, the implementation MUST produce an error.</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+              </tr>
+              <tr>
+                <td class="subtest not-optional">MUST have a keyId parameter.</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+              </tr>
+              <tr>
+                <td class="subtest not-optional">Public Keys should verify for a RSA public key</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+              </tr>
+              <tr>
+                <td class="subtest not-optional">Public Keys should verify for a P256 public key</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+              </tr>
+              <tr>
+                <td class="subtest not-optional">Public Keys should verify for a ED25519 public key</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+              </tr>
+              <tr>
+                <td class="subtest not-optional">Public Keys should verify for a ECDSA public key</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+              </tr>
+              <tr>
+                <td class="subtest not-optional">Algorithm Parameter MUST produce an error if algorithm parameter differs from key metadata.</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+              </tr>
+              <tr>
+                <td class="subtest not-optional">Algorithm Parameter Signature scheme MUST be in the HTTP Signatures Algorithms Registry.</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+              </tr>
+              <tr>
+                <td class="subtest not-optional">Algorithm Parameter signature scheme MUST not reject algorithm hs2019.</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+              </tr>
+              <tr>
+                <td class="subtest not-optional">Algorithm Parameter signature scheme MUST reject deprecated algorithm rsa-sha1.</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+              </tr>
+              <tr>
+                <td class="subtest not-optional">Algorithm Parameter signature scheme MUST reject deprecated algorithm rsa-sha256.</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+              </tr>
+              <tr>
+                <td class="subtest not-optional">Algorithm Parameter signature scheme MUST reject deprecated algorithm hmac-sha256.</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+              </tr>
+              <tr>
+                <td class="subtest not-optional">Algorithm Parameter signature scheme MUST reject deprecated algorithm ecdsa-sha256.</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+                  <td class="passed not-optional">✓</td>
+              </tr>
               </tbody>
               </table>
             </section>
