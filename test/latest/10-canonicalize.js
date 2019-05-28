@@ -212,11 +212,11 @@ describe('Canonicalize', function() {
 
       it(
         'SHOULD return "" if the headers paramter is empty.', async function() {
-          generatorOptions.args.headers = '""';
+          generatorOptions.args.headers = ' ';
           const result = await util.generate(
             'basic-request', generatorOptions);
           expect(result, 'Expected a result').to.exist;
-          result.should.be.an('object');
+          result.should.equal('');
         });
       it(`If the header parameter is not specified, implementations
         MUST operate as if the field were specified with a single
