@@ -226,12 +226,14 @@ describe('Canonicalize', function() {
             * implementations MUST operate as if the field were specified with a
             * single value, `(created)`, in the list of HTTP headers.
           */
+        const created = Date.now() - 100;
         generatorOptions.args.headers = [''];
+        generatorOptions.args.created = created;
         const result = await util.generate(
           'created', generatorOptions);
         expect(result, 'Expected a result').to.exist;
         result.should.be.a('string');
-        const expected = `created: 1`;
+        const expected = `(created): ${created}`;
         result.should.equal(expected, 'expected signature string to match');
       });
       //TODO: should (created) & algorithm be in canonicalize or sign?
@@ -312,9 +314,14 @@ describe('Canonicalize', function() {
           it(`If given valid options SHOULD return (${param}).`,
             async function() {
               generatorOptions.args.headers = [`(${param})`];
+              if(param.search('created') > -1) {
+                generatorOptions.args['created'] = 1;
+              } else {
+                generatorOptions.args['expires'] = 1;
+              }
               const result = await util.generate(
                 `${param}`, generatorOptions);
-              const expected = `(${param}): 1\n`;
+              const expected = `(${param}): 1`;
               expect(result, 'Expected a result').to.exist;
               result.should.be.a('string');
               result.should.equal(
