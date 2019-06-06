@@ -140,6 +140,8 @@ describe('Verify', function() {
       let error = null;
       const options = commonOptions(generatorOptions);
       options.args['key-type'] = 'unknown';
+      options.args['public-key'] = path.join(
+        __dirname, '..', 'keys', 'dsa_pub.pem');
       try {
         await util.generate(commonRequest, options);
       } catch(e) {
