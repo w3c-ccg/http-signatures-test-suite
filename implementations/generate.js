@@ -6,6 +6,7 @@
 /**
  * Generates the HTTP Signatures Implementation Report given
  * a set of *-report.json files.
+ * Expects the report files be the product of your ImplementationReporter.js
  */
 const fs = require('fs');
 const path = require('path');
