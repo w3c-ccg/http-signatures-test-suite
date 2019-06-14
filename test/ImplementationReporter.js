@@ -2,9 +2,8 @@ const mocha = require('mocha');
 
 exports = module.exports = ImplementationReporter;
 
-
-//WARNING: only compatible with mocha >=  6.0.0
-// require a manual import (see tech-mocha.js)
+// WARNING: only compatible with mocha >=  6.0.0
+// require a manual import (see test-mocha.js)
 
 /**
  * Custom Mocha Reporter for w3c test suites.
