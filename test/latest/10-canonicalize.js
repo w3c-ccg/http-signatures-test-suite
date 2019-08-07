@@ -13,11 +13,6 @@ describe('Canonicalize', function() {
       date: new Date().toGMTString(),
     };
   });
-  describe('Optional', function() {
-    it('should be able to parse json', function() {
-
-    });
-  });
   describe('Signature String', function() {
     it(
       'For valid options MUST return a valid signature string.',
@@ -211,8 +206,8 @@ describe('Canonicalize', function() {
         result.should.equal(expected, 'expected signature string to match');
       });
 
-      it(
-        'SHOULD return "" if the headers paramter is empty.', async function() {
+      it('SHOULD return "" if the headers paramter is empty.',
+        async function() {
           generatorOptions.args.headers = ' ';
           const result = await util.generate(
             'basic-request', generatorOptions);
