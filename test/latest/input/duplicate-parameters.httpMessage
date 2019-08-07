@@ -2,8 +2,6 @@ GET /duplicate/headers HTTP/1.1
 Connection: keep-alive
 User-Agent: Mozilla/5.0 (Macintosh)
 Host: example.com
-Duplicate: one
-Duplicate: two
-Authorization: Signature algorithm="hmac"
+Authorization: Signature algorithm="hmac",headers="first",headers="last"
 first: first
 last: last
