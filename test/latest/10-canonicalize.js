@@ -52,6 +52,7 @@ describe('Canonicalize', function() {
         * the associated header field, then the last parameter defined MUST be
         * used.
       */
+      generatorOptions.args.headers = ['digest', 'host'];
       const result = await util.generate(
         'duplicate-headers-request', generatorOptions);
       result.should.not.be.null;
@@ -67,7 +68,7 @@ describe('Canonicalize', function() {
        * SHOULD be a lowercased, quoted list of HTTP header fields,
        * separated by a single space character.
        */
-        generatorOptions.args.headers = ['content-Length', 'host', 'digest'];
+        generatorOptions.args.headers = ['content-length', 'host', 'digest'];
         const result = await util.generate(
           'default-test', generatorOptions);
         expect(result, 'Expected a result').to.exist;
@@ -236,7 +237,6 @@ describe('Canonicalize', function() {
         const expected = `(created): ${created}`;
         result.should.equal(expected, 'expected signature string to match');
       });
-      //TODO: should (created) & algorithm be in canonicalize or sign?
       ['created', 'expires']
         .forEach(param => {
           algorithms.forEach(algorithm => {
