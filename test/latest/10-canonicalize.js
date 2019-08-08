@@ -141,10 +141,10 @@ describe('Canonicalize', function() {
         * MUST produce an error.
       */
         let error = null;
-        generatorOptions.args.headers = ['server'];
+        generatorOptions.args.headers = ['digest=='];
         try {
           await util.generate(
-            'malformed-request', generatorOptions);
+            'default-test', generatorOptions);
         } catch(e) {
           error = e;
         }
