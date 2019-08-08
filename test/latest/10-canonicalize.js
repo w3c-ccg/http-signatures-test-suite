@@ -40,7 +40,7 @@ describe('Canonicalize', function() {
         expected += 'host: example.com';
         result.should.equal(expected);
       });
-    it(`if duplicate parameters the last parameter
+    it.skip(`if duplicate parameters the last parameter
         defined MUST be used.`, async function() {
       /**
         * If any of the parameters listed above are erroneously duplicated in
