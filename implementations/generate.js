@@ -1,4 +1,4 @@
-/**
+/**!
  * Copyright (c) 2019 Digital Bazaar, Inc. All rights reserved.
 */
 'use strict';
@@ -34,9 +34,9 @@ function makeMaster(masterName) {
   const masterFile = `${masterName}-report.json`;
   const masterPath = files.find(f => f === masterFile);
   if(!masterPath) {
-    throw new Error(`Unable to find json report at ${masterPath}
-      for ${masterName}. This file is used to generate
-      the report and is set in test.json`);
+    throw new Error(`Unable to find json report at ${masterPath}` +
+      `for ${masterName}. This file is used to generate` +
+      'the report and is set in test.json');
   }
   const masterJson = require(path.join(__dirname, masterFile));
   const testNames = Object.keys(masterJson);
