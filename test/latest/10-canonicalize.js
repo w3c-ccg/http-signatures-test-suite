@@ -93,7 +93,7 @@ describe('Canonicalize', function() {
         result.should.equal(expected, 'expected signature string to match');
       });
 
-      it.skip(`All header field values associated with the header field
+      it(`All header field values associated with the header field
         MUST be concatenated, separated by an ASCII comma and an ASCII space,
         and used in the order in which they will appear in the
         transmitted HTTP message.`, async function() {
