@@ -4,7 +4,7 @@
 'use strict';
 
 /**
- * Generates the HTTP Signatures Implementation Report given
+ * Generates the Signing HTTP Messages Implementation Report given
  * a set of *-report.json files.
  * Expects the report files be the product of your ImplementationReporter.js
  */

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-        <title>HTTP Signatures Implementation Report 1.0</title>
+        <title>Signing HTTP Messages draft v11 Implementation Report 1.0</title>
         <meta http-equiv='Content-Type' content='text/html;charset=utf-8'/>
         <!--
           === NOTA BENE ===
@@ -13,33 +13,33 @@
           var respecConfig = {
             // specification status (e.g., WD, LCWD, NOTE, etc.). If in doubt use ED.
             specStatus: "ED",
-    
+
             // the specification's short name, as in http://www.w3.org/TR/short-name/
             shortName: "http-signatures-implementation-report",
-    
+
             // subtitle for the spec
-            subtitle: "Implementation Report for HTTP Signatures Spec",
-    
+            subtitle: "Implementation Report for Signing HTTP Messages Draft Spec v11",
+
             // if you wish the publication date to be other than today, set this
             //publishDate:  "2017-08-03",
-    
+
             // if there is a previously published draft, uncomment this and set its YYYY-MM-DD date
             // and its maturity status
             // previousPublishDate:  "1977-03-15",
             // previousMaturity:  "WD",
-    
+
             // extend the bibliography entries
             doJsonLd: true,
-    
+
             github: "https://github.com/w3c-dvcg/http-signatures-test-suite",
             includePermalinks: false,
-    
+
             // if there a publicly available Editor's Draft, this is the link
             edDraftURI: "https://tools.ietf.org/html/draft-cavage-http-signatures",
-    
+
             // if this is a LCWD, uncomment and set the end of its review period
             // lcEnd: "2009-08-05",
-    
+
             // editors, add as many as you like
             // only "name" is required
             editors:  [
@@ -58,13 +58,13 @@
             ],
             // name of the WG
             wg:           "W3C Digital Verification Community Group",
-    
+
             // URI of the public WG page
             wgURI:        "https://w3c-dvcg.github.io/",
-    
+
             // name (with the @w3c.org) of the public mailing to which comments are due
             wgPublicList: "public-credentials",
-    
+
             // URI of the patent status for this WG, for Rec-track documents
             // !!!! IMPORTANT !!!!
             // This is important for Rec-track documents, do not copy a patent URI from a random
@@ -98,10 +98,10 @@
         <section id='abstract'>
           <p>
     This is the most recent implementation report for the
-    <a href="https://tools.ietf.org/html/draft-cavage-http-signatures">HTTP Signatures</a> specification.
+    <a href="https://tools.ietf.org/html/draft-cavage-http-signatures">Signing HTTP Messages</a> draft specification v11.
           </p>
         </section>
-    
+
         <section id='sotd'>
           <p>
     Comments regarding this document are welcome. Please file issues
@@ -111,35 +111,35 @@
     (<a href="mailto:public-credentials@w3.org?subject=subscribe">subscribe</a>,
     <a href="https://lists.w3.org/Archives/Public/public-credentials/">archives</a>).
           </p>
-    
+
         </section>
-    
+
         <section class="informative">
           <h1>Introduction</h1>
-    
+
           <p>
     The purpose of this document is to demonstrate that there are multiple
-    interoperable implementations of HTTP Signatures that are capable of generating
+    interoperable implementations of Signing HTTP Messages that are capable of generating
     output that is conformant to the latest version.
           </p>
-    
+
           <section class="informative">
             <h2>Testing Methodology</h2>
-    
+
             <p>
-    The testing framework for HTTP Signatures executes the
-    following process for every conformance statement in the 
+    The testing framework for Signing HTTP Messages executes the
+    following process for every conformance statement in the
     <a href="https://tools.ietf.org/html/draft-cavage-http-signatures">
-    HTTP Signatures specification</a> :
+    Signing HTTP Messages draft specification v11</a> :
             </p>
-    
+
             <ol class="algorithm">
               <li>
     Take an input HTTP Message that exercises the feature and feed it to a
-    developer provided HTTP Signatures binary.
+    developer provided Signing HTTP Messages binary.
               </li>
               <li>
-    If the input is valid, generate a HTTP Signature that is conformant
+    If the input is valid, generate a Signing HTTP Messages header that is conformant
     to options and HTTP message.
               </li>
               <li>
@@ -147,9 +147,9 @@
     conformant to the feature being tested.
               </li>
             </ol>
-    
+
           </section>
-    
+
         </section>
     <section class="informative">
       <h1>Conformance Testing Results</h1>
