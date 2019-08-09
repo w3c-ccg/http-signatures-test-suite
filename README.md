@@ -33,7 +33,7 @@ Options:
   -h, --help                       output usage information
 
 Commands:
-  c14n|canonicalize
+  canonicalize
   sign
   verify
 ```
@@ -41,7 +41,7 @@ All tests will run against the implementation's binary and assume that an exit c
 than 0 represents an error.
 The binary will receive an [HTTP message](https://developer.mozilla.org/en-US/docs/Web/HTTP/Messages) via [standard in](https://en.wikipedia.org/wiki/Standard_streams):
 
-Here is an example HTTP message the binary should receive via stdin:
+Here is an example HTTP request the binary should receive via stdin:
 ```
 POST /foo?param=value&pet=dog HTTP/1.1
 Host: example.com
@@ -64,23 +64,25 @@ This is an example local configuration for the test suite. To use:
 
 ### Running the Test Suite
 
-1. npm install
-2. Copy the `config.json.example` file to `config.json` and modify.
-3. All that is needed is a path to the binary that runs the tests
-4. npm test
+1. Install the suite's dependencies and set it up for execution with
+  ``npm install``
+2. Copy the `config.json.example` file to `config.json` and modify with
+  the path of the generator. Note this path must be executable.
+3. ``npm test``
 
 ### Submit an Implementation Report
 
-1. npm install
-2. Copy the `config.json.example` file to `config.json` and modify.
-3. npm run report
-4. Rename implementation/results.json to
-   implementation/YOUR_IMPLEMENTATION-results.json.
-5. git add implementations/YOUR_IMPLEMENTATION-results.json and submit a
-   pull request for the implementation.
+1. Create a fork of the repository <https://github.com/w3c-dvcg/http-signatures-test-suite> on GitHub.
+2. ``npm install``
+3. Copy the `config.json.example` file to `config.json` and modify.
+4. ``npm run report``
+5. Rename ``implementation/results.json`` to
+   ``implementation/YOUR_IMPLEMENTATION-results.json``.
+6. ``git add implementations/YOUR_IMPLEMENTATION-results.json`` and push to your forked repository
+7. Submit a pull request for the results of your implementation to the master repository.
 
 ## Contributing
 
 You may contribute to this test suite by submitting pull requests here:
 
-https://github.com/w3c-dvcg/http-signatures-test-suite
+<https://github.com/w3c-dvcg/http-signatures-test-suite/pulls>
