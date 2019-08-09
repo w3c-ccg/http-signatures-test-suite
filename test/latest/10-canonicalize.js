@@ -8,7 +8,7 @@ describe('Canonicalize', function() {
   beforeEach(function() {
     generatorOptions = {
       generator: config.generator,
-      command: 'c14n',
+      command: 'canonicalize',
       args: {},
       date: new Date().toGMTString(),
     };
