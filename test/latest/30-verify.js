@@ -13,7 +13,7 @@ function commonOptions(ops) {
   ops.args['headers'] = ['host', 'digest'];
   ops.args['algorithm'] = 'hs2019';
   ops.args['key-type'] = 'rsa';
-  ops.args['keyId'] = 'test-rsa';
+  ops.args['keyId'] = 'test';
   return ops;
 }
 
