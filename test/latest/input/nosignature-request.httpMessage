@@ -1,4 +1,4 @@
 GET /basic/request HTTP/1.1
 Connection: keep-alive
 User-Agent: Mozilla/5.0 (Macintosh)
-authorization: Signature keyId="foo",algorithm="hmac"
+Authorization: Signature keyId="foo",algorithm="hmac"
