@@ -3,4 +3,4 @@ Host: example.com
 Content-Type: application/json
 Digest: SHA-256=X48E9qOokqqrvdts8nOJRJN3OWDUoyWxBf7kbu9DBPE=
 Content-Length: 18
-authorization: Signature keyId="foo",created="not-int",headers="(created)",signature="test"
+Authorization: Signature keyId="foo",created="not-int",headers="(created)",signature="test"
