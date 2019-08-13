@@ -51,8 +51,8 @@ describe('Sign', function() {
     expect(result, 'Expected sign to return a Signature').to.exist;
     result.should.match(base64Signature);
   });
-  //TODO while for an hmac this might work
-  //this would mean exposing the private key via the keyId
+  // TODO while for an hmac this might work
+  // this would mean exposing the private key via the keyId
   // better to say A client MUST a private key of the type in
   // the metadata derefernced from the keyId to generate a digital signature.
   it.skip(`A client MUST use the key associated with keyId to 
@@ -155,7 +155,7 @@ describe('Sign', function() {
     options.args['headers'] = 'date';
     try {
       await util.generate(
-        'nokeymetadata-request', options);
+        'default-test', options);
     } catch(e) {
       error = e;
     }
@@ -173,7 +173,7 @@ describe('Sign', function() {
     options.args['headers'] = 'date';
     options.args['created'] = Date.now() + 1000;
     try {
-      await util.generate('created-in-future', options);
+      await util.generate('default-test', options);
     } catch(e) {
       error = e;
     }
@@ -191,7 +191,7 @@ describe('Sign', function() {
     options.args['headers'] = 'date';
     options.args['expires'] = Date.now() - 1000;
     try {
-      await util.generate('expired', options);
+      await util.generate('default-test', options);
     } catch(e) {
       error = e;
     }
