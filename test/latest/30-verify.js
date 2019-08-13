@@ -44,9 +44,9 @@ describe('Verify', function() {
 
   it('MUST require a signature parameter.', async function() {
     let error = null;
-    commonOptions(generatorOptions);
+    const options = commonOptions(generatorOptions);
     try {
-      await util.generate('nosignature-request', generatorOptions);
+      await util.generate('nosignature-request', options);
     } catch(e) {
       error = e;
     }
@@ -98,8 +98,8 @@ describe('Verify', function() {
   it(`A server MUST use the algorithm, keyId, and base 64
       decoded signature listed in the Signature Parameters
       to verify the authenticity of the digital signature.`, async function() {
-    commonOptions(generatorOptions);
-    const result = await util.generate(commonRequest, generatorOptions);
+    const options = commonOptions(generatorOptions);
+    const result = await util.generate(commonRequest, options);
     expect(result, 'Expected a result').to.not.be.null;
   });
   it(`If a header specified in the headers value of
@@ -172,6 +172,7 @@ describe('Verify', function() {
             generatorOptions.args['headers'] = 'date';
             generatorOptions.args['algorithm'] = scheme;
             generatorOptions.args['key-type'] = 'rsa';
+            generatorOptions.args['keyId'] = 'test';
             try {
               await util.generate('basic-request', generatorOptions);
             } catch(e) {
@@ -183,10 +184,10 @@ describe('Verify', function() {
           });
         } else {
           it(`MUST not reject algorithm ${scheme}.`, async function() {
-            commonOptions(generatorOptions);
-            generatorOptions.args['algorithm'] = scheme;
+            const options = commonOptions(generatorOptions);
+            options.args['algorithm'] = scheme;
             const result = await util.generate(
-              'rsa-signed', generatorOptions);
+              'rsa-signed', options);
             expect(result, 'Expected a result').to.not.be.null;
           });
         }
