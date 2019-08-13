@@ -116,6 +116,7 @@ describe('Sign', function() {
             generatorOptions.args['headers'] = 'date';
             generatorOptions.args['algorithm'] = scheme;
             generatorOptions.args['key-type'] = 'ed25519';
+            generatorOptions.args['keyId'] = 'test';
             try {
               await util.generate('basic-request', generatorOptions);
             } catch(e) {
@@ -132,6 +133,7 @@ describe('Sign', function() {
             generatorOptions.args['headers'] = 'date';
             generatorOptions.args['algorithm'] = scheme;
             generatorOptions.args['key-type'] = 'rsa';
+            generatorOptions.args['keyId'] = 'test';
             const result = await util.generate(
               'basic-request', generatorOptions);
             result.should.match(base64Signature);
@@ -205,6 +207,7 @@ describe('Sign', function() {
         generatorOptions.args['headers'] = ['host', 'digest'];
         generatorOptions.args['algorithm'] = 'hs2019';
         generatorOptions.args['key-type'] = key;
+        generatorOptions.args['keyId'] = 'test';
         const result = await util.generate(
           'default-test', generatorOptions);
         expect(result, 'Expected sign to return a Signature').to.exist;
