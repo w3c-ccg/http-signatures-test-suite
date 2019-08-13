@@ -120,6 +120,7 @@ describe('Verify', function() {
     let error = null;
     const options = commonOptions(generatorOptions);
     delete options.args['key-id'];
+    delete options.args['keyId'];
     try {
       await util.generate('nokeyid-request', options);
     } catch(e) {
