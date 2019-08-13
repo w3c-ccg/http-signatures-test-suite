@@ -16,6 +16,7 @@ function commonOptions(options) {
   options.args['headers'] = 'digest';
   options.args['algorithm'] = 'hs2019';
   options.args['key-type'] = rsaKeyType;
+  options.args['keyId'] = 'test';
   return options;
 }
 
