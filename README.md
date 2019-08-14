@@ -18,18 +18,18 @@ The implementation will need to be accessible from the command line.
 It will also need to accept the following command line parameters:
 
 ```
-Usage: <implementation_binary> [options] [command]
+Usage: <implementation_binary> <command> [options]
 
 Options:
   -V, --version                    output the version number
-  -d, --headers <headers>          A list of header names.
+  -d, --headers [headers]          A list of header names, optionally quoted
   -k, --keyId <keyId>              A Key Id string.
-  -p, --private-key <privateKey>.  A private key file name filename.
+  -p, --private-key <privateKey>   A private key file name filename.
   -t, --key-type <keyType>         The type of the keys.
-  -u, --public-key <publicKey>.    A public key file name filename.
-  -a, --algorithm [algorithm]      One of: rsa-sha1, hmac-sha1, rsa-sha256, hmac-sha256, hs2019.
-  -c, --created [created]          The created param for the signature.
-  -e, --expires [expires]          The expires param for the signature.
+  -u, --public-key <publicKey>     A public key file name filename.
+  -a, --algorithm <algorithm>      One of: rsa-sha1, hmac-sha1, rsa-sha256, hmac-sha256, hs2019.
+  -c, --created <created>          The created param for the signature.
+  -e, --expires <expires>          The expires param for the signature.
   -h, --help                       output usage information
 
 Commands:
