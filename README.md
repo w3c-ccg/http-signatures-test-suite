@@ -5,17 +5,16 @@ This repository contains the W3C
 [Signing HTTP Messages draft v11](https://tools.ietf.org/html/draft-cavage-http-signatures-11) test suite.
 Any conforming implementation MUST pass all tests in the test suite.
 
-There are multiple test suites, each of which is detailed below.
-
 # Signing HTTP Messages Tests
 
-This test suite will check any application that generates headers compliant with
+The test suite will check an implentation that generates and validates signatures
+compliant with
 [Signing HTTP Messages](https://tools.ietf.org/html/draft-cavage-http-signatures)
 to ensure conformance with the specification.
 
 This suite requires a functioning installation of
-[nodejs](https://nodejs.org), and specifically
-the ``npm`` commmand.
+[nodejs](https://nodejs.org) (>v8.12), and specifically
+the ``npm`` commmand (>v6.4).
 
 ## Creating a Generator
 The Signing HTTP Mesages implementation being tested will need to be
@@ -112,9 +111,12 @@ No output is expected on an exit code of ``0``.
 1. Install the suite's dependencies and set it up for execution with
   ``npm install``
 2. Copy the `config.json.example` file to `config.json` and provide
-  the path of the generator. Note this path must be executable.
+  the path of the generator.
 
-To launch the test suite, run the command:
+Note: The path provided for the ``generator`` command must be executable, ie
+can be launched from a commandline.
+
+Once the suite is configured, launch the test suite with the command:
 
 ```shell
 npm test
