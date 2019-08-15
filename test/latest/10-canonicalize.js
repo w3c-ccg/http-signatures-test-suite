@@ -151,7 +151,7 @@ describe('Canonicalize', function() {
         expect(error, 'Expected an error to be thrown').to.exist;
       });
 
-      it.skip(`If the header value is a zero-length string,
+      it(`If the header value is a zero-length string,
           the signature string line correlating with
           that header will simply be the (lowercased) header name,
           an ASCII colon :, and an ASCII space.`, async function() {
