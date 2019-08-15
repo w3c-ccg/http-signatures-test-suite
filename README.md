@@ -23,6 +23,7 @@ Usage: <implementation_binary> [options] [command]
 Options:
   -V, --version                    output the version number
   -d, --headers <headers>          A list of header names.
+  -c, --construct <construct>      (Signature|Authorization)
   -k, --keyId <keyId>              A Key Id string.
   -p, --private-key <privateKey>.  A private key file name filename.
   -t, --key-type <keyType>         The type of the keys.

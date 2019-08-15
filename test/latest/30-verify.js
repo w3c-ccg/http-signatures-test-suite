@@ -11,6 +11,7 @@ const commonKey = path.join(__dirname, '..', 'keys', 'rsa.pub');
 function commonOptions(ops) {
   ops.args['public-key'] = commonKey;
   ops.args['headers'] = ['host', 'digest'];
+  ops.args['construct'] = 'Signature';
   ops.args['algorithm'] = 'hs2019';
   ops.args['key-type'] = 'rsa';
   ops.args['keyId'] = 'test';
