@@ -57,6 +57,19 @@ describe('Canonicalize', function() {
 
     describe('Header Parameter', function() {
 
+      it(`SHOULD accept lowercase and uppercase
+        HTTP header fields`, async function() {
+        generatorOptions.args.headers = ['content-length', 'host', 'digest'];
+        const result = await util.generate(
+          'ignore-case', generatorOptions);
+        expect(result, 'Expected a result').to.exist;
+        result.should.be.a('string');
+        let expected = 'content-length: 18\n';
+        expected += 'host: example.com\n' +
+        'digest: SHA-256=X48E9qOokqqrvdts8nOJRJN3OWDUoyWxBf7kbu9DBPE=';
+        result.should.equal(expected, 'expected signature string to match');
+      });
+
       it(`SHOULD be a lowercased, quoted list of HTTP header fields,
          separated by a single space character.`, async function() {
       /** If specified, it
