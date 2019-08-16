@@ -22,7 +22,7 @@ accessible via a "generator" from the command line. This generator
 is invoked independently for each test, and state is not expected to be
 preserved between tests.
 
-The genarator will need to accept the following command line parameters
+The generator will need to accept the following command line parameters
 to control behavior for each test:
 
 ```
