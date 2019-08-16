@@ -58,6 +58,8 @@ Date: Sun, 05 Jan 2014 21:31:40 GMT
 Content-Type: application/json
 Digest: SHA-256=X48E9qOokqqrvdts8nOJRJN3OWDUoyWxBf7kbu9DBPE=
 Content-Length: 18
+
+{"hello": "world"}
 ```
 
 The generator is expected to parse the input HTTP message, perform
