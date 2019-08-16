@@ -4,3 +4,5 @@ Content-Type: application/json
 Digest: SHA-256=X48E9qOokqqrvdts8nOJRJN3OWDUoyWxBf7kbu9DBPE=
 Content-Length: 18
 Authorization: Signature keyId="test-key",headers="host digest",signature="MEUCIQDQSZTB7CXL2qReWWdtKlqfnjj8jlKCBVhem4bTtUP+MAIgUzAPO33P3OFJoEzy0ePkUvCYaIpKW6Q2jVPB61pWaqY="
+
+{"hello": "world"}
