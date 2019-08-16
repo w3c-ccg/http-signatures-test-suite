@@ -20,7 +20,7 @@ async function generate(file, options) {
   }
   // this cat filePath - the dash is the last pipe op
   const httpMessage =
-    `echo -e '${latestDate}\n{"hello": "world"}' | cat ${filePath} - | `;
+    `echo -e '${latestDate}\n\n{"hello": "world"}' | cat ${filePath} - | `;
   const binaryOps = `${options.generator} ${options.command} `;
   const command = httpMessage + binaryOps + args;
   const result = await runTest(command);
