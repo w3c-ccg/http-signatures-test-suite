@@ -199,7 +199,7 @@ describe('Canonicalize', function() {
         result.should.equal(expected);
       });
 
-      it(`If the header field name is (request-target) then generate
+      it(`If the header field name is '(request-target)' then generate
           the header field value by concatenating the lowercased :method,
           an ASCII space, and the :path pseudo-headers.`, async function() {
         /**
@@ -229,14 +229,14 @@ describe('Canonicalize', function() {
         });
       it(`If the header parameter is not specified, implementations
         MUST operate as if the field were specified with a single
-        value, (created), in the list of HTTP headers.`, async function() {
+        value, '(created)', in the list of HTTP headers.`, async function() {
         /**
             * If not specified (the header parameter),
             * implementations MUST operate as if the field were specified with a
             * single value, `(created)`, in the list of HTTP headers.
           */
-        const created = util.getUnixTime() - 10;
-        generatorOptions.args.headers = [''];
+        const created = util.getUnixTime();
+        // generatorOptions.args.headers = [''];
         generatorOptions.args.created = created;
         const result = await util.generate(
           'created', generatorOptions);
@@ -273,7 +273,7 @@ describe('Canonicalize', function() {
               expect(error, 'expected an error').to.exist;
             });
           });
-          const unDefined = `If the ${param} Signature Parameter is
+          const unDefined = `If the '${param}' Signature Parameter is
           not specified, an implementation MUST produce an error.`;
           it(unDefined, async function() {
             /**
@@ -296,7 +296,7 @@ describe('Canonicalize', function() {
             expect(error, 'expected and error to be thrown').to.exist;
           });
           const notInt = `If the ${param} Signature Parameter is
-          not an integer or unix timestamp, an 
+          not an integer or unix timestamp, an
           implementation MUST produce an error.`;
           it(notInt, async function() {
             /**
@@ -319,7 +319,7 @@ describe('Canonicalize', function() {
             }
             expect(error, 'Expected an error to be thrown').to.exist;
           });
-          it(`If given valid options SHOULD return (${param}).`,
+          it(`If given valid options SHOULD return '(${param})'.`,
             async function() {
               generatorOptions.args.headers = [`(${param})`];
               if(param.search('created') > -1) {
