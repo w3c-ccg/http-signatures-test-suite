@@ -173,7 +173,7 @@ describe('Sign', function() {
     let error = null;
     const options = commonOptions(generatorOptions);
     options.args['headers'] = 'date';
-    options.args['created'] = Date.now() + 1000;
+    options.args['created'] = util.getUnixTime() + 1000;
     try {
       await util.generate('default-test', options);
     } catch(e) {
@@ -191,7 +191,7 @@ describe('Sign', function() {
     let error = null;
     const options = commonOptions(generatorOptions);
     options.args['headers'] = 'date';
-    options.args['expires'] = Date.now() - 1000;
+    options.args['expires'] = util.getUnixTime() - 1000;
     try {
       await util.generate('default-test', options);
     } catch(e) {
