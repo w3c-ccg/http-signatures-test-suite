@@ -59,6 +59,11 @@ function streamToString(stream) {
   });
 }
 
+function getUnixTime({time = Date.now()} = {}) {
+  return time / 1000 | 0;
+}
+
 module.exports = {
-  generate
+  generate,
+  getUnixTime
 };
