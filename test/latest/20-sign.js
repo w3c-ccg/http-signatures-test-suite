@@ -51,21 +51,6 @@ describe('Sign', function() {
     expect(result, 'Expected sign to return a Signature').to.exist;
     result.should.match(base64Signature);
   });
-  // TODO while for an hmac this might work
-  // this would mean exposing the private key via the keyId
-  // better to say A client MUST a private key of the type in
-  // the metadata derefernced from the keyId to generate a digital signature.
-  it.skip(`A client MUST use the key associated with keyId to 
-      generate a digital signature on the
-      signature string.`, async function() {
-    const options = commonOptions(generatorOptions);
-    // Use the key associated with `keyId`
-    // to generate a digital signature on the signature string.
-    const result = await util.generate(
-      'basic-request', options);
-    expect(result, 'Expected sign to return a Signature').to.exist;
-    result.should.match(base64Signature);
-  });
 
   describe('Algorithm Parameter', function() {
 
@@ -143,26 +128,6 @@ describe('Sign', function() {
     });
   });
 
-  // TODO should sign check the algorithm vs keyMeta functions?
-  it.skip(`MUST be able to discover metadata
-      about the key from the keyId.`, async function() {
-    /**
-      * Implementations MUST be able to discover metadata
-      * about the key from the `keyId` such that they can
-      * determine the type of digital signature algorithm
-      * to employ when creating or verifying signatures.
-    */
-    let error = null;
-    const options = commonOptions(generatorOptions);
-    options.args['headers'] = 'date';
-    try {
-      await util.generate(
-        'default-test', options);
-    } catch(e) {
-      error = e;
-    }
-    error.should.not.be.null;
-  });
 
   it(`MUST NOT process a Signature with a
       created timestamp value that is in the future.`, async function() {
