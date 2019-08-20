@@ -235,7 +235,7 @@ describe('Canonicalize', function() {
             * implementations MUST operate as if the field were specified with a
             * single value, `(created)`, in the list of HTTP headers.
           */
-        const created = Date.now() - 100;
+        const created = util.getUnixTime() - 10;
         generatorOptions.args.headers = [''];
         generatorOptions.args.created = created;
         const result = await util.generate(
