@@ -29,7 +29,7 @@ describe('Verify', function() {
   });
   describe('optional Public Keys', function() {
     publicKeys.forEach(key => {
-      it(`should verify for a ${key} public key`, async function() {
+      it(`should verify for a/an ${key} public key`, async function() {
         const requestName = `${key.toLowerCase()}-signed`;
         const filePath = path.join(__dirname, '..', 'keys', keys.public[key]);
         generatorOptions.args['headers'] = ['host', 'digest'];
