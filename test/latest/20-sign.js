@@ -199,7 +199,7 @@ describe('Sign', function() {
     }
     error.should.not.be.null;
   });
-  describe('Private Keys', function() {
+  describe('optional Private Keys', function() {
     privateKeys.forEach(key => {
       it(`should sign with a/an ${key} private key.`, async function() {
         const filePath = path.join(__dirname, '..', 'keys', keys.private[key]);
