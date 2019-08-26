@@ -27,7 +27,7 @@ describe('Verify', function() {
       date: new Date().toGMTString(),
     };
   });
-  describe('Public Keys', function() {
+  describe('optional Public Keys', function() {
     publicKeys.forEach(key => {
       it(`should verify for a ${key} public key`, async function() {
         const requestName = `${key.toLowerCase()}-signed`;
