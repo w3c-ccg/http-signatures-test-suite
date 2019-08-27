@@ -323,14 +323,17 @@ describe('Canonicalize', function() {
           it(`If given valid options SHOULD return '(${param})'.`,
             async function() {
               generatorOptions.args.headers = [`(${param})`];
+              let time = util.getUnixTime();
               if(param.search('created') > -1) {
-                generatorOptions.args['created'] = 1;
+                time = time - 10;
+                generatorOptions.args['created'] = time;
               } else {
-                generatorOptions.args['expires'] = 1;
+                time = time + 600;
+                generatorOptions.args['expires'] = time;
               }
               const result = await util.generate(
                 `${param}`, generatorOptions);
-              const expected = `(${param}): 1`;
+              const expected = `(${param}): ${time}`;
               expect(result, 'Expected a result').to.exist;
               result.should.be.a('string');
               result.should.equal(
