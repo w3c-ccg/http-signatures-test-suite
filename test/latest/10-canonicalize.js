@@ -310,10 +310,11 @@ describe('Canonicalize', function() {
               * produce an error.
             */
             generatorOptions.args.headers = [`(${param})`];
+            generatorOptions.args[param] = 'not-an-integer';
             let error = null;
             try {
               await util.generate(
-                `${param}-not-int`, generatorOptions);
+                'basic-request', generatorOptions);
             } catch(e) {
               error = e;
             }
