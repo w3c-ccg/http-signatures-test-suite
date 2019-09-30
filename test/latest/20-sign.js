@@ -14,6 +14,7 @@ const rsaKeyType = 'rsa';
 function commonOptions(options) {
   options.args['private-key'] = rsaPrivateKey;
   options.args['headers'] = 'digest';
+  options.args['add'] = 'Authorization';
   options.args['algorithm'] = 'hs2019';
   options.args['key-type'] = rsaKeyType;
   options.args['keyId'] = 'test';

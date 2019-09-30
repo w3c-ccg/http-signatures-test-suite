@@ -29,8 +29,9 @@ to control behavior for each test:
 Usage: <implementation_binary> <command> [options]
 
 Options:
-  -V, --version                    output the version number
+  -V, --version                    Output the version number
   -d, --headers <headers>          A list of header names, optionally quoted
+  -a, --add <header>               Add a (Signature|Authorization) header
   -k, --keyId <keyId>              A Key Id string.
   -p, --private-key <privateKey>   A private key file name filename.
   -t, --key-type <keyType>         The type of the keys.
@@ -38,7 +39,7 @@ Options:
   -a, --algorithm <algorithm>      One of: rsa-sha1, hmac-sha1, rsa-sha256, hmac-sha256, hs2019.
   -c, --created <created>          The created param for the signature.
   -e, --expires <expires>          The expires param for the signature.
-  -h, --help                       output usage information
+  -h, --help                       Output usage information
 
 Modes:
   canonicalize
