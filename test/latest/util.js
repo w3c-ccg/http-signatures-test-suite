@@ -19,17 +19,19 @@ async function generate(file, options) {
     args += value;
   }
   // this cat filePath - the dash is the last pipe op
+  const inputStr = `${latestDate}\n\n{"hello": "world"}`;
   const httpMessage =
-    `echo -e '${latestDate}\n\n{"hello": "world"}' | cat ${filePath} - | `;
+    `cat ${filePath} - | `;
   const binaryOps = `${options.generator} ${options.command} `;
   const command = httpMessage + binaryOps + args;
-  const result = await runTest(command);
+  const result = await runTest(command, inputStr);
   return result;
 }
 
-function runTest(command) {
+function runTest(command, inputStr) {
   return new Promise((resolve, reject) => {
     const child = exec(command);
+    child.stdin.end(inputStr);
     const streams = Promise.all([
       streamToString(child.stdout),
       streamToString(child.stderr)
