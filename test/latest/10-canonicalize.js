@@ -1,6 +1,5 @@
 const config = require('../../config.json');
 const util = require('./util');
-const {algorithms} = require('./input/algorithms');
 const {expect} = require('chai');
 
 describe('Canonicalize', function() {
@@ -247,32 +246,6 @@ describe('Canonicalize', function() {
       });
       ['created', 'expires']
         .forEach(param => {
-          algorithms.forEach(algorithm => {
-            const algTest = `If (${param}) is in headers & the ` +
-            `algorithm param starts with ${algorithm}` +
-            ' MUST produce an error.';
-            it(algTest, async function() {
-              /**
-               * If the header field name is `(created)` and the `algorithm`
-               * parameter starts with `rsa`, `hmac`, or `ecdsa`
-               * an implementation MUST produce an error.
-              */
-              /**
-               * If the header field name is `(expires)` and the `algorithm`
-               * parameter starts with `rsa`, `hmac`, or `ecdsa`
-               * an implementation MUST produce an error.
-              */
-              generatorOptions.args.headers = [`(${algorithm})`];
-              let error = null;
-              try {
-                await util.generate(
-                  `created-${algorithm}`, generatorOptions);
-              } catch(e) {
-                error = e;
-              }
-              expect(error, 'expected an error').to.exist;
-            });
-          });
           const unDefined = `If the '${param}' Signature Parameter is
           not specified, an implementation MUST produce an error.`;
           it(unDefined, async function() {
@@ -294,31 +267,6 @@ describe('Canonicalize', function() {
               error = e;
             }
             expect(error, 'expected and error to be thrown').to.exist;
-          });
-          const notInt = `If the ${param} Signature Parameter is
-          not an integer or unix timestamp, an
-          implementation MUST produce an error.`;
-          it(notInt, async function() {
-            /**
-              * If the `created` Signature Parameter is
-              * not specified, or is not an integer, an implementation MUST
-              * produce an error.
-            */
-            /**
-              * If the `expires` Signature Parameter is
-              * not specified, or is not an integer, an implementation MUST
-              * produce an error.
-            */
-            generatorOptions.args.headers = [`(${param})`];
-            generatorOptions.args[param] = 'not-an-integer';
-            let error = null;
-            try {
-              await util.generate(
-                'basic-request', generatorOptions);
-            } catch(e) {
-              error = e;
-            }
-            expect(error, 'Expected an error to be thrown').to.exist;
           });
           it(`If given valid options SHOULD return '(${param})'.`,
             async function() {
