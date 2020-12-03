@@ -128,7 +128,6 @@ describe('Sign', function() {
     });
   });
 
-
   it(`MUST NOT process a Signature with a
       created timestamp value that is in the future.`, async function() {
     /**

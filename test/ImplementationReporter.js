@@ -9,7 +9,7 @@ exports = module.exports = ImplementationReporter;
  * Custom Mocha Reporter for w3c test suites.
  *
  * @param {Function} runner - A mocha runner.
- * @param {Object} options - The command line options passed to mocha.
+ * @param {object} options - The command line options passed to mocha.
  */
 function ImplementationReporter(runner, options) {
   mocha.reporters.Base.call(this, runner, options);
