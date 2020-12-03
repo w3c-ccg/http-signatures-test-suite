@@ -128,41 +128,6 @@ describe('Sign', function() {
     });
   });
 
-  it(`MUST NOT process a Signature with a
-      created timestamp value that is in the future.`, async function() {
-    /**
-     * A signature with a `created` timestamp value
-     * that is in the future MUST NOT be processed.
-    */
-    let error = null;
-    const options = commonOptions(generatorOptions);
-    options.args['headers'] = 'date';
-    options.args['created'] = util.getUnixTime() + 1000;
-    try {
-      await util.generate('default-test', options);
-    } catch(e) {
-      error = e;
-    }
-    expect(error, 'Expected an Error').to.not.be.null;
-  });
-
-  it(`MUST NOT process a Signature with an expires
-      timestamp value that is in the past.`, async function() {
-    /**
-      * A signatures with a `expires` timestamp
-      * value that is in the past MUST NOT be processed.
-    */
-    let error = null;
-    const options = commonOptions(generatorOptions);
-    options.args['headers'] = 'date';
-    options.args['expires'] = util.getUnixTime() - 1000;
-    try {
-      await util.generate('default-test', options);
-    } catch(e) {
-      error = e;
-    }
-    error.should.not.be.null;
-  });
   describe('optional Private Keys', function() {
     privateKeys.forEach(key => {
       it(`should sign with a/an ${key} private key.`, async function() {
