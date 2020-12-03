@@ -61,8 +61,17 @@ function streamToString(stream) {
   });
 }
 
+/**
+ * Takes in a javascript ms timestamp and turns it in a unix
+ *  timestamp in seconds.
+ *
+ * @param {object} options - Options to use.
+ * @param {number} [options.time=Date.now()] - Number of Ms since epoch.
+ *
+ * @returns {number} Number of seconds since epoch.
+*/
 function getUnixTime({time = Date.now()} = {}) {
-  return time / 1000 | 0;
+  return Math.floor(time / 1000) | 0;
 }
 
 module.exports = {
