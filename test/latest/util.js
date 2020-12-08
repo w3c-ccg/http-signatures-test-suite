@@ -62,7 +62,7 @@ function streamToString(stream) {
 }
 
 /**
- * Takes in a javascript ms timestamp and turns it in a unix
+ * Takes in a javascript ms timestamp and converts it to an unix
  *  timestamp in seconds.
  *
  * @param {object} options - Options to use.
@@ -71,6 +71,7 @@ function streamToString(stream) {
  * @returns {number} Number of seconds since epoch.
 */
 function getUnixTime({time = Date.now()} = {}) {
+  // in the case of NaN return 0
   return Math.floor(time / 1000) | 0;
 }
 
