@@ -1,6 +1,7 @@
 const config = require('../../config.json');
 const util = require('./util');
 const {expect} = require('chai');
+const {algorithms} = require('./input/algorithms');
 
 describe('Canonicalize', function() {
   let generatorOptions = null;
@@ -246,6 +247,33 @@ describe('Canonicalize', function() {
       });
       ['created', 'expires']
         .forEach(param => {
+
+          algorithms.forEach(algorithm => {
+            const algTest = `If (${param}) is in headers & the ` +
+            `algorithm param starts with ${algorithm}` +
+            ' MUST produce an error.';
+            it(algTest, async function() {
+              /**
+               * If the header field name is `(created)` and the `algorithm`
+               * parameter starts with `rsa`, `hmac`, or `ecdsa`
+               * an implementation MUST produce an error.
+              */
+              /**
+               * If the header field name is `(expires)` and the `algorithm`
+               * parameter starts with `rsa`, `hmac`, or `ecdsa`
+               * an implementation MUST produce an error.
+              */
+              generatorOptions.args.headers = [`(${algorithm})`];
+              let error = null;
+              try {
+                await util.generate(
+                  `created-${algorithm}`, generatorOptions);
+              } catch(e) {
+                error = e;
+              }
+              expect(error, 'expected an error').to.exist;
+            });
+          });
           const unDefined = `If the '${param}' Signature Parameter is
           not specified, an implementation MUST produce an error.`;
           it(unDefined, async function() {
