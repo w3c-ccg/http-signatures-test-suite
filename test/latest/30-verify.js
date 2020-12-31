@@ -243,9 +243,8 @@ describe('Verify', function() {
         HTTP Signatures Algorithms Registry.`, async function() {
       let error = null;
       const options = commonOptions(generatorOptions);
-      options.args.algorithm = 'unknown';
       try {
-        await util.generate(commonRequest, options);
+        await util.generate('unknown-algorithm', options);
       } catch(e) {
         error = e;
       }
