@@ -219,7 +219,7 @@ describe('Canonicalize', function() {
         result.should.equal(expected, 'expected signature string to match');
       });
 
-      it('SHOULD return "" if the headers paramter is empty.',
+      it('SHOULD return "" if the headers parameter is empty.',
         async function() {
           generatorOptions.args.headers = ' ';
           const result = await util.generate(
